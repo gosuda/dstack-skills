@@ -29,7 +29,7 @@ Tests sit beside the code they test where the toolchain allows it (Go `_test.go`
 
 ## Move without breaking
 
-Moves are mechanical and provable. List every reference into the moved paths first: `grep -rn` over sources, build files, and docs, recorded as one old-to-new pair list. Use `git mv` for every move so rename detection follows, and keep the whole move in one commit with no content edits, so review reads the moves and a revert undoes them. Apply the pair list to imports, build files, and doc links in the follow-up change, then let the build and a link check prove nothing dangles: `git log --follow <moved-file>` still reaches the history. A move without a passing build is not done.
+Moves are mechanical and provable. List every reference into the moved paths first: `grep -rn` over sources, build files, and docs, recorded as one old-to-new pair list. Use `git mv` for every move so rename detection follows, and stage the moves together with their mechanical reference updates from the pair list in one commit with no other content edits, so each commit leaves the tree building: a move whose references still dangle breaks the tree on its own. Apply the pair list to imports, build files, and doc links in the same staged tree, then let the build and a link check prove nothing dangles before committing: `git log --follow <moved-file>` still reaches the history. A move without a passing build is not done.
 
 ## When not to reorganize
 
