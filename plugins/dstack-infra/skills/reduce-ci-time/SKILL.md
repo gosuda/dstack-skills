@@ -1,0 +1,36 @@
+---
+name: reduce-ci-time
+description: 'Use when CI wall time, queue wait, or build minutes are too high and caching, path filters, sharding, fan-out, or cancellation need cutting from measured evidence. Not for a red run needing repair: use ci-fix. Not for authoring a pipeline or its gates: use ci-cd.'
+---
+
+# Cut CI wall time from measurement
+
+A pipeline costs more wall time than the work behind it, or its build minutes grow every month. This skill shortens one pipeline using the CI provider's own numbers, and it never buys speed with a gate: reordering, caching, cancellation, and sharding change when work runs, never whether it blocks merge. A required gate is not removed, skipped, or made advisory to save time; a gate that looks removable is a report to the repository owner, not a change. Edits stay in workflow files and build scripts, and version control rolls everything back.
+
+## Measure before any move
+
+Read per-job and per-step durations from the provider's own data, never from a stopwatch. On GitHub Actions, `gh run view <run-id> --json jobs` returns every job with `startedAt` and `completedAt`, and the jobs API record adds the same timestamps for every step inside the job (docs.github.com/en/rest/actions/workflow-jobs). On GitLab, the jobs API carries duration and queued duration per job (docs.gitlab.com/api/jobs). Record three things before touching anything: total run time split into queue wait and execution, the per-job table, and the per-step breakdown of the heaviest jobs.
+
+Find the critical path: the chain of jobs whose durations and queue waits add up to the finish time. The slowest job is not always on it; a quick job that every later job waits behind often is. The path names the first move, and the recorded numbers are the baseline every later check compares against.
+
+## Make the moves in this order
+
+Each move names its precondition (what the measurement must already show), its check (before and after numbers from the same report), and its risk. Apply one move, rerun the pipeline, record the numbers, and stop applying once the next precondition is false.
+
+- Cache dependencies on the lockfile. Precondition: dependency install or restore dominates a job. Key the cache on the lockfile hash (`actions/cache` with `hashFiles('**/package-lock.json')`; GitLab `cache:key: files`), with a fallback key so close matches restore partially. Check: install step minutes, before and after. Risk: a cache that outlives its lockfile restores stale dependencies; the lockfile hash in the key bounds that, and a scheduled key reset clears drift.
+- Restore build outputs between runs. Precondition: compile work repeats unchanged across runs. Upload or pull the tool's build cache (Gradle build cache, ccache or sccache archives, the provider's artifact store). Check: compile minutes across two runs of the same tree. Risk: a stale cache hides a source change; key the cache on its inputs, never on the branch name.
+- Filter paths. Precondition: jobs run for changes they cannot observe. Add `paths` and `paths-ignore` filters (GitHub) or `rules:changes` (GitLab) so each job runs only when its inputs change, and include the workflow file itself plus generated and fixture directories the job reads. Check: number of jobs for a docs-only and a code-only change. Risk: a filter too narrow skips a needed gate; every filtered-out job must still run for the paths that feed it.
+- Fan jobs out against runner limits. Precondition: one job holds serial work with no ordering constraint, or the critical path sits behind queued jobs. Split the work into parallel jobs or a matrix, sized so the runner concurrency quota absorbs them; beyond the quota, fan-out adds queue wait instead of removing it. Check: critical-path minutes and queue wait, before and after. Risk: an exhausted runner quota queues the same pipeline slower than before; measure queue wait next to run time.
+- Shard tests from timing data. Precondition: the test job sets the critical path. Split the suite into shards balanced by measured per-suite duration, not by file count, and re-shard when suite timing changes. Check: slowest-shard minutes, before and after. Risk: imbalance concentrates wall time in one shard; the shard timing exposes it.
+- Order gates fail-fast. Precondition: cheap checks run after heavy build work. Put lint and type checking first so a broken change stops in minutes; the heavy gates still run and still block. Check: minutes spent on runs that end in a cheap failure. Risk: ordering only, because no gate left the pipeline; a gate that must run first for correctness keeps its place.
+- Remove duplicate work between jobs. Precondition: two jobs compile the same code or run the same check. Build once, upload the artifact, download it downstream, and run a shared check once. Check: duplicated step minutes across jobs. Risk: an artifact hand-off fails silently, so the downstream job rebuilds or uses nothing; the download step must hard-fail when the artifact is missing.
+- Cancel superseded runs. Precondition: a run sits abandoned mid-flight when the next push arrives. Group runs per branch (`concurrency` with `cancel-in-progress` on GitHub; auto-cancel redundant pipelines with `interruptible: true` on GitLab). Check: aggregate run minutes across a day of pushes. Risk: a needed long run gets canceled, so deployments and release runs stay outside the cancelable group.
+- Install pinned tools instead of building them. Precondition: a job compiles a toolchain or tool every run. Install the prebuilt artifact at a pinned version and cache it against that version. Check: setup step minutes, before and after. Risk: a floating version drifts between runs; pin exact versions in the workflow file.
+
+## Hold the gate line
+
+Reordering, caching, cancellation, and sharding leave every gate in place with its verdict power intact. When a move would remove a required gate, narrow its trigger, or turn its failure advisory, stop and report the proposal with the measured cost instead of applying it.
+
+## What you hand back
+
+The edited workflow files, the before and after numbers for every applied move from the provider's own report, and the accepted risks, each with its bound. A move whose numbers did not improve is reverted, not explained.

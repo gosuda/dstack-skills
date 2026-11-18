@@ -2,7 +2,7 @@
 
 Cross-project workflows for planning, implementation, review, verification, and delivery.
 
-86 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
+87 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
 
 ## Install
 
@@ -83,6 +83,7 @@ Each row states when to reach for the skill. Invoke one as `/dstack-core:<name>`
 | no-comments | Use when asked to remove source comments by replacing them with clear code or accessible documentation. |
 | no-excuses | Use when a material claim rests on missing proof, an untested assumption, or unresolved counterevidence that investigation can still settle. |
 | offensive-driven | Use when the user explicitly asks for a replacement-first pass such as "rebuild it clean", "replace-first", or "offensive pass on <target>" spanning code, docs, plans, or research. |
+| organize-directories | Use when a directory layout needs deciding, new code keeps landing in the wrong place, or files must move without breaking imports, build files, or doc links. |
 | parallel-launch | Use when work splits into independent sub-tasks or cross-domain research, or the user says orchestrate, fan out, or more parallel about independent work. |
 | plans | Use when multi-step work needs a structured implementation plan that preserves outcomes and constraints. |
 | plans-complete | Use when a plan must be proven complete before implementation begins. |

@@ -4,5 +4,5 @@ DStack workflows for CI, deployment, observability, cost, and infrastructure too
 
 ## Routes
 
-- Red CI is core `/skill:ci-fix`; building or changing pipelines and quality gates is `/skill:ci-cd`.
+- Red CI is core `/skill:ci-fix`; building or changing pipelines and quality gates is `/skill:ci-cd`. A pipeline or a compile that costs too much time: `/skill:reduce-ci-time` cuts pipeline wall time from the provider's measurements, `/skill:reduce-compile-time` cuts build time from the tool's timing report.
 - Environment-dependent code or missing runtime configuration: `/skill:environment-contract-audit`. Telemetry, alerts, and production diagnosis: `/skill:observability`. Terraform: `/skill:terraform-style-check` (user only). CI capacity and required-check safety: `/skill:workflow-capacity-audit` (user only).

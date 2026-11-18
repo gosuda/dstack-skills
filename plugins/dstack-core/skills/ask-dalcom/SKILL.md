@@ -72,7 +72,7 @@ A stance changes how a step is done, not what it does. Stack it in the same mess
 
 ## Codebase health
 
-Upkeep, not feature work. `/skill:simplify` decides which level owns a cut and routes it: `/skill:code-simplification` for one module's interior, `/skill:architecture-simplification` for layout (explicit request only), `/skill:guillotine` for residue spread across code, docs, tests, and config, and `/skill:refactor-break-compat` for removing a consumer-facing surface. `/skill:docs-practices` decides whether a document should exist at all.
+Upkeep, not feature work. `/skill:simplify` decides which level owns a cut and routes it: `/skill:code-simplification` for one module's interior, `/skill:architecture-simplification` for layout (explicit request only), `/skill:organize-directories` for the directory layout and the history-preserving moves that reshape it, `/skill:guillotine` for residue spread across code, docs, tests, and config, and `/skill:refactor-break-compat` for removing a consumer-facing surface. `/skill:docs-practices` decides whether a document should exist at all.
 
 ## Writing and visuals
 
@@ -98,7 +98,7 @@ Each plugin outside dstack-core has a reference beside this file. Read the one w
 | `references/dstack-testing.md` | browser or Electron testing, CLI and TUI verification, smoke tests, TLA+ specs, verification loops that repeat |
 | `references/dstack-git.md` | pushing straight to a branch or to main, atomic pull request series, merge conflicts, worktrees, stacked commits, gating and merging pull request queues, issue triage |
 | `references/dstack-run.md` | splitting work across subagents, tasks that must run in order, sizing a run, watching a target, a loop that misbehaves, steps only a human can take, a long autonomous run |
-| `references/dstack-infra.md` | CI/CD pipelines, deployment configuration, observability, Terraform, workflow capacity |
+| `references/dstack-infra.md` | CI/CD pipelines, deployment configuration, observability, Terraform, workflow capacity, a slow pipeline or build |
 | `references/dstack-security.md` | security findings and triage, CodeQL, smart contracts, supply chain, crypto and zeroization audits |
 | `references/dstack-fuzzing.md` | fuzz campaigns, harnesses, dictionaries, fuzzing blockers |
 | `references/dstack-research.md` | sourced research reports, drift between docs and code, GitHub solution search, how a code path works |

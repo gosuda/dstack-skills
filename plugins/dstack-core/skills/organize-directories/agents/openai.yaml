@@ -1,0 +1,3 @@
+interface:
+  display_name: "Organize Directories"
+  short_description: "Use when a directory layout needs deciding, new code keeps landing in the wrong place, or files must move without breaking imports, build files, or doc links."
