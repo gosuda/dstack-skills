@@ -211,8 +211,8 @@
 | punishing-practices | dstack-planning | Productivity | Use when a workflow, plan, diff, or completed work cycle must be checked for practices that punish the project later. |
 | purge-slop-docs | dstack-core | Coding | Use when a human asks to purge stale docs, clean Markdown, or reorder the documentation hierarchy. |
 | recall | dstack-core | Coding | Use when asked to recover prior work and current status before resuming. |
-| reduce-ci-time | dstack-infra | Infrastructure | Use when CI wall time, queue wait, or build minutes are too high and caching, path filters, sharding, fan-out, or cancellation need cutting from measured evidence. |
-| reduce-compile-time | dstack-infra | Infrastructure | Use when a local or CI build takes too long and the build profile, dependency graph, linker, cache, or debug info settings need changing from the tool timing report. |
+| reduce-ci-time | dstack-core | Coding | Use when CI wall time, queue wait, or build minutes are too high and caching, path filters, sharding, fan-out, or cancellation need cutting from measured evidence. |
+| reduce-compile-time | dstack-core | Coding | Use when a local or CI build takes too long and the build profile, dependency graph, linker, cache, or debug info settings need changing from the tool timing report. |
 | refactor-break-compat | dstack-core | Coding | Use when modernizing APIs, removing compat shims, killing feature flags, or rewriting a subsystem cleanly. |
 | release-promotion | dstack-marketing | Marketing | Use when asked to draft launch or promotion copy for a shipped feature across channels via /release-promotion. |
 | reorder | dstack-writing | Writing | Use when asked to reorder a drifted listing under one stated principle, moving items only and rewording nothing. |

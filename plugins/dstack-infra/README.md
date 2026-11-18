@@ -2,7 +2,7 @@
 
 DStack workflows for CI, deployment, observability, cost, and infrastructure tooling.
 
-7 skills, category Infrastructure. Install the whole plugin below, or take a single skill with `gh skill install`.
+5 skills, category Infrastructure. Install the whole plugin below, or take a single skill with `gh skill install`.
 
 ## Install
 
@@ -39,8 +39,6 @@ Each row states when to reach for the skill. Invoke one as `/dstack-infra:<name>
 | ci-cd | Use when setting up or modifying CI/CD pipelines, quality gates, test runners, or deployment pipeline configuration through workflow files. |
 | environment-contract-audit | Use when environment-dependent code, templates, or deployment configuration changes, or when runtime configuration is missing. |
 | observability | Use when adding telemetry, composing an observability surface, reviewing alerts, shipping a production feature, or diagnosing a production issue. |
-| reduce-ci-time | Use when CI wall time, queue wait, or build minutes are too high and caching, path filters, sharding, fan-out, or cancellation need cutting from measured evidence. |
-| reduce-compile-time | Use when a local or CI build takes too long and the build profile, dependency graph, linker, cache, or debug info settings need changing from the tool timing report. |
 | terraform-style-check | Use when writing, reviewing, or generating Terraform HCL that must pass fmt and validate. |
 | workflow-capacity-audit | Use for a read-only audit of CI workflow capacity, duplication, queue time, runner compatibility, and required-check safety. |
 

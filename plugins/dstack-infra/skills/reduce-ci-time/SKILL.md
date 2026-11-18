@@ -15,7 +15,6 @@ Find the critical path: the chain of jobs whose durations and queue waits add up
 
 ## Make the moves in this order
 
-Each move names its precondition (what the measurement must already show), its check (before and after numbers from the same report), and its risk. Skip a move when its precondition is false and check the next one. Apply one qualifying move at a time, rerun the pipeline, and record the numbers.
 
 - Cache dependencies on the lockfile. Precondition: dependency install or restore dominates a job. Key the cache on the lockfile hash (`actions/cache` with `hashFiles('**/package-lock.json')`; GitLab `cache:key: files`), with a fallback key so close matches restore partially. Check: install step minutes, before and after. Risk: a cache that outlives its lockfile restores stale dependencies; the lockfile hash in the key bounds that, and a scheduled key reset clears drift.
 - Restore build outputs between runs. Precondition: compile work repeats unchanged across runs. Upload or pull the tool's build cache (Gradle build cache, ccache or sccache archives, the provider's artifact store). Check: compile minutes across two runs of the same tree. Risk: a stale cache hides a source change; key the cache on its inputs, never on the branch name.

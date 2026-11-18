@@ -55,6 +55,7 @@ Situations that create work and then join the main flow.
 - A repository is new to you or to the agent: `/skill:explore` maps it, `/skill:inits` records its costly conventions in AGENTS.md, `/skill:setup-repo` adds gitignore rules, hooks, and review rules, and `/skill:strict-validation-setup` sets up strict gates.
 - You are rebuilding or porting a codebase: `/skill:breaking-driven` with `/skill:refactor-break-compat`, then `/skill:wayfinder` when the rebuild cannot fit one session. `/skill:fromzero` replaces an attempt from a clean pad and needs that attempt committed first.
 - A dependency or version problem: `/skill:ground-latest` with `/skill:deps-upgrade` from dstack-code.
+- A pipeline or a build that costs too much time: `/skill:reduce-ci-time` cuts pipeline wall time from the provider's measurements, `/skill:reduce-compile-time` cuts build time from the tool's timing report.
 
 ## Stances
 
@@ -98,7 +99,7 @@ Each plugin outside dstack-core has a reference beside this file. Read the one w
 | `references/dstack-testing.md` | browser or Electron testing, CLI and TUI verification, smoke tests, TLA+ specs, verification loops that repeat |
 | `references/dstack-git.md` | pushing straight to a branch or to main, atomic pull request series, merge conflicts, worktrees, stacked commits, gating and merging pull request queues, issue triage |
 | `references/dstack-run.md` | splitting work across subagents, tasks that must run in order, sizing a run, watching a target, a loop that misbehaves, steps only a human can take, a long autonomous run |
-| `references/dstack-infra.md` | CI/CD pipelines, deployment configuration, observability, Terraform, workflow capacity, a slow pipeline or build |
+| `references/dstack-infra.md` | CI/CD pipelines, deployment configuration, observability, Terraform, workflow capacity |
 | `references/dstack-security.md` | security findings and triage, CodeQL, smart contracts, supply chain, crypto and zeroization audits |
 | `references/dstack-fuzzing.md` | fuzz campaigns, harnesses, dictionaries, fuzzing blockers |
 | `references/dstack-research.md` | sourced research reports, drift between docs and code, GitHub solution search, how a code path works |

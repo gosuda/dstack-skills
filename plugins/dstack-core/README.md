@@ -2,7 +2,7 @@
 
 Cross-project workflows for planning, implementation, review, verification, and delivery.
 
-87 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
+89 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
 
 ## Install
 
@@ -90,6 +90,8 @@ Each row states when to reach for the skill. Invoke one as `/dstack-core:<name>`
 | proof-driven | Use when property-based testing, theorem proving, or formal proof tactics require zero unproven properties. |
 | purge-slop-docs | Use when a human asks to purge stale docs, clean Markdown, or reorder the documentation hierarchy. |
 | recall | Use when asked to recover prior work and current status before resuming. |
+| reduce-ci-time | Use when CI wall time, queue wait, or build minutes are too high and caching, path filters, sharding, fan-out, or cancellation need cutting from measured evidence. |
+| reduce-compile-time | Use when a local or CI build takes too long and the build profile, dependency graph, linker, cache, or debug info settings need changing from the tool timing report. |
 | refactor-break-compat | Use when modernizing APIs, removing compat shims, killing feature flags, or rewriting a subsystem cleanly. |
 | research | Use when researching a named library, framework, SDK, API, or service, or finding a migration guide. |
 | resolve | Use when local feedback needs adjudication, or the user explicitly chooses analyze, reception, summary, interactive, or autonomous mode for one feedback batch. |
