@@ -19,10 +19,10 @@ When no chain in the table fits, run `/skill:ask-dalcom` with your situation: it
 | Author a new **skill** | `/skill:skill-gap-finder` → `/skill:writing-for-agents` → `/skill:unslop` → `/skill:humanizer-simple-english-asd-ste100` → `/skill:taste` | The skill index already holds a skill that covers the job. |
 
 ## Example workflow invocations
-Install the plugins for these workflows from the `dstack` marketplace added from `gosuda/dalcom-skills`:
+Install the plugins for these workflows from the `dstack` marketplace added from `gosuda/dstack-skills`:
 
 ```shell
-claude plugin marketplace add gosuda/dalcom-skills
+claude plugin marketplace add gosuda/dstack-skills
 claude plugin install dstack-core@dstack
 claude plugin install dstack-planning@dstack
 claude plugin install dstack-code@dstack

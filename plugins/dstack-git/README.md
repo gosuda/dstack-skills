@@ -8,21 +8,21 @@ Git workflows for commits, branches, GitHub pull requests, GitLab merge requests
 
 ```bash
 # Claude Code
-/plugin marketplace add gosuda/dalcom-skills
+/plugin marketplace add gosuda/dstack-skills
 /plugin install dstack-git@dstack
 
 # Codex
-codex plugin marketplace add gosuda/dalcom-skills
+codex plugin marketplace add gosuda/dstack-skills
 codex plugin add dstack-git@dstack
 
 # Hermes Agent
-hermes plugins install gosuda/dalcom-skills/plugins/dstack-git --enable
+hermes plugins install gosuda/dstack-skills/plugins/dstack-git --enable
 ```
 
 ### Individual (gh skill)
 
 ```shell
-gh skill install gosuda/dalcom-skills plugins/dstack-git/skills/<skill> \
+gh skill install gosuda/dstack-skills plugins/dstack-git/skills/<skill> \
   --agent <agent> --scope user
 ```
 

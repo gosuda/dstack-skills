@@ -2,14 +2,14 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "dstack-marketing",
   "displayName": "DStack Marketing",
-  "version": "2.1.18",
+  "version": "2.1.19",
   "description": "DStack workflows for marketing and viral growth, from audience research to opportunity scouting.",
   "author": {
     "name": "gosuda",
     "url": "https://github.com/gosuda"
   },
-  "homepage": "https://github.com/gosuda/dalcom-skills",
-  "repository": "https://github.com/gosuda/dalcom-skills",
+  "homepage": "https://github.com/gosuda/dstack-skills",
+  "repository": "https://github.com/gosuda/dstack-skills",
   "license": "SEE LICENSE IN LICENSE",
   "keywords": [
     "dstack",
