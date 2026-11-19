@@ -32,7 +32,7 @@ Use domain words such as `catalog`, `invoices`, and `auth`. Kind words such as `
 
 ## Keep paths shallow and predictable
 
-Keep depth at four levels below any prefix the toolchain mandates, such as Java's `src/main/java/<package>`; the toolchain decides the prefix, not the layout. Keep sibling counts near twelve. Past either bound, add the distinction the new files actually follow instead of numbering directories. Place entry points and the files opened most often nearer the root. Fold a level with one child directory upward, and never leave a directory that only forwards the reader to another directory.
+Keep depth at four levels below any prefix the toolchain mandates, such as Java's `src/main/java/<package>`; the toolchain decides the prefix, not the layout. Keep sibling counts near twelve. Past either bound, add the distinction the new files actually follow instead of numbering directories. Place entry points and the files opened most often nearer the root. Fold a level below the mandated prefix that has one child directory upward, and never leave such a discretionary directory that only forwards the reader to another directory. Prefix components stay even when they have one child.
 
 ## Give fixed kinds one home
 
@@ -52,11 +52,13 @@ Make the top level say what the system is and each directory name say what it ho
 
 ## Test reachability
 
-Keep entry points and frequently opened files near the top, with predictable paths and no pass-through directories. From the repository root, find the five files changed most often in recent months:
+Keep entry points and frequently opened files near the top, with predictable paths and no pass-through directories. From the repository root, find the five files changed most often in recent months within the scope under review:
 
-`git log --since='6 months ago' --name-only --pretty=format: -- . | awk 'NF' | sort | uniq -c | sort -nr | head -5`
+`git log --since='6 months ago' --name-only --pretty=format: -- <scope> | awk 'NF' | sort | uniq -c | sort -nr | head -5`
 
-For each file, start at the repository root, write down the path expected to reach it, and then compare that guess with its actual path. Count directory levels, sibling choices, and wrong guesses. Require the bounds of `Keep paths shallow and predictable` and a correct first guess. A deeper path, a larger unexplained fan-out, a pass-through level, or repeated searching fails this test.
+Use the requested subtree for `<scope>`, or `.` for a repository-wide review.
+
+For each file, start at the repository root, write down the path expected to reach it, and then compare that guess with its actual path. Count directory levels, sibling choices, and wrong guesses. Require the bounds of `Keep paths shallow and predictable` and a correct first guess. A deeper path below the mandated prefix, a larger unexplained fan-out, a pass-through level below the mandated prefix, or repeated searching fails this test.
 
 ## Check elegance
 
@@ -67,7 +69,7 @@ Explain every placement with the smallest set of grouping, naming, and fixed-kin
 Walk the old tree directory by directory against the target tree and record each verdict with a one-line reason:
 
 - Essential: it has a home in the target tree. Name the target path.
-- Residue: it has no home. Kind-named bins, pass-through levels, dead or duplicate directories, stale generated output, and single-child levels are residue. Residue is deleted, not moved.
+- Residue: it has no home. Kind-named bins, pass-through levels below the mandated prefix, dead or duplicate directories, stale generated output, and single-child levels below the mandated prefix are residue. Residue is deleted, not moved. Prefix components stay.
 
 The walk covers every directory, not a sample: a directory never read is a file lost by accident.
 
@@ -87,7 +89,7 @@ Then, for each target:
 2. Move with `git mv`, migrate every reference in the same commit (imports, build files, relative links, package clauses, doc links), and delete residue in the same change. Leave no compatibility residue: no forwarding stub, re-export file, alias package, or symlink at an old path. A boundary path that got a no simply stays.
 3. Run the build and a link check. Require `git diff --cached -M --name-status` to show every listed pair as `R<score> <old> <new>` with any similarity score and no listed path in an `A` or `D` entry. A moved file whose own references were rewritten scores below 100, which is expected; only identical content earns `R100`.
 4. If Git reports `D <old>` plus `A <new>` instead of `R`, the content edit is too large for the selected threshold. Defer content edits not needed by the move to the next commit so the move commit keeps building, or rerun the check with a lower `-M<n>` threshold and record that threshold.
-5. Commit the target. Prove `git log --follow -- <new-path>` reaches the earlier history recorded in step 1; if it does not, revert this target's commit to the last green state before starting another target.
+5. Commit the target. Prove `git log --follow -- <new-path>` reaches the earlier history recorded in step 1; pass the same `-M<n>` threshold if step 4 lowered it. If the history still does not match, revert this target's commit to the last green state before starting another target.
 6. After the commit, search every old path and every residue name; each must return nothing.
 
 Half-moved is the forbidden state. A target that cannot finish reverts to the last green commit; it is never shipped half old, half new. Nothing in this skill pushes to a remote.
