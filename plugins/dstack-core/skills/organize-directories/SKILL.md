@@ -54,7 +54,7 @@ Make the top level say what the system is and each directory name say what it ho
 
 Keep entry points and frequently opened files near the top, with predictable paths and no pass-through directories. From the repository root, find the five files changed most often in recent months within the scope under review:
 
-`git --literal-pathspecs log --since='6 months ago' --name-only --pretty=format: -- "<scope>" | awk 'NF' | while IFS= read -r f; do [ -f "$f" ] && printf '%s\n' "$f"; done | sort | uniq -c | sort -nr | head -5`
+`git --literal-pathspecs log --since='6 months ago' --name-only -z --pretty=format: -- "<scope>" | while IFS= read -r -d '' f; do [ -n "$f" ] && [ -f "$f" ] && printf '%s\n' "$f"; done | sort | uniq -c | sort -nr | head -5`
 
 Use the requested subtree for `<scope>`, or `.` for a repository-wide review. Both runs keep only paths that name files still present in the current tree. If the scoped log yields no such file, rerun it without `--since`; if the scope still yields none, test the entry points the consumer contract names and record the substitution.
 
