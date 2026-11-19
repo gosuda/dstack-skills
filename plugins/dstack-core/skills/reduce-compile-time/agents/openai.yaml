@@ -1,0 +1,3 @@
+interface:
+  display_name: "Reduce Compile Time"
+  short_description: "Use when a local or CI build takes too long and its dependency graph, build units, profile, linker, cache, or debug info need rebuilding or retuning from the toolchain timing report."

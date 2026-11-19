@@ -2,7 +2,7 @@
 
 Cross-project workflows for planning, implementation, review, verification, and delivery.
 
-86 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
+89 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
 
 ## Install
 
@@ -83,12 +83,15 @@ Each row states when to reach for the skill. Invoke one as `/dstack-core:<name>`
 | no-comments | Use when asked to remove source comments by replacing them with clear code or accessible documentation. |
 | no-excuses | Use when a material claim rests on missing proof, an untested assumption, or unresolved counterevidence that investigation can still settle. |
 | offensive-driven | Use when the user explicitly asks for a replacement-first pass such as "rebuild it clean", "replace-first", or "offensive pass on <target>" spanning code, docs, plans, or research. |
+| organize-directories | Use when a directory tree needs rebuilding into an elegant, well organized, readable, and easy-to-reach layout; when a hard-to-read layout hides where files belong or makes them hard to find; when a layout needs deciding; or when files must move without breaking imports, build files, or doc links. |
 | parallel-launch | Use when work splits into independent sub-tasks or cross-domain research, or the user says orchestrate, fan out, or more parallel about independent work. |
 | plans | Use when multi-step work needs a structured implementation plan that preserves outcomes and constraints. |
 | plans-complete | Use when a plan must be proven complete before implementation begins. |
 | proof-driven | Use when property-based testing, theorem proving, or formal proof tactics require zero unproven properties. |
 | purge-slop-docs | Use when a human asks to purge stale docs, clean Markdown, or reorder the documentation hierarchy. |
 | recall | Use when asked to recover prior work and current status before resuming. |
+| reduce-ci-time | Use when CI wall time, queue wait, or build minutes are too high and the pipeline needs measured tuning or a contract-first rebuild. |
+| reduce-compile-time | Use when a local or CI build takes too long and its dependency graph, build units, profile, linker, cache, or debug info need rebuilding or retuning from the toolchain timing report. |
 | refactor-break-compat | Use when modernizing APIs, removing compat shims, killing feature flags, or rewriting a subsystem cleanly. |
 | research | Use when researching a named library, framework, SDK, API, or service, or finding a migration guide. |
 | resolve | Use when local feedback needs adjudication, or the user explicitly chooses analyze, reception, summary, interactive, or autonomous mode for one feedback batch. |

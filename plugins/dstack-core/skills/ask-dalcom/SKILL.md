@@ -55,6 +55,7 @@ Situations that create work and then join the main flow.
 - A repository is new to you or to the agent: `/skill:explore` maps it, `/skill:inits` records its costly conventions in AGENTS.md, `/skill:setup-repo` adds gitignore rules, hooks, and review rules, and `/skill:strict-validation-setup` sets up strict gates.
 - You are rebuilding or porting a codebase: `/skill:breaking-driven` with `/skill:refactor-break-compat`, then `/skill:wayfinder` when the rebuild cannot fit one session. `/skill:fromzero` replaces an attempt from a clean pad and needs that attempt committed first.
 - A dependency or version problem: `/skill:ground-latest` with `/skill:deps-upgrade` from dstack-code.
+- A pipeline or a build that costs too much time: `/skill:reduce-ci-time` cuts pipeline wall time from the provider's measurements, `/skill:reduce-compile-time` cuts build time from the tool's timing report.
 
 ## Stances
 
@@ -72,7 +73,7 @@ A stance changes how a step is done, not what it does. Stack it in the same mess
 
 ## Codebase health
 
-Upkeep, not feature work. `/skill:simplify` decides which level owns a cut and routes it: `/skill:code-simplification` for one module's interior, `/skill:architecture-simplification` for layout (explicit request only), `/skill:guillotine` for residue spread across code, docs, tests, and config, and `/skill:refactor-break-compat` for removing a consumer-facing surface. `/skill:docs-practices` decides whether a document should exist at all.
+Upkeep, not feature work. `/skill:simplify` decides which level owns a cut and routes it: `/skill:code-simplification` for one module's interior, `/skill:architecture-simplification` for layout (explicit request only), `/skill:organize-directories` for the directory layout and the history-preserving moves that reshape it, `/skill:guillotine` for residue spread across code, docs, tests, and config, and `/skill:refactor-break-compat` for removing a consumer-facing surface. `/skill:docs-practices` decides whether a document should exist at all.
 
 ## Writing and visuals
 

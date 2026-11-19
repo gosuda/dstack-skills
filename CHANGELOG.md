@@ -5,6 +5,21 @@ All notable changes to Dalcom Skills will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.18] - 2026-11-19
+### Added
+- `reduce-ci-time` in dstack-core rebuilds or tunes one CI pipeline from the
+  merge contract and the provider's own numbers. A required gate changes only on
+  its own explicit yes.
+- `reduce-compile-time` in dstack-core cuts build time by rebuilding the slow
+  structure from the build's contract or retuning a sound one, measured by the
+  toolchain's own timing report, with notes for Rust, C and C++, Go, TypeScript,
+  and the JVM.
+- `organize-directories` in dstack-core rebuilds a directory tree from its consumer
+  contract into an elegant, well organized, readable, and easy-to-reach layout. Each
+  subtree moves atomically with migrated references, provable history, and no
+  compatibility residue.
+- `ask-dalcom` routes the three skills.
+
 ## [2.1.17] - 2026-11-10
 ### Changed
 - Invoking `autowatch` or `watch-and-repair-pr` is now the standing review grant for
