@@ -75,8 +75,9 @@ codex plugin add dstack-core@dstack
 codex plugin add dstack-code@dstack
 ```
 
-Codex resolves the plugin list from `.claude-plugin/marketplace.json`; the generated
-`.codex-plugin/` manifests are forward-compatible copies.
+Codex resolves the plugin list from `.claude-plugin/marketplace.json` (the generated
+`.codex-plugin/marketplace.json` is a forward-compatible copy); each plugin's own
+`.codex-plugin/plugin.json` is what Codex loads first, including the core MCP configuration path.
 
 ### Cursor
 
