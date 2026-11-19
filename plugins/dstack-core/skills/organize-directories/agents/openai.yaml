@@ -1,3 +1,3 @@
 interface:
   display_name: "Organize Directories"
-  short_description: "Use when a directory layout needs deciding, new code keeps landing in the wrong place, or files must move without breaking imports, build files, or doc links."
+  short_description: "Use when a directory tree needs rebuilding into an elegant, well organized, readable, and easy-to-reach layout; when a hard-to-read layout hides where files belong or makes them hard to find; when a layout needs deciding; or when files must move without breaking imports, build files, or doc links."

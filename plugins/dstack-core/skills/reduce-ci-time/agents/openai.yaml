@@ -1,3 +1,3 @@
 interface:
   display_name: "Reduce CI Time"
-  short_description: "Use when CI wall time, queue wait, or build minutes are too high and caching, path filters, sharding, fan-out, or cancellation need cutting from measured evidence."
+  short_description: "Use when CI wall time, queue wait, or build minutes are too high and the pipeline needs measured tuning or a contract-first rebuild."

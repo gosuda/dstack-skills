@@ -7,14 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.18] - 2026-11-19
 ### Added
-- `reduce-ci-time` in dstack-core shortens one CI pipeline from the provider's own
-  per-job and per-step numbers. Each move names its precondition, its check, and its
-  risk. It never removes a required gate.
-- `reduce-compile-time` in dstack-core cuts local and CI build time from the
-  toolchain's timing report, with notes for Rust, C and C++, Go, TypeScript, and the
-  JVM.
-- `organize-directories` in dstack-core decides a directory layout, moves files with
-  one mechanical commit, and declines a move that buys nothing.
+- `reduce-ci-time` in dstack-core rebuilds or tunes one CI pipeline from the
+  merge contract and the provider's own numbers. A required gate changes only on
+  its own explicit yes.
+- `reduce-compile-time` in dstack-core cuts build time by rebuilding the slow
+  structure from the build's contract or retuning a sound one, measured by the
+  toolchain's own timing report, with notes for Rust, C and C++, Go, TypeScript,
+  and the JVM.
+- `organize-directories` in dstack-core rebuilds a directory tree from its consumer
+  contract into an elegant, well organized, readable, and easy-to-reach layout. Each
+  subtree moves atomically with migrated references, provable history, and no
+  compatibility residue.
 - `ask-dalcom` routes the three skills.
 
 ## [2.1.17] - 2026-11-10
