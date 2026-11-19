@@ -1,13 +1,13 @@
 {
   "name": "dstack-performance",
-  "version": "2.1.18",
+  "version": "2.1.19",
   "description": "DStack workflows for measured performance: hardware kernels, profilers, byte budgets, and optimization proof.",
   "author": {
     "name": "gosuda",
     "url": "https://github.com/gosuda"
   },
-  "homepage": "https://github.com/gosuda/dalcom-skills",
-  "repository": "https://github.com/gosuda/dalcom-skills",
+  "homepage": "https://github.com/gosuda/dstack-skills",
+  "repository": "https://github.com/gosuda/dstack-skills",
   "license": "SEE LICENSE IN LICENSE",
   "keywords": [
     "dstack",

@@ -54,10 +54,10 @@ When no skill fits, run `skill-gap-finder`. It names the owning skill or writes 
 
 ## Install plugins and skills
 
-Install plugins from the `dstack` marketplace added from repository `gosuda/dalcom-skills`:
+Install plugins from the `dstack` marketplace added from repository `gosuda/dstack-skills`:
 
 ```shell
-claude plugin marketplace add gosuda/dalcom-skills
+claude plugin marketplace add gosuda/dstack-skills
 claude plugin install dstack-core@dstack
 claude plugin install dstack-planning@dstack
 claude plugin install dstack-code@dstack
@@ -65,10 +65,10 @@ claude plugin install dstack-run@dstack
 claude plugin install dstack-knowledge@dstack
 ```
 
-To install a single skill without installing an entire plugin, use `gh skill install` with the exact repository path in `gosuda/dalcom-skills`:
+To install a single skill without installing an entire plugin, use `gh skill install` with the exact repository path in `gosuda/dstack-skills`:
 
 ```shell
-gh skill install gosuda/dalcom-skills plugins/dstack-core/skills/askme \
+gh skill install gosuda/dstack-skills plugins/dstack-core/skills/askme \
   --agent <agent> --scope user
 ```
 

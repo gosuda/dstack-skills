@@ -1,6 +1,6 @@
 {
   "name": "dstack-learn",
-  "version": "2.1.18",
+  "version": "2.1.19",
   "description": "DStack workflows for teaching, explaining, drilling, and onboarding.",
   "keywords": [
     "dstack",
@@ -8,7 +8,7 @@
     "agent-skills",
     "learn"
   ],
-  "homepage": "https://github.com/gosuda/dalcom-skills",
+  "homepage": "https://github.com/gosuda/dstack-skills",
   "license": "SEE LICENSE IN LICENSE",
   "author": {
     "name": "gosuda"

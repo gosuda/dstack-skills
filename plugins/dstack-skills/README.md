@@ -8,21 +8,21 @@ DStack workflows for authoring, auditing, benchmarking, and publishing agent ski
 
 ```bash
 # Claude Code
-/plugin marketplace add gosuda/dalcom-skills
+/plugin marketplace add gosuda/dstack-skills
 /plugin install dstack-skills@dstack
 
 # Codex
-codex plugin marketplace add gosuda/dalcom-skills
+codex plugin marketplace add gosuda/dstack-skills
 codex plugin add dstack-skills@dstack
 
 # Hermes Agent
-hermes plugins install gosuda/dalcom-skills/plugins/dstack-skills --enable
+hermes plugins install gosuda/dstack-skills/plugins/dstack-skills --enable
 ```
 
 ### Individual (gh skill)
 
 ```shell
-gh skill install gosuda/dalcom-skills plugins/dstack-skills/skills/<skill> \
+gh skill install gosuda/dstack-skills plugins/dstack-skills/skills/<skill> \
   --agent <agent> --scope user
 ```
 

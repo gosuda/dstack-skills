@@ -8,21 +8,21 @@ DStack workflows for measured performance: hardware kernels, profilers, byte bud
 
 ```bash
 # Claude Code
-/plugin marketplace add gosuda/dalcom-skills
+/plugin marketplace add gosuda/dstack-skills
 /plugin install dstack-performance@dstack
 
 # Codex
-codex plugin marketplace add gosuda/dalcom-skills
+codex plugin marketplace add gosuda/dstack-skills
 codex plugin add dstack-performance@dstack
 
 # Hermes Agent
-hermes plugins install gosuda/dalcom-skills/plugins/dstack-performance --enable
+hermes plugins install gosuda/dstack-skills/plugins/dstack-performance --enable
 ```
 
 ### Individual (gh skill)
 
 ```shell
-gh skill install gosuda/dalcom-skills plugins/dstack-performance/skills/<skill> \
+gh skill install gosuda/dstack-skills plugins/dstack-performance/skills/<skill> \
   --agent <agent> --scope user
 ```
 

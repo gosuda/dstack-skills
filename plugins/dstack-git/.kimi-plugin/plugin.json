@@ -1,6 +1,6 @@
 {
   "name": "dstack-git",
-  "version": "2.1.18",
+  "version": "2.1.19",
   "description": "Git workflows for commits, branches, GitHub pull requests, GitLab merge requests, review feedback, and issues.",
   "keywords": [
     "dstack",
@@ -8,7 +8,7 @@
     "agent-skills",
     "git"
   ],
-  "homepage": "https://github.com/gosuda/dalcom-skills",
+  "homepage": "https://github.com/gosuda/dstack-skills",
   "license": "SEE LICENSE IN LICENSE",
   "author": {
     "name": "gosuda"

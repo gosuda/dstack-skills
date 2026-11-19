@@ -6,19 +6,19 @@
   },
   "metadata": {
     "description": "DStack skill plugins for agent harnesses.",
-    "version": "2.1.18"
+    "version": "2.1.19"
   },
   "plugins": [
     {
       "name": "dstack-core",
       "source": "./plugins/dstack-core",
       "description": "Cross-project workflows for planning, implementation, review, verification, and delivery.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -32,12 +32,12 @@
       "name": "dstack-planning",
       "source": "./plugins/dstack-planning",
       "description": "DStack workflows for shaping intent into approved plans, specs, and task lists.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -51,12 +51,12 @@
       "name": "dstack-code",
       "source": "./plugins/dstack-code",
       "description": "DStack workflows for writing, changing, and simplifying code.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -70,12 +70,12 @@
       "name": "dstack-review",
       "source": "./plugins/dstack-review",
       "description": "DStack workflows for reviewing diffs, branches, and implementations against their specs.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -89,12 +89,12 @@
       "name": "dstack-testing",
       "source": "./plugins/dstack-testing",
       "description": "DStack workflows for tests, properties, mutation, and behavioral verification.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -108,12 +108,12 @@
       "name": "dstack-git",
       "source": "./plugins/dstack-git",
       "description": "Git workflows for commits, branches, GitHub pull requests, GitLab merge requests, review feedback, and issues.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -127,12 +127,12 @@
       "name": "dstack-run",
       "source": "./plugins/dstack-run",
       "description": "DStack workflows for executing plans, orchestrating subagents, and bounded autonomous loops.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -146,12 +146,12 @@
       "name": "dstack-infra",
       "source": "./plugins/dstack-infra",
       "description": "DStack workflows for CI, deployment, observability, cost, and infrastructure tooling.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -165,12 +165,12 @@
       "name": "dstack-security",
       "source": "./plugins/dstack-security",
       "description": "DStack workflows for security review, vulnerability triage, and defensive implementation.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -184,12 +184,12 @@
       "name": "dstack-fuzzing",
       "source": "./plugins/dstack-fuzzing",
       "description": "DStack workflows for fuzz harnesses, fuzzer setup, sanitizers, and coverage analysis.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -203,12 +203,12 @@
       "name": "dstack-research",
       "source": "./plugins/dstack-research",
       "description": "DStack workflows for source-backed investigation, verification, and design rationale.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -222,12 +222,12 @@
       "name": "dstack-knowledge",
       "source": "./plugins/dstack-knowledge",
       "description": "DStack workflows for memory, session continuity, decision records, and retrospectives.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -241,12 +241,12 @@
       "name": "dstack-learn",
       "source": "./plugins/dstack-learn",
       "description": "DStack workflows for teaching, explaining, drilling, and onboarding.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -260,12 +260,12 @@
       "name": "dstack-skills",
       "source": "./plugins/dstack-skills",
       "description": "DStack workflows for authoring, auditing, benchmarking, and publishing agent skills.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -279,12 +279,12 @@
       "name": "dstack-writing",
       "source": "./plugins/dstack-writing",
       "description": "DStack workflows for documentation, editorial prose, and copy.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -298,12 +298,12 @@
       "name": "dstack-visual",
       "source": "./plugins/dstack-visual",
       "description": "DStack workflows for diagrams, decks, canvases, and visual explainers.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -317,12 +317,12 @@
       "name": "dstack-design",
       "source": "./plugins/dstack-design",
       "description": "DStack workflows for interface design, prototypes, and visual fidelity.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -336,12 +336,12 @@
       "name": "dstack-typescript",
       "source": "./plugins/dstack-typescript",
       "description": "DStack workflows for modern TypeScript development.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -355,12 +355,12 @@
       "name": "dstack-native",
       "source": "./plugins/dstack-native",
       "description": "DStack workflows for native systems, toolchains, and performance.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -374,12 +374,12 @@
       "name": "dstack-rust",
       "source": "./plugins/dstack-rust",
       "description": "DStack workflows for Rust development: cargo, async, FFI, cross-compilation, debugging, and unsafe review.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -393,12 +393,12 @@
       "name": "dstack-performance",
       "source": "./plugins/dstack-performance",
       "description": "DStack workflows for measured performance: hardware kernels, profilers, byte budgets, and optimization proof.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",
@@ -412,12 +412,12 @@
       "name": "dstack-marketing",
       "source": "./plugins/dstack-marketing",
       "description": "DStack workflows for marketing and viral growth, from audience research to opportunity scouting.",
-      "version": "2.1.18",
+      "version": "2.1.19",
       "author": {
         "name": "gosuda",
         "url": "https://github.com/gosuda"
       },
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "license": "SEE LICENSE IN LICENSE",
       "keywords": [
         "dstack",

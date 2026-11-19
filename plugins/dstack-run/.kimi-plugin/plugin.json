@@ -1,6 +1,6 @@
 {
   "name": "dstack-run",
-  "version": "2.1.18",
+  "version": "2.1.19",
   "description": "DStack workflows for executing plans, orchestrating subagents, and bounded autonomous loops.",
   "keywords": [
     "dstack",
@@ -8,7 +8,7 @@
     "agent-skills",
     "run"
   ],
-  "homepage": "https://github.com/gosuda/dalcom-skills",
+  "homepage": "https://github.com/gosuda/dstack-skills",
   "license": "SEE LICENSE IN LICENSE",
   "author": {
     "name": "gosuda"
