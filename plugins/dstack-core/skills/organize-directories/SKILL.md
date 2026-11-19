@@ -54,7 +54,7 @@ Make the top level say what the system is and each directory name say what it ho
 
 Keep entry points and frequently opened files near the top, with predictable paths and no pass-through directories. From the repository root, find the five files changed most often in recent months within the scope under review:
 
-`git --literal-pathspecs log --since='6 months ago' --name-only -z --pretty=format: -- "<scope>" | perl -0ne 'chomp; $c{$_}++ if length && -f; END { for (sort { $c{$b} <=> $c{$a} || $a cmp $b } keys %c) { last if ++$n > 5; (my $d = $_) =~ s/([^\x20-\x7e]|\\)/sprintf("\\x%02x", ord $1)/ge; printf "%7d %s\n", $c{$_}, $d } }'`
+`git --literal-pathspecs log --since='6 months ago' --name-only -z --pretty=format: -- "<scope>" | perl -C0 -0ne 'chomp; $c{$_}++ if length && -f; END { for (sort { $c{$b} <=> $c{$a} || $a cmp $b } keys %c) { last if ++$n > 5; (my $d = $_) =~ s/([^\x20-\x7e]|\\)/sprintf("\\x%02x", ord $1)/ge; printf "%7d %s\n", $c{$_}, $d } }'`
 
 Use the requested subtree for `<scope>`, or `.` for a repository-wide review. Both runs keep only paths that name files still present in the current tree. The command counts each path as one whole record in any shell and prints a byte outside printable ASCII as `\xNN`. If the scoped log yields no such file, rerun it without `--since`; if the scope still yields none, test the entry points the consumer contract names and record the substitution.
 
