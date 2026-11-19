@@ -32,7 +32,7 @@ claude plugin install dstack-core@dstack
 claude plugin install dstack-code@dstack
 ```
 
-Run it and the plugin list shows both entries enabled:
+Run `claude plugin list` to verify; both entries show enabled:
 
 ```text
 ❯ dstack-code@dstack
