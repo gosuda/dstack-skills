@@ -5,6 +5,13 @@ All notable changes to Dalcom Skills will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.20] - 2026-11-20
+### Security
+- The four MCP servers that dstack-core starts through `npx` now name an exact
+  package version. Before, three had no version and one used `@latest`, so a
+  new or hijacked release ran in the agent session without a change in this
+  repository.
+
 ## [2.1.18] - 2026-11-19
 ### Added
 - `reduce-ci-time` in dstack-core rebuilds or tunes one CI pipeline from the

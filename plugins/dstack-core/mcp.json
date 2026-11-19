@@ -3,7 +3,7 @@
     "sequential": {
       "command": "npx",
       "args": [
-        "mcp-sequentialthinking-tools"
+        "mcp-sequentialthinking-tools@0.1.1"
       ],
       "alwaysLoad": true
     },
@@ -11,7 +11,7 @@
       "command": "npx",
       "args": [
         "-y",
-        "mcp-server-actor-critic-thinking"
+        "mcp-server-actor-critic-thinking@1.0.0"
       ],
       "alwaysLoad": true
     },
@@ -19,7 +19,7 @@
       "command": "npx",
       "args": [
         "-y",
-        "server-shannon-thinking@latest"
+        "server-shannon-thinking@0.1.1"
       ],
       "alwaysLoad": true
     },
@@ -27,7 +27,7 @@
       "command": "npx",
       "args": [
         "-y",
-        "repomix",
+        "repomix@1.19.0",
         "--mcp",
         "--compress"
       ]
