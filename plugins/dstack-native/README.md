@@ -8,21 +8,21 @@ DStack workflows for native systems, toolchains, and performance.
 
 ```bash
 # Claude Code
-/plugin marketplace add gosuda/dalcom-skills
+/plugin marketplace add gosuda/dstack-skills
 /plugin install dstack-native@dstack
 
 # Codex
-codex plugin marketplace add gosuda/dalcom-skills
+codex plugin marketplace add gosuda/dstack-skills
 codex plugin add dstack-native@dstack
 
 # Hermes Agent
-hermes plugins install gosuda/dalcom-skills/plugins/dstack-native --enable
+hermes plugins install gosuda/dstack-skills/plugins/dstack-native --enable
 ```
 
 ### Individual (gh skill)
 
 ```shell
-gh skill install gosuda/dalcom-skills plugins/dstack-native/skills/<skill> \
+gh skill install gosuda/dstack-skills plugins/dstack-native/skills/<skill> \
   --agent <agent> --scope user
 ```
 

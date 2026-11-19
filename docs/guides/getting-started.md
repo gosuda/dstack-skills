@@ -4,10 +4,10 @@ Install the base plugins, confirm the install, and run one skill. That is the wh
 
 ## Install the plugins
 
-Add the `dstack` marketplace from repository `gosuda/dalcom-skills`, then install `dstack-core` followed by `dstack-code`. These two form the base engineering set:
+Add the `dstack` marketplace from repository `gosuda/dstack-skills`, then install `dstack-core` followed by `dstack-code`. These two form the base engineering set:
 
 ```shell
-claude plugin marketplace add gosuda/dalcom-skills
+claude plugin marketplace add gosuda/dstack-skills
 claude plugin install dstack-core@dstack
 claude plugin install dstack-code@dstack
 ```
@@ -15,7 +15,7 @@ claude plugin install dstack-code@dstack
 In Codex, register the marketplace and add the plugins:
 
 ```shell
-codex plugin marketplace add gosuda/dalcom-skills
+codex plugin marketplace add gosuda/dstack-skills
 codex plugin add dstack-core@dstack
 codex plugin add dstack-code@dstack
 ```

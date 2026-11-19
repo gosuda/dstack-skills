@@ -4,5 +4,5 @@ description: "DStack workflows for documentation, editorial prose, and copy."
 author: "gosuda"
 manifest_version: 2
 license: "SEE LICENSE IN LICENSE"
-homepage: "https://github.com/gosuda/dalcom-skills"
+homepage: "https://github.com/gosuda/dstack-skills"
 tags: ["dstack", "dalcom", "agent-skills", "writing"]

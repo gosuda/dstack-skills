@@ -8,21 +8,21 @@ DStack workflows for fuzz harnesses, fuzzer setup, sanitizers, and coverage anal
 
 ```bash
 # Claude Code
-/plugin marketplace add gosuda/dalcom-skills
+/plugin marketplace add gosuda/dstack-skills
 /plugin install dstack-fuzzing@dstack
 
 # Codex
-codex plugin marketplace add gosuda/dalcom-skills
+codex plugin marketplace add gosuda/dstack-skills
 codex plugin add dstack-fuzzing@dstack
 
 # Hermes Agent
-hermes plugins install gosuda/dalcom-skills/plugins/dstack-fuzzing --enable
+hermes plugins install gosuda/dstack-skills/plugins/dstack-fuzzing --enable
 ```
 
 ### Individual (gh skill)
 
 ```shell
-gh skill install gosuda/dalcom-skills plugins/dstack-fuzzing/skills/<skill> \
+gh skill install gosuda/dstack-skills plugins/dstack-fuzzing/skills/<skill> \
   --agent <agent> --scope user
 ```
 

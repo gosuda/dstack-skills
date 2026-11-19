@@ -53,7 +53,7 @@ of this scale that matters; the current count is in the generated `docs/specs/sk
 Command shape rather than a run record: no output or exit code is captured below.
 
 ```shell
-gh skill install gosuda/dalcom-skills plugins/dstack-planning/skills/askme \
+gh skill install gosuda/dstack-skills plugins/dstack-planning/skills/askme \
   --agent claude-code --scope user
 ```
 

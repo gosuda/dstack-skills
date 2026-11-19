@@ -6,7 +6,7 @@
       "displayName": "DStack Core",
       "description": "Cross-project workflows for planning, implementation, review, verification, and delivery.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-core"
     },
     {
@@ -14,7 +14,7 @@
       "displayName": "DStack Planning",
       "description": "DStack workflows for shaping intent into approved plans, specs, and task lists.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-planning"
     },
     {
@@ -22,7 +22,7 @@
       "displayName": "DStack Code",
       "description": "DStack workflows for writing, changing, and simplifying code.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-code"
     },
     {
@@ -30,7 +30,7 @@
       "displayName": "DStack Review",
       "description": "DStack workflows for reviewing diffs, branches, and implementations against their specs.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-review"
     },
     {
@@ -38,7 +38,7 @@
       "displayName": "DStack Testing",
       "description": "DStack workflows for tests, properties, mutation, and behavioral verification.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-testing"
     },
     {
@@ -46,7 +46,7 @@
       "displayName": "DStack Git",
       "description": "Git workflows for commits, branches, GitHub pull requests, GitLab merge requests, review feedback, and issues.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-git"
     },
     {
@@ -54,7 +54,7 @@
       "displayName": "DStack Run",
       "description": "DStack workflows for executing plans, orchestrating subagents, and bounded autonomous loops.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-run"
     },
     {
@@ -62,7 +62,7 @@
       "displayName": "DStack Infra",
       "description": "DStack workflows for CI, deployment, observability, cost, and infrastructure tooling.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-infra"
     },
     {
@@ -70,7 +70,7 @@
       "displayName": "DStack Security",
       "description": "DStack workflows for security review, vulnerability triage, and defensive implementation.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-security"
     },
     {
@@ -78,7 +78,7 @@
       "displayName": "DStack Fuzzing",
       "description": "DStack workflows for fuzz harnesses, fuzzer setup, sanitizers, and coverage analysis.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-fuzzing"
     },
     {
@@ -86,7 +86,7 @@
       "displayName": "DStack Research",
       "description": "DStack workflows for source-backed investigation, verification, and design rationale.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-research"
     },
     {
@@ -94,7 +94,7 @@
       "displayName": "DStack Knowledge",
       "description": "DStack workflows for memory, session continuity, decision records, and retrospectives.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-knowledge"
     },
     {
@@ -102,7 +102,7 @@
       "displayName": "DStack Learn",
       "description": "DStack workflows for teaching, explaining, drilling, and onboarding.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-learn"
     },
     {
@@ -110,7 +110,7 @@
       "displayName": "DStack Skills",
       "description": "DStack workflows for authoring, auditing, benchmarking, and publishing agent skills.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-skills"
     },
     {
@@ -118,7 +118,7 @@
       "displayName": "DStack Writing",
       "description": "DStack workflows for documentation, editorial prose, and copy.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-writing"
     },
     {
@@ -126,7 +126,7 @@
       "displayName": "DStack Visual",
       "description": "DStack workflows for diagrams, decks, canvases, and visual explainers.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-visual"
     },
     {
@@ -134,7 +134,7 @@
       "displayName": "DStack Design",
       "description": "DStack workflows for interface design, prototypes, and visual fidelity.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-design"
     },
     {
@@ -142,7 +142,7 @@
       "displayName": "DStack TypeScript",
       "description": "DStack workflows for modern TypeScript development.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-typescript"
     },
     {
@@ -150,7 +150,7 @@
       "displayName": "DStack Native",
       "description": "DStack workflows for native systems, toolchains, and performance.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-native"
     },
     {
@@ -158,7 +158,7 @@
       "displayName": "DStack Rust",
       "description": "DStack workflows for Rust development: cargo, async, FFI, cross-compilation, debugging, and unsafe review.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-rust"
     },
     {
@@ -166,7 +166,7 @@
       "displayName": "DStack Performance",
       "description": "DStack workflows for measured performance: hardware kernels, profilers, byte budgets, and optimization proof.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-performance"
     },
     {
@@ -174,7 +174,7 @@
       "displayName": "DStack Marketing",
       "description": "DStack workflows for marketing and viral growth, from audience research to opportunity scouting.",
       "version": "2.1.18",
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "source": "../plugins/dstack-marketing"
     }
   ]

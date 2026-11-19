@@ -6,7 +6,7 @@
     "name": "gosuda",
     "url": "https://github.com/gosuda"
   },
-  "repository": "https://github.com/gosuda/dalcom-skills",
+  "repository": "https://github.com/gosuda/dstack-skills",
   "license": "SEE LICENSE IN LICENSE",
   "entries": [
     {
@@ -21,7 +21,7 @@
         "agent-skills",
         "core"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-core"
     },
     {
@@ -36,7 +36,7 @@
         "agent-skills",
         "planning"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-planning"
     },
     {
@@ -51,7 +51,7 @@
         "agent-skills",
         "code"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-code"
     },
     {
@@ -66,7 +66,7 @@
         "agent-skills",
         "review"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-review"
     },
     {
@@ -81,7 +81,7 @@
         "agent-skills",
         "testing"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-testing"
     },
     {
@@ -96,7 +96,7 @@
         "agent-skills",
         "git"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-git"
     },
     {
@@ -111,7 +111,7 @@
         "agent-skills",
         "run"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-run"
     },
     {
@@ -126,7 +126,7 @@
         "agent-skills",
         "infra"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-infra"
     },
     {
@@ -141,7 +141,7 @@
         "agent-skills",
         "security"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-security"
     },
     {
@@ -156,7 +156,7 @@
         "agent-skills",
         "fuzzing"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-fuzzing"
     },
     {
@@ -171,7 +171,7 @@
         "agent-skills",
         "research"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-research"
     },
     {
@@ -186,7 +186,7 @@
         "agent-skills",
         "knowledge"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-knowledge"
     },
     {
@@ -201,7 +201,7 @@
         "agent-skills",
         "learn"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-learn"
     },
     {
@@ -216,7 +216,7 @@
         "agent-skills",
         "skills"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-skills"
     },
     {
@@ -231,7 +231,7 @@
         "agent-skills",
         "writing"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-writing"
     },
     {
@@ -246,7 +246,7 @@
         "agent-skills",
         "visual"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-visual"
     },
     {
@@ -261,7 +261,7 @@
         "agent-skills",
         "design"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-design"
     },
     {
@@ -276,7 +276,7 @@
         "agent-skills",
         "typescript"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-typescript"
     },
     {
@@ -291,7 +291,7 @@
         "agent-skills",
         "native"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-native"
     },
     {
@@ -306,7 +306,7 @@
         "agent-skills",
         "rust"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-rust"
     },
     {
@@ -321,7 +321,7 @@
         "agent-skills",
         "performance"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-performance"
     },
     {
@@ -336,7 +336,7 @@
         "agent-skills",
         "marketing"
       ],
-      "homepage": "https://github.com/gosuda/dalcom-skills",
+      "homepage": "https://github.com/gosuda/dstack-skills",
       "directory": "plugins/dstack-marketing"
     }
   ]

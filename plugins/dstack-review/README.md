@@ -8,21 +8,21 @@ DStack workflows for reviewing diffs, branches, and implementations against thei
 
 ```bash
 # Claude Code
-/plugin marketplace add gosuda/dalcom-skills
+/plugin marketplace add gosuda/dstack-skills
 /plugin install dstack-review@dstack
 
 # Codex
-codex plugin marketplace add gosuda/dalcom-skills
+codex plugin marketplace add gosuda/dstack-skills
 codex plugin add dstack-review@dstack
 
 # Hermes Agent
-hermes plugins install gosuda/dalcom-skills/plugins/dstack-review --enable
+hermes plugins install gosuda/dstack-skills/plugins/dstack-review --enable
 ```
 
 ### Individual (gh skill)
 
 ```shell
-gh skill install gosuda/dalcom-skills plugins/dstack-review/skills/<skill> \
+gh skill install gosuda/dstack-skills plugins/dstack-review/skills/<skill> \
   --agent <agent> --scope user
 ```
 
