@@ -1,206 +1,162 @@
-# Dalcom Skills
+# DStack Skills
 
-> Formerly the ODIN Claude Plugin. The repository moved to gosuda/dalcom-skills.
+Agent skills for agentic engineering, installable as plugin modules in Claude Code, Codex, Cursor, Grok, Kimi Code, and Hermes Agent.
 
-Dalcom Skills, built on the DStack methodology, is a highly opinionated code-agent skill library: principles-first
-engineering, surgical editing, and workflow automation, published as installable plugins. It gives
-you a drop-in skill set with five discipline layers. Skills are authored once in-tree, and every
-supported client discovers them from that same layout, so nothing is copied or republished.
+Each skill is a `SKILL.md` file authored once under `plugins/<plugin>/skills/<slug>/`; every supported
+agent reads that same tree, so a fix lands everywhere without a second copy or a registry release.
+Install the base plugins, then invoke skills by name:
 
-Methodology: [dstack](https://github.com/gosuda/dstack)
-· Site: [outlinedriven.github.io](https://outlinedriven.github.io)
-
-- Six harness surfaces from one tree: Claude Code, Codex, Cursor, Grok, Kimi, and Hermes Agent
-- No package manager for the tooling; every script is dependency-free Node ESM or standard-library Python
-- Six output styles in dstack-core, each embedding the canonical doctrine byte-identically
-- Pre-commit gates that audit the whole tree on every commit, listed in `.pre-commit-config.yaml`
-
-## Contents
-
-- [What is this](#what-is-this)
-- [Install](#install)
-- [Choose your plugins](#choose-your-plugins)
-- [Using the skills](#using-the-skills)
-- [Plugins](#plugins)
-- [Core philosophy](#core-philosophy)
-- [Output styles](#output-styles)
-- [Development](#development)
-- [License](#license)
-
-## What is this
-
-308 skills in 22 plugins. A skill is authored once, at
-`plugins/<plugin>/skills/<slug>/SKILL.md`, and that path is its only home. The directory states
-which plugin owns the skill, so no registry has to answer that question. Every plugin and
-marketplace ships at one `releaseVersion`, currently 2.1.19, held in `catalog/plugins.json`.
-
-Each harness resolves components from fixed conventions at the plugin root, so this layout is the
-one every supported client already discovers. Nothing is copied at publish time, and nothing is
-published to a package registry.
-
-```
-plugins/dstack-core/
-  .claude-plugin/plugin.json   Claude Code manifest
-  .codex-plugin/plugin.json    Codex manifest
-  .cursor-plugin/plugin.json   Cursor manifest
-  .grok-plugin/plugin.json     Grok manifest
-  .kimi-plugin/plugin.json     Kimi manifest
-  skills/necessary-work/SKILL.md        authored skill
-  skills/necessary-work/agents/openai.yaml   generated from the frontmatter
-  mcp.json                     MCP servers, dstack-core only
-  output-styles/               Claude output styles, dstack-core only
+```text
+/dstack-core:ask-dalcom I want to add a feature to this repository. Where do I start?
 ```
 
-> `dstack-core` carries the six output styles and the core session gates; `dstack-planning` carries the planning skills. `dstack-code` carries the day-to-day engineering skills. Install the rest by working domain.
+`ask-dalcom` answers with one route: which skills, in which order, what each step does, and what must
+exist first. It recommends and runs none of it.
+308 skills in 22 plugins.
 
+## Why use it
 
-## Core philosophy
+- Skills are organized by working domain; install `dstack-core` and `dstack-code`, then add only the domains you use.
+- One authored tree serves six agents through fixed manifests, so skills do not drift between copies.
+- Skills ship as reviewable Markdown with named triggers; nothing is fetched from a package registry at install time beyond the repository itself.
+- `dstack-core` includes six output styles and four MCP server configurations; `ask-dalcom` routes you to the right skill when you do not know the name.
+- The maintenance scripts are dependency-free Node ESM and standard-library Python; `just check` runs every tree gate.
 
-> 1. Investigate before acting. Never speculate about code you have not read.
-> 2. Draw the structure before building it.
-> 3. Match rigor to risk.
-> 4. One logical change per commit.
-> 5. Show the code, not a description of the code.
+## Quick start
 
-## Install
+Install the base plugins in Claude Code:
 
-Six install surfaces are supported; each installs from this repository.
+```shell
+claude plugin marketplace add gosuda/dstack-skills
+claude plugin install dstack-core@dstack
+claude plugin install dstack-code@dstack
+```
+
+Run `claude plugin list` to verify; both entries show enabled:
+
+```text
+❯ dstack-code@dstack
+  Version: 2.1.19
+  Scope: user
+  Status: ✔ enabled
+
+❯ dstack-core@dstack
+  Version: 2.1.19
+  Scope: user
+  Status: ✔ enabled
+```
+
+Then invoke the router skill shown above, or pick a skill from the
+[skill index](docs/specs/skill-index.md); install its plugin first when it lives
+outside the two base plugins (`claude plugin install <plugin>@dstack`; other agents under Installation).
+
+## Installation
+
+Every surface installs from this repository; the manifests live at the repository root and at
+`plugins/<plugin>/.<agent>-plugin/plugin.json`. The evidence for each surface is in
+[docs/specs/distribution-surfaces.md](docs/specs/distribution-surfaces.md), and recorded install runs
+are in [docs/specs/install-proof.md](docs/specs/install-proof.md).
 
 ### Claude Code
 
 ```shell
-claude plugin marketplace add gosuda/dalcom-skills
+claude plugin marketplace add gosuda/dstack-skills
 claude plugin install dstack-core@dstack
-
-# Your selected plugin modules; Keep it lean, only for you.
 claude plugin install dstack-code@dstack
-claude plugin install dstack-run@dstack
-claude plugin install dstack-planning@dstack
-claude plugin install dstack-knowledge@dstack
-
-# More ...
 ```
+
+`claude plugin install <plugin>@dstack` adds any other plugin module, for example
+`dstack-planning`, `dstack-run`, or `dstack-knowledge`.
 
 ### Codex
 
 ```shell
-codex plugin marketplace add gosuda/dalcom-skills
+codex plugin marketplace add gosuda/dstack-skills
 codex plugin add dstack-core@dstack
-
-# Your selected plugin modules; Keep it lean, only for you.
 codex plugin add dstack-code@dstack
-codex plugin add dstack-run@dstack
-codex plugin add dstack-planning@dstack
-codex plugin add dstack-knowledge@dstack
-
-# More ...
 ```
+
+Codex resolves the plugin list from `.claude-plugin/marketplace.json` (the generated
+`.codex-plugin/marketplace.json` is a forward-compatible copy); each plugin's own
+`.codex-plugin/plugin.json` is what Codex loads first, including the core MCP configuration path.
 
 ### Cursor
 
-Add the marketplace, then `/plugin install dstack-core`. Cursor reads the
-`.cursor-plugin/plugin.json` manifest at each plugin root.
-
-```
-/plugin install dstack-core
-
-# Your selected plugin modules; Keep it lean, only for you.
-/plugin install dstack-code
-/plugin install dstack-run
-/plugin install dstack-planning
-/plugin install dstack-knowledge
-
-# More ...
-```
-
-### Hermes Agent
-
-Each plugin is also a native Hermes plugin. Install the modules you want straight from their
-directories; Hermes loads their skills as read-only `<plugin>:<skill>` entries, such as
-`dstack-writing:humanizer-korean-plain`.
-
 ```shell
-hermes plugins install gosuda/dalcom-skills/plugins/dstack-core --enable
-
-# Your selected plugin modules; Keep it lean, only for you.
-hermes plugins install gosuda/dalcom-skills/plugins/dstack-code --enable
-hermes plugins install gosuda/dalcom-skills/plugins/dstack-writing --enable
-
-# More ...
+cursor-agent plugin marketplace add github.com/gosuda/dstack-skills
 ```
 
-`hermes plugins update <plugin>` pulls a newer release. Hermes skips the `.claude-plugin/` and other
-harness directories and reads only `plugin.yaml` and `__init__.py`.
-
-Hermes scans every file at install time. Plugins whose skills quote shell or Rust syntax scan as
-`caution` and ask for one confirmation. `dstack-native` scans as `dangerous` on its security teaching
-examples and cannot be installed into Hermes; take its skills through `gh skill install` instead.
-
-### Individual (gh skill)
-
-`gh skill` installs a single skill for any of its supported agents. Passing the exact path skips a
-full tree traversal, which matters at this repository's size.
-```shell
-gh skill install gosuda/dalcom-skills plugins/dstack-core/skills/askme \
-  --agent <agent> --scope user
-```
-
-`<agent>` is `claude-code`, `codex`, `cursor`, `grok`, or `kimi-cli`.
+Cursor indexes the repository and reads `.cursor-plugin/marketplace.json`. Install plugins from the
+marketplace in the Cursor plugin UI.
 
 ### Grok
 
 ```shell
-grok plugin marketplace add gosuda/dalcom-skills
-grok plugin install gosuda/dalcom-skills#plugins/dstack-core
+grok plugin marketplace add gosuda/dstack-skills
+grok plugin install gosuda/dstack-skills#plugins/dstack-core
 ```
 
-The `#plugins/<plugin>` suffix selects one plugin subdirectory from the repository.
+The `#plugins/<plugin>` suffix selects one plugin subdirectory; repeat the install command for each
+plugin you want.
 
-### Kimi
+### Kimi Code
 
-From a local clone; Kimi cannot install a subdirectory of a GitHub repository.
+Kimi reads a marketplace registry from a local clone and requires absolute paths:
 
 ```shell
-/plugins marketplace /path/to/dalcom-skills/.kimi-plugin/marketplace.json
-/plugins install /path/to/dalcom-skills/plugins/dstack-core
+git clone https://github.com/gosuda/dstack-skills.git
 ```
 
-Both paths are absolute: Kimi rejects a relative plugin root.
+```text
+/plugins marketplace /absolute/path/to/dstack-skills/.kimi-plugin/marketplace.json
+/plugins install /absolute/path/to/dstack-skills/plugins/dstack-core
+```
 
-## Choose your plugins
+### Hermes Agent
 
-Nothing here is all-or-nothing. `dstack-core` and `dstack-code` are the base from Install; every
-row below is what you add on top for that kind of work, and unselected plugins stay uninstalled.
-
-| Working on | Add |
-|---|---|
-| Everyday code changes | `dstack-run`, `dstack-git` |
-| Tests and verification | `dstack-testing` |
-| Large refactors, audits, bounded iteration | `dstack-code`, `dstack-review` |
-| A specific language | `dstack-native`, `dstack-typescript`, or `dstack-rust` |
-| Web and interface work | `dstack-typescript`, `dstack-design` |
-| Security review and hardening | `dstack-security`, `dstack-fuzzing` |
-| Research and technical writing | `dstack-research`, `dstack-knowledge`, `dstack-writing` |
-| Product, planning, and new artifacts | `dstack-planning`, `dstack-visual` |
-| Building agents | `dstack-skills` |
-| Infrastructure and data | `dstack-infra` |
-
-Each name installs with the same command:
+Each plugin is also a native Hermes plugin; install the modules you want straight from their
+subdirectories:
 
 ```shell
-/plugin install dstack-security@dstack
+hermes plugins install gosuda/dstack-skills/plugins/dstack-core --enable
+hermes plugins install gosuda/dstack-skills/plugins/dstack-writing --enable
 ```
 
-The largest plugins are `dstack-core` at 89, `dstack-marketing` at 28, and `dstack-run` at 20.
-Install one skill instead of a whole plugin with `gh skill install`, shown under Install above.
+Hermes loads their skills as `<plugin>:<slug>` entries. Its install-time scanner reads every Markdown
+file as if it were executable, so `dstack-native` scans as dangerous on its security teaching examples
+and cannot be installed into Hermes; take its skills through `gh skill install` instead.
 
-## Using the skills
+### One skill with gh skill
 
-You install plugins once and invoke skills every day. When you do not know which skill fits, ask the router: run `/dstack-core:ask-dalcom` and describe the situation, such as "CI is red on my PR" or "re-derive this bloated module". Other harnesses spell it `$ask-dalcom` in Codex or `/` and the name in Cursor; the [using the skills](docs/guides/using-skills.md) guide has the full table.
+The GitHub CLI's `gh skill` installs a single skill for many agents. Passing the exact path skips a
+full tree traversal:
 
-It answers with one route: which skills, in which order, what each step does, and what must exist first. It recommends only and runs none of it. Inside a running `autopilot` chain, `continue`, `go`, `do it now`, `orchestrate`, and `fan out` resume the chain instead of starting a new skill.
+```shell
+gh skill install gosuda/dstack-skills plugins/dstack-core/skills/askme \
+  --agent claude-code --scope user
+```
 
-New here? Start with [getting started](docs/guides/getting-started.md). For chained examples mined from real sessions, see [workflows](docs/guides/workflows.md).
+Supported `--agent` values include `claude-code`, `codex`, `cursor`, `grok`, and `kimi-cli`;
+`gh skill install --help` lists the full set.
+
+## Usage
+
+Invoke a skill by name in the form your agent uses:
+
+```text
+/dstack-core:ask-dalcom CI is red on my PR
+```
+
+| Agent | Invocation shape | Example |
+|---|---|---|
+| Claude Code | `/<plugin>:<slug>` | `/dstack-core:ask-dalcom` |
+| Codex | `$<slug>` | `$ask-dalcom` |
+| Cursor | `/` then pick the skill by name | `/ask-dalcom` |
+| Hermes Agent | `<plugin>:<slug>` | `dstack-core:ask-dalcom` |
+
+Grok and Kimi load the same skill tree; use each agent's own invocation form. Skill names are exact:
+a near miss loads nothing. A skill can also load automatically when your request matches the trigger
+sentence in its `description` field.
 
 ## Plugins
 
@@ -219,22 +175,29 @@ New here? Start with [getting started](docs/guides/getting-started.md). For chai
 | dstack-research | Research | dstack-marketing | Marketing |
 
 `catalog/plugins.json` is the identity ledger: it holds each plugin's name, description, category,
-and tags, and every manifest and registry is generated from it.
+and tags, and every manifest and registry is generated from it. Every plugin manifest and every
+marketplace entry the harnesses read ships at one `releaseVersion`, currently 2.1.19, held in
+`catalog/plugins.json`; the `"2"` at the top of `.kimi-plugin/marketplace.json`
+is the registry schema version, not the release. The inert `.codex-plugin/marketplace.json`
+forward-compat copy carries no per-entry version; Codex reads `.claude-plugin/marketplace.json`.
+
+The largest plugins are `dstack-core` at 89, `dstack-marketing` at 28, and `dstack-run` at 20.
 
 ## Output styles
 
-Output styles shape how the agent communicates. Switch through Claude Code's `/config` or by
-setting `outputStyle` in `settings.json`. They ship in `dstack-core`.
+Six output styles ship in `dstack-core` and shape how the agent communicates. Switch through Claude
+Code's `/config` or by setting `outputStyle` in `settings.json`: `DStack`, `AxiomMode`, `Builder`,
+`Duet`, `Linus`, and `Eval`. Every style embeds a byte-identical copy of `system-prompt-baseline.md`;
+`scripts/sync-baseline.py` owns that copy.
 
-- `DStack`: default. Skeptic register, scope discipline, no reflexive validation.
-- `AxiomMode`: formal-logic English with predicate-form claims and ASCII keywords.
-- `Builder`: for non-technical builders. Outcome-first, plain language, progressive disclosure.
-- `Duet`: companion to the `duet` skill. Decisions before prose, forks stated loudly.
-- `Linus`: Torvalds review discipline. Good taste as special-case elimination.
-- `Eval`: benchmark harness register, generated by margin-runner. Do not hand-edit.
+## Documentation
 
-Every style embeds a byte-identical copy of `system-prompt-baseline.md`, because the Claude Code
-loader does not resolve references. `scripts/sync-baseline.py` owns that copy.
+- [Getting started](docs/guides/getting-started.md): install the base plugins and run one skill.
+- [Using skills](docs/guides/using-skills.md): invocation forms, stacking, and choosing between overlapping skills.
+- [Workflows](docs/guides/workflows.md): skill chains mined from real sessions.
+- [Skill index](docs/specs/skill-index.md): every skill with its trigger sentence.
+- [Distribution surfaces](docs/specs/distribution-surfaces.md): what each agent requires and the evidence behind it.
+- Methodology: [dstack](https://github.com/gosuda/dstack); project site: [outlinedriven.github.io](https://outlinedriven.github.io).
 
 ## Development
 
@@ -248,17 +211,17 @@ just check        # every gate
 just verify       # every gate plus Agent Skills validation
 ```
 
-`.pre-commit-config.yaml` is the gate list. Every gate audits the whole tree and runs
-unconditionally, so none of them can be skipped by touching the wrong file. `docs/specs/gates.md`
-explains what each generator writes, what each gate proves, and how to read a failure.
+`.pre-commit-config.yaml` is the gate list. `docs/specs/gates.md` explains what each generator
+writes, what each gate proves, and how to read a failure.
 
 ### Contributing
 
-Maintainer workflow lives in [CONTRIBUTING.md](CONTRIBUTING.md): how to publish, run gates, and change skills. Agent-behavior rules live in `AGENTS.md`.
-
+Maintainer workflow lives in [CONTRIBUTING.md](CONTRIBUTING.md): how to publish, run gates, and
+change skills. Agent-behavior rules live in [AGENTS.md](AGENTS.md).
 
 ## License
 
-See LICENSE. Third-party attribution is in `licenses/NOTICE`.
+Apache License 2.0; see [LICENSE](LICENSE). Third-party attribution is in
+[licenses/NOTICE](licenses/NOTICE).
 
-Issues: https://github.com/gosuda/dalcom-skills/issues
+Issues: https://github.com/gosuda/dstack-skills/issues
