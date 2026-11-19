@@ -34,7 +34,7 @@ Nothing is kept or cut without its classification. Several essential items may s
 
 Interior covers job layout, ordering, caching, sharding, path filters, and fan-out inside the same set of proven properties. Interior changes need no ask, but a path filter is interior only while every contract item still runs for every change it protects.
 
-Each boundary surface needs its own explicit yes or no after it is presented with its class and cost:
+Each boundary surface needs the user in this conversation to give its own explicit yes or no for that named surface, after it is presented with its class and cost:
 
 - Every required or protected check whose removal, rename, merge, trigger narrowing, or advisory state changes what protects the branch or merge request.
 - Every release, publish, deploy, migration, or rollback job.
@@ -71,7 +71,7 @@ Each move names its precondition, its check, and its risk. Skip a move whose pre
 
 ## Prove parity and the delta
 
-Prove every contract item still has a verdict path. For each essential gate, plant one failure that the gate exists to catch and observe the new pipeline turn red on an isolated or reviewable run. Where the provider offers no safe planted-failure path, parity is unproven: restore the last green pipeline and report the missing proof rather than substituting a weaker check. A planted failure that stays green fails parity the same way.
+Prove every contract item still has a verdict path. For each essential gate, plant one failure that passes that gate's prerequisites and that the gate exists to catch. The provider record must show that the intended check ran, that its named step failed with the planted reason, and that the outcome the check protects stayed blocked. A skipped check, a failure in another job or step, or a red run without that evidence is unproven; repair the plant and run it again. Where no safe planted-failure path exists, parity is unproven: restore the last green pipeline and report the missing proof rather than substituting a weaker check.
 
 Measure the changed pipeline the same way as the old one on comparable runs: wall time, queue wait, build minutes, first useful signal, and the per-job and per-step tables. Finish the target or revert it to the last green state; a half-old, half-new graph is not a result. Never erase a required validation to make the proof pass, and take no remote, credential, paid, or published change unless the user explicitly asked for that separate act.
 

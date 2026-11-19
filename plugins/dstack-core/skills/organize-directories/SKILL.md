@@ -32,7 +32,7 @@ Use domain words such as `catalog`, `invoices`, and `auth`. Kind words such as `
 
 ## Keep paths shallow and predictable
 
-Keep depth at four levels and sibling counts near twelve. Past either bound, add the distinction the new files actually follow instead of numbering directories. Place entry points and the files opened most often nearer the root. Fold a level with one child directory upward, and never leave a directory that only forwards the reader to another directory.
+Keep depth at four levels below any prefix the toolchain mandates, such as Java's `src/main/java/<package>`; the toolchain decides the prefix, not the layout. Keep sibling counts near twelve. Past either bound, add the distinction the new files actually follow instead of numbering directories. Place entry points and the files opened most often nearer the root. Fold a level with one child directory upward, and never leave a directory that only forwards the reader to another directory.
 
 ## Give fixed kinds one home
 
@@ -52,11 +52,11 @@ Make the top level say what the system is and each directory name say what it ho
 
 ## Test reachability
 
-Keep entry points and frequently opened files near the top, with predictable paths and no pass-through directories. Find the five files changed most often in recent months:
+Keep entry points and frequently opened files near the top, with predictable paths and no pass-through directories. From the repository root, find the five files changed most often in recent months:
 
 `git log --since='6 months ago' --name-only --pretty=format: -- . | awk 'NF' | sort | uniq -c | sort -nr | head -5`
 
-For each file, start at the repository root, write down the path expected to reach it, and then compare that guess with its actual path. Count directory levels, sibling choices, and wrong guesses. Require at most four directory levels, sibling counts near twelve, and a correct first guess. A deeper path, a larger unexplained fan-out, a pass-through level, or repeated searching fails this test.
+For each file, start at the repository root, write down the path expected to reach it, and then compare that guess with its actual path. Count directory levels, sibling choices, and wrong guesses. Require the bounds of `Keep paths shallow and predictable` and a correct first guess. A deeper path, a larger unexplained fan-out, a pass-through level, or repeated searching fails this test.
 
 ## Check elegance
 
@@ -83,11 +83,12 @@ Work one target subtree at a time, atomically. Before the first move, the target
 
 Then, for each target:
 
-1. Move with `git mv`, migrate every reference in the same commit (imports, build files, relative links, package clauses, doc links), and delete residue in the same change. Leave no compatibility residue: no forwarding stub, re-export file, alias package, or symlink at an old path. A boundary path that got a no simply stays.
-2. Run the build and a link check. Require `git diff --cached -M --name-status` to show every listed pair as `R<score> <old> <new>` with any similarity score and no listed path in an `A` or `D` entry. A moved file whose own references were rewritten scores below 100, which is expected; only identical content earns `R100`.
-3. If Git reports `D <old>` plus `A <new>` instead of `R`, the content edit is too large for the selected threshold. Defer content edits not needed by the move to the next commit so the move commit keeps building, or rerun the check with a lower `-M<n>` threshold and record that threshold.
-4. Prove history: `git log --follow -- <new-path>` reaches the same earlier history that `git log --follow -- <old-path>` showed before the move. Commit before starting the next target.
-5. After the commit, search every old path and every residue name; each must return nothing.
+1. Record `git log --follow -- <old-path>` as the history baseline for every moved file.
+2. Move with `git mv`, migrate every reference in the same commit (imports, build files, relative links, package clauses, doc links), and delete residue in the same change. Leave no compatibility residue: no forwarding stub, re-export file, alias package, or symlink at an old path. A boundary path that got a no simply stays.
+3. Run the build and a link check. Require `git diff --cached -M --name-status` to show every listed pair as `R<score> <old> <new>` with any similarity score and no listed path in an `A` or `D` entry. A moved file whose own references were rewritten scores below 100, which is expected; only identical content earns `R100`.
+4. If Git reports `D <old>` plus `A <new>` instead of `R`, the content edit is too large for the selected threshold. Defer content edits not needed by the move to the next commit so the move commit keeps building, or rerun the check with a lower `-M<n>` threshold and record that threshold.
+5. Commit the target. Prove `git log --follow -- <new-path>` reaches the earlier history recorded in step 1; if it does not, revert this target's commit to the last green state before starting another target.
+6. After the commit, search every old path and every residue name; each must return nothing.
 
 Half-moved is the forbidden state. A target that cannot finish reverts to the last green commit; it is never shipped half old, half new. Nothing in this skill pushes to a remote.
 
