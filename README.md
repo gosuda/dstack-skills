@@ -36,12 +36,12 @@ Run `claude plugin list` to verify; both entries show enabled:
 
 ```text
 ❯ dstack-code@dstack
-  Version: 2.1.18
+  Version: 2.1.19
   Scope: user
   Status: ✔ enabled
 
 ❯ dstack-core@dstack
-  Version: 2.1.18
+  Version: 2.1.19
   Scope: user
   Status: ✔ enabled
 ```
@@ -176,7 +176,7 @@ sentence in its `description` field.
 
 `catalog/plugins.json` is the identity ledger: it holds each plugin's name, description, category,
 and tags, and every manifest and registry is generated from it. Every plugin manifest and every
-marketplace entry ships at one `releaseVersion`, currently 2.1.18, held in `catalog/plugins.json`;
+marketplace entry ships at one `releaseVersion`, currently 2.1.19, held in `catalog/plugins.json`;
 the `"2"` at the top of `.kimi-plugin/marketplace.json` is the registry schema version, not the release.
 
 The largest plugins are `dstack-core` at 89, `dstack-marketing` at 28, and `dstack-run` at 20.
