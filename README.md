@@ -48,7 +48,7 @@ Run `claude plugin list` to verify; both entries show enabled:
 
 Then invoke the router skill shown above, or pick a skill from the
 [skill index](docs/specs/skill-index.md); install its plugin first when it lives
-outside the two base plugins.
+outside the two base plugins (`claude plugin install <plugin>@dstack`; other agents under Installation).
 
 ## Installation
 
