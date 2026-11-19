@@ -13,6 +13,5 @@ This directory holds the repository guides and specifications: guides that teach
 | [specs/gates.md](specs/gates.md) | You want to run a gate or read a gate failure. |
 | [specs/install-proof.md](specs/install-proof.md) | You want the recorded runs behind the README commands. |
 | [specs/voice.md](specs/voice.md) | You want the prose rules your markdown must pass. |
-| [solutions/integration-issues/](solutions/integration-issues/) | You hit a failure where this tree meets another system. |
 
 The three guides and the skill index serve you as a skill user. The rest serve you as a repository contributor.
