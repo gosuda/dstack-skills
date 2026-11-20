@@ -132,14 +132,6 @@ and cannot be installed into Hermes; take its skills through `gh skill install` 
 agy plugin install https://github.com/gosuda/dstack-skills
 ```
 
-Antigravity indexes the repository and reads `.antigravity-plugin/marketplace.json`. Install
-individual plugins from the marketplace:
-
-```shell
-agy plugin install dstack-core@dstack
-agy plugin install dstack-code@dstack
-```
-
 ### One skill with gh skill
 
 The GitHub CLI's `gh skill` installs a single skill for many agents. Passing the exact path skips a
