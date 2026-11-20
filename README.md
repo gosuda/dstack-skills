@@ -150,7 +150,7 @@ gh skill install gosuda/dstack-skills plugins/dstack-core/skills/askme \
   --agent claude-code --scope user
 ```
 
-Supported `--agent` values include `claude-code`, `codex`, `cursor`, `grok`, and `kimi-cli`;
+Supported `--agent` values include `claude-code`, `codex`, `cursor`, `grok`, `kimi-cli`, and `antigravity`;
 `gh skill install --help` lists the full set.
 
 ## Usage
