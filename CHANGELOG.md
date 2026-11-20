@@ -5,6 +5,14 @@ All notable changes to Dalcom Skills will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.20] - 2026-11-21
+### Changed
+- Renamed `ask-dalcom` router skill to `dstack-guide`.
+- Added Antigravity (AGY) as the seventh distribution surface with
+  `.antigravity-plugin/` manifests and marketplace registry.
+- Added Hermes Agent to the CONTRIBUTING.md distribution allowlist and to
+  generated plugin README surface lists.
+
 ## [2.1.18] - 2026-11-19
 ### Added
 - `reduce-ci-time` in dstack-core rebuilds or tunes one CI pipeline from the
