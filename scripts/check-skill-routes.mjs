@@ -18,7 +18,7 @@ export function danglingPointers(descriptions, slugs) {
 }
 
 const MENTION_RE = /`\/skill:([a-z0-9][a-z0-9-]*)`/g;
-const ROUTER_DIR = "plugins/dstack-core/skills/ask-dalcom";
+const ROUTER_DIR = "plugins/dstack-core/skills/dstack-guide";
 export function danglingMentions(files, slugs) {
   const out = [];
   for (const [path, text] of files) {

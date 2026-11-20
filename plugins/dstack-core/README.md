@@ -43,7 +43,6 @@ Each row states when to reach for the skill. Invoke one as `/dstack-core:<name>`
 | abstract-well | Use when the user wants to classify abstractions as useful, bad, or busy and keep one shallow level. |
 | architect | Use when non-trivial code needs a design, codebase architecture needs improving through survey and deepening, or one module needs targeted interface narrowing, seams, or testability. |
 | architecture-simplification | Use when the user explicitly asks to simplify an architecture, collapse modules or crates, or cut a dependency graph within approved boundaries. |
-| ask-dalcom | Use when the user asks which dstack skill or chain of skills to use for a situation and names no skill, which route to take across skills, or what must exist before a named skill. |
 | askme | Use when eliciting intent/scope/referents or gating long/bundled/high-stakes/hard-to-undo work: exhaustive/collaborative/adversarial/grill/gate/batch/interview/proposal/pairing. |
 | audit-project | Use when the user says "audit my code", "find all the bugs", "review until clean", or "grill my changes". |
 | autolearn | Use when a verified fix yields a generalized well-abstracted invariant with enforcement or proof, or existing solution docs need bounded refresh. |
@@ -68,6 +67,7 @@ Each row states when to reach for the skill. Invoke one as `/dstack-core:<name>`
 | do-it-now | Use when the user asks to finish the whole task now, clear active todos, or unblock undone implementation without deferred phases or follow-up remainders, or says do it now, do all, or don't ask. |
 | docs-practices | Use when deciding whether a durable document, ADR, plan, or spec is needed, or when checking its invariant quality, scope, and naming. |
 | doubt-driven | Use when a non-trivial decision sits under uncertainty and correctness matters more than speed. |
+| dstack-guide | Use when the user asks which dstack skill or chain of skills to use for a situation and names no skill, which route to take across skills, or what must exist before a named skill. |
 | enforce-workflow-constraints | Use when any bounded workflow starts or reaches an action, path, proposal, or merge boundary. |
 | exhaustive | Use when asked to prove coverage, find missing cases, or enumerate state, decision, requirement, or behavior space. |
 | explore | Use when asked to explore the codebase to map structure, symbols, and dependencies. |

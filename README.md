@@ -7,10 +7,10 @@ agent reads that same tree, so a fix lands everywhere without a second copy or a
 Install the base plugins, then invoke skills by name:
 
 ```text
-/dstack-core:ask-dalcom I want to add a feature to this repository. Where do I start?
+/dstack-core:dstack-guide I want to add a feature to this repository. Where do I start?
 ```
 
-`ask-dalcom` answers with one route: which skills, in which order, what each step does, and what must
+`dstack-guide` answers with one route: which skills, in which order, what each step does, and what must
 exist first. It recommends and runs none of it.
 308 skills in 22 plugins.
 
@@ -19,7 +19,7 @@ exist first. It recommends and runs none of it.
 - Skills are organized by working domain; install `dstack-core` and `dstack-code`, then add only the domains you use.
 - One authored tree serves seven agents through fixed manifests, so skills do not drift between copies.
 - Skills ship as reviewable Markdown with named triggers; nothing is fetched from a package registry at install time beyond the repository itself.
-- `dstack-core` includes six output styles and four MCP server configurations; `ask-dalcom` routes you to the right skill when you do not know the name.
+- `dstack-core` includes six output styles and four MCP server configurations; `dstack-guide` routes you to the right skill when you do not know the name.
 - The maintenance scripts are dependency-free Node ESM and standard-library Python; `just check` runs every tree gate.
 
 ## Quick start
@@ -146,7 +146,7 @@ The GitHub CLI's `gh skill` installs a single skill for many agents. Passing the
 full tree traversal:
 
 ```shell
-gh skill install gosuda/dstack-skills plugins/dstack-core/skills/askme \
+gh skill install gosuda/dstack-skills plugins/dstack-core/skills/dstack-guide \
   --agent claude-code --scope user
 ```
 
@@ -158,16 +158,16 @@ Supported `--agent` values include `claude-code`, `codex`, `cursor`, `grok`, `ki
 Invoke a skill by name in the form your agent uses:
 
 ```text
-/dstack-core:ask-dalcom CI is red on my PR
+/dstack-core:dstack-guide CI is red on my PR
 ```
 
 | Agent | Invocation shape | Example |
 |---|---|---|
-| Claude Code | `/<plugin>:<slug>` | `/dstack-core:ask-dalcom` |
-| Codex | `$<slug>` | `$ask-dalcom` |
-| Cursor | `/` then pick the skill by name | `/ask-dalcom` |
-| Hermes Agent | `<plugin>:<slug>` | `dstack-core:ask-dalcom` |
-| Antigravity | `/` then pick the skill by name | `/ask-dalcom` |
+| Claude Code | `/<plugin>:<slug>` | `/dstack-core:dstack-guide` |
+| Codex | `$<slug>` | `$dstack-guide` |
+| Cursor | `/` then pick the skill by name | `/dstack-guide` |
+| Hermes Agent | `<plugin>:<slug>` | `dstack-core:dstack-guide` |
+| Antigravity | `/` then pick the skill by name | `/dstack-guide` |
 
 Grok and Kimi load the same skill tree; use each agent's own invocation form. Skill names are exact:
 a near miss loads nothing. A skill can also load automatically when your request matches the trigger
