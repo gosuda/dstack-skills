@@ -52,6 +52,7 @@ const DOTDIRS = [
   ".cursor-plugin",
   ".grok-plugin",
   ".kimi-plugin",
+  ".antigravity-plugin",
 ];
 let skillTotal = 0;
 for (const entry of catalog.entries) {
@@ -108,6 +109,7 @@ for (const registry of [
   ".cursor-plugin/marketplace.json",
   ".grok-plugin/marketplace.json",
   ".kimi-plugin/marketplace.json",
+  ".antigravity-plugin/marketplace.json",
 ]) {
   const path = join(ROOT, registry);
   if (!existsSync(path)) {

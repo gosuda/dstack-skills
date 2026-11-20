@@ -57,7 +57,7 @@ Leave managed-source libraries unchanged and promote general lessons into DStack
 
 ## Distribution surfaces
 
-Keep distribution limited to Claude Code, Codex, Cursor, Grok, and Kimi; do not add package-registry publication or npm artifacts. A flat Devin mirror of these same skills is exported to the outline repository, which publishes nothing and installs nothing; it is not a sixth distribution surface. [Tony Hoare]
+Keep distribution limited to Claude Code, Codex, Cursor, Grok, Kimi, and Antigravity; do not add package-registry publication or npm artifacts. A flat Devin mirror of these same skills is exported to the outline repository, which publishes nothing and installs nothing; it is not a sixth distribution surface. [Tony Hoare]
 
 Change plugin identity in `catalog/plugins.json`, not generated manifests or registries. [Tony Hoare]
 

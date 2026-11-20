@@ -4,7 +4,7 @@ Verified 2026-09-01 against vendor specifications, vendor source code, vendor do
 
 ## Purpose
 
-This repository dropped npm distribution. It now ships one skill tree through exactly six harness surfaces, plus per-skill install:
+This repository dropped npm distribution. It now ships one skill tree through exactly seven harness surfaces, plus per-skill install:
 
 1. The Claude Code plugin marketplace
 2. The OpenAI Codex plugin marketplace
@@ -12,8 +12,9 @@ This repository dropped npm distribution. It now ships one skill tree through ex
 4. The Grok plugin marketplace
 5. The Kimi Code plugin marketplace
 6. Hermes Agent native plugins, installed per plugin directory
+7. Antigravity (AGY) plugins, installed via `.antigravity-plugin/` manifests
 
-The Agent Plugins standard surface was retired on 2026-09-03; no root `plugins/<id>/plugin.json` ships anymore. This document records what each surface requires, the repository layout that satisfies all six at once, and the toolchain versions the gates run on.
+The Agent Plugins standard surface was retired on 2026-09-03; no root `plugins/<id>/plugin.json` ships anymore. This document records what each surface requires, the repository layout that satisfies all seven at once, and the toolchain versions the gates run on.
 
 ## How to read the evidence
 
@@ -278,9 +279,27 @@ Install proof, run 2026-10-30 against hermes-agent `6337f1f2` with a throwaway `
 - The install-time security scan (`tools/plugin_guard.py`) reads every Markdown file as if it were executable. Twelve plugins scan `safe`. Nine scan `caution`, mostly on backtick spans that start with `!`, such as Rust macros, which match its `inline_shell_exec` pattern; a caution plugin installs after one confirmation, or with `--force`.
 - `dstack-native` scans `dangerous` and cannot be installed into Hermes. Its findings are teaching examples: `../../etc/passwd` path-traversal cases, `strace` output that opens `/etc/passwd`, `sudo ldconfig`, and Go configuration tables. `--force` does not override a dangerous verdict. The examples stay, because rewriting correct security material to pass a pattern scanner would remove what the skills teach; use `dstack-native` from the other five surfaces or `gh skill install` until the scanner treats Markdown examples as inert.
 
+## Antigravity
+
+Google Antigravity (`agy`) plugin support (Tier 2, source: web search against antigravity.google docs and the agy-customizations skill reference, probable).
+
+### Registry file
+
+The registry is `.antigravity-plugin/marketplace.json` at the repository root. Source paths use `./plugins/<module>` and resolve against the directory containing `.antigravity-plugin/`, which is the repository root (same convention as Claude Code and Cursor).
+
+### Per-plugin manifest
+
+`.antigravity-plugin/plugin.json`, validated against `https://antigravity.google/schemas/v1/plugin.json`. The manifest declares `name`, `displayName`, `version`, `description`, `author`, `homepage`, `repository`, `license`, and `keywords`. Skills default to `skills/`, so the generated manifests omit the key. `mcpServers` is declared as `"./mcp.json"` for plugins shipping the dotless file (currently only `dstack-core`).
+
+### Install commands
+
+- `agy plugin install https://github.com/<owner>/<repo>` (whole repository).
+- `agy plugin install <plugin>@<marketplace>` (from a registered marketplace).
+- `agy plugin install ./<local-path>` (local directory).
+
 ## Repository layout
 
-The current layout satisfies all six surfaces from one tree (Tier 1, source: repository files; shape verified 2026-09-03, counts per `catalog/plugins.json` at `releaseVersion` 2.1.7):
+The current layout satisfies all seven surfaces from one tree (Tier 1, source: repository files; shape verified 2026-09-03, counts per `catalog/plugins.json` at `releaseVersion` 2.1.7):
 
 ```
 .
@@ -289,6 +308,7 @@ The current layout satisfies all six surfaces from one tree (Tier 1, source: rep
 ├── .cursor-plugin/marketplace.json      # Cursor: 22 entries, ./plugins/<module>
 ├── .grok-plugin/marketplace.json        # Grok: 22 entries, {type: local, path}
 ├── .kimi-plugin/marketplace.json        # Kimi: 22 entries, ../plugins/<module>
+├── .antigravity-plugin/marketplace.json # AGY: 22 entries, ./plugins/<module>
 ├── plugins/
 │   └── <module>/                        # 22 modules
 │       ├── .claude-plugin/plugin.json   # Claude Code manifest
@@ -296,6 +316,7 @@ The current layout satisfies all six surfaces from one tree (Tier 1, source: rep
 │       ├── .cursor-plugin/plugin.json   # Cursor manifest, identity only
 │       ├── .grok-plugin/plugin.json     # Grok manifest
 │       ├── .kimi-plugin/plugin.json     # Kimi manifest, skills declared
+│       ├── .antigravity-plugin/plugin.json  # AGY manifest
 │       ├── plugin.yaml                  # Hermes Agent manifest
 │       ├── __init__.py                  # Hermes Agent register(), registers skills/
 │       ├── mcp.json                     # optional; only dstack-core ships one
@@ -313,6 +334,7 @@ Why this shape works for each surface:
 - Cursor reads `.cursor-plugin/marketplace.json` with the same relative sources, and would walk each `skills/` root recursively if nested skills ever appear.
 - Grok reads `.grok-plugin/marketplace.json` with `{"type": "local", "path": "./plugins/<module>"}` sources resolving against the marketplace root.
 - Kimi reads `.kimi-plugin/marketplace.json` from a local clone; each `../plugins/<module>` source resolves against the registry's own directory.
+- Antigravity reads `.antigravity-plugin/marketplace.json`; each `./plugins/<module>` source resolves from the repository root; skills default to `skills/`.
 - Hermes Agent installs each `plugins/<module>` directory on its own, reads `plugin.yaml`, and imports `__init__.py`, which registers every `skills/<slug>/SKILL.md` as `<module>:<slug>`.
 - `gh skill` discovers the fourth convention `plugins/{scope}/skills/*/SKILL.md`, so per-skill install works without any manifest.
 

@@ -1,6 +1,6 @@
 # DStack Skills
 
-Agent skills for agentic engineering, installable as plugin modules in Claude Code, Codex, Cursor, Grok, Kimi Code, and Hermes Agent.
+Agent skills for agentic engineering, installable as plugin modules in Claude Code, Codex, Cursor, Grok, Kimi Code, Hermes Agent, and Antigravity.
 
 Each skill is a `SKILL.md` file authored once under `plugins/<plugin>/skills/<slug>/`; every supported
 agent reads that same tree, so a fix lands everywhere without a second copy or a registry release.
@@ -17,7 +17,7 @@ exist first. It recommends and runs none of it.
 ## Why use it
 
 - Skills are organized by working domain; install `dstack-core` and `dstack-code`, then add only the domains you use.
-- One authored tree serves six agents through fixed manifests, so skills do not drift between copies.
+- One authored tree serves seven agents through fixed manifests, so skills do not drift between copies.
 - Skills ship as reviewable Markdown with named triggers; nothing is fetched from a package registry at install time beyond the repository itself.
 - `dstack-core` includes six output styles and four MCP server configurations; `ask-dalcom` routes you to the right skill when you do not know the name.
 - The maintenance scripts are dependency-free Node ESM and standard-library Python; `just check` runs every tree gate.
@@ -126,6 +126,20 @@ Hermes loads their skills as `<plugin>:<slug>` entries. Its install-time scanner
 file as if it were executable, so `dstack-native` scans as dangerous on its security teaching examples
 and cannot be installed into Hermes; take its skills through `gh skill install` instead.
 
+### Antigravity
+
+```shell
+agy plugin install https://github.com/gosuda/dstack-skills
+```
+
+Antigravity indexes the repository and reads `.antigravity-plugin/marketplace.json`. Install
+individual plugins from the marketplace:
+
+```shell
+agy plugin install dstack-core@dstack
+agy plugin install dstack-code@dstack
+```
+
 ### One skill with gh skill
 
 The GitHub CLI's `gh skill` installs a single skill for many agents. Passing the exact path skips a
@@ -153,6 +167,7 @@ Invoke a skill by name in the form your agent uses:
 | Codex | `$<slug>` | `$ask-dalcom` |
 | Cursor | `/` then pick the skill by name | `/ask-dalcom` |
 | Hermes Agent | `<plugin>:<slug>` | `dstack-core:ask-dalcom` |
+| Antigravity | `/` then pick the skill by name | `/ask-dalcom` |
 
 Grok and Kimi load the same skill tree; use each agent's own invocation form. Skill names are exact:
 a near miss loads nothing. A skill can also load automatically when your request matches the trigger

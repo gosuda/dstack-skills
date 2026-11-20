@@ -1,0 +1,20 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "dstack-research",
+  "displayName": "DStack Research",
+  "version": "2.1.19",
+  "description": "DStack workflows for source-backed investigation, verification, and design rationale.",
+  "author": {
+    "name": "gosuda",
+    "url": "https://github.com/gosuda"
+  },
+  "homepage": "https://github.com/gosuda/dstack-skills",
+  "repository": "https://github.com/gosuda/dstack-skills",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "dstack",
+    "dalcom",
+    "agent-skills",
+    "research"
+  ]
+}
