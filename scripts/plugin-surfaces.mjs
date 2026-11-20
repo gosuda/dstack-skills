@@ -387,7 +387,7 @@ export function renderPluginReadme(catalog, entry, skills) {
     "",
     "`<agent>` is `claude-code`, `codex`, `cursor`, `grok`, `kimi-cli`, or `antigravity`.",
     "",
-    "Cursor, Grok, Kimi, and Antigravity install from this same tree. The repository README gives each command.",
+    "Cursor, Grok, Kimi, Hermes Agent, and Antigravity install from this same tree. The repository README gives each command.",
     "",
     "## Skills",
     "",
