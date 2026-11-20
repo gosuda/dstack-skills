@@ -1,9 +1,9 @@
 ---
-name: ask-dalcom
+name: dstack-guide
 description: 'Use when the user asks which dstack skill or chain of skills to use for a situation and names no skill, which route to take across skills, or what must exist before a named skill. Recommends one route and runs none of it. Not for a repository orientation or first contribution: use onboard. Not for proving that no skill covers a job: use skill-gap-finder.'
 ---
 
-# Ask Dalcom
+# DStack Guide
 
 Nobody remembers three hundred skills, so ask. Describe the situation and get one route back: which skills to invoke in which order, what each step does for you, what must exist first, and when you are done.
 

@@ -17,6 +17,10 @@ codex plugin add dstack-design@dstack
 
 # Hermes Agent
 hermes plugins install gosuda/dstack-skills/plugins/dstack-design --enable
+
+# Antigravity
+agy plugin install https://github.com/gosuda/dstack-skills
+agy plugin install dstack-design@dstack
 ```
 
 ### Individual (gh skill)
@@ -26,9 +30,9 @@ gh skill install gosuda/dstack-skills plugins/dstack-design/skills/<skill> \
   --agent <agent> --scope user
 ```
 
-`<agent>` is `claude-code`, `codex`, `cursor`, `grok`, or `kimi-cli`.
+`<agent>` is `claude-code`, `codex`, `cursor`, `grok`, `kimi-cli`, or `antigravity`.
 
-Cursor, Grok, and Kimi install from this same tree. The repository README gives each command.
+Cursor, Grok, Kimi, Hermes Agent, and Antigravity install from this same tree. The repository README gives each command.
 
 ## Skills
 

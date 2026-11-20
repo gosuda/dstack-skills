@@ -1,0 +1,20 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "dstack-performance",
+  "displayName": "DStack Performance",
+  "version": "2.1.20",
+  "description": "DStack workflows for measured performance: hardware kernels, profilers, byte budgets, and optimization proof.",
+  "author": {
+    "name": "gosuda",
+    "url": "https://github.com/gosuda"
+  },
+  "homepage": "https://github.com/gosuda/dstack-skills",
+  "repository": "https://github.com/gosuda/dstack-skills",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "dstack",
+    "dalcom",
+    "agent-skills",
+    "performance"
+  ]
+}

@@ -126,6 +126,23 @@ export function renderKimiPluginManifest(catalog, entry) {
   return manifest;
 }
 
+export function renderAntigravityPluginManifest(catalog, entry) {
+  const manifest = {
+    $schema: "https://antigravity.google/schemas/v1/plugin.json",
+    name: entry.id,
+    displayName: entry.display_name,
+    version: catalog.releaseVersion,
+    description: entry.description,
+    author: author(catalog),
+    homepage: entry.homepage,
+    repository: catalog.repository,
+    license: catalog.license,
+    keywords: entry.tags,
+  };
+  if (hasMcp(entry)) manifest.mcpServers = "./mcp.json";
+  return manifest;
+}
+
 export function renderHermesPluginManifest(catalog, entry) {
   const q = (value) => JSON.stringify(value);
   return [
@@ -260,6 +277,25 @@ export function renderKimiMarketplace(catalog) {
   };
 }
 
+export function renderAntigravityMarketplace(catalog) {
+  return {
+    name: catalog.marketplace_name,
+    description: "DStack skill plugins for agent harnesses.",
+    owner: catalog.owner,
+    plugins: catalog.entries.map((entry) => ({
+      name: entry.id,
+      source: `./${entry.directory}`,
+      description: entry.description,
+      version: catalog.releaseVersion,
+      author: author(catalog),
+      homepage: entry.homepage,
+      license: catalog.license,
+      keywords: entry.tags,
+      category: entry.category,
+    })),
+  };
+}
+
 export function parseScalar(raw) {
   const s = raw.trim();
   if (s.startsWith("'")) {
@@ -336,6 +372,10 @@ export function renderPluginReadme(catalog, entry, skills) {
     "",
     `# Hermes Agent`,
     `hermes plugins install ${repoSlug(catalog)}/${entry.directory} --enable`,
+    "",
+    `# Antigravity`,
+    `agy plugin install https://github.com/${repoSlug(catalog)}`,
+    `agy plugin install ${entry.id}@${catalog.marketplace_name}`,
     "```",
     "",
     "### Individual (gh skill)",
@@ -345,9 +385,9 @@ export function renderPluginReadme(catalog, entry, skills) {
     "  --agent <agent> --scope user",
     "```",
     "",
-    "`<agent>` is `claude-code`, `codex`, `cursor`, `grok`, or `kimi-cli`.",
+    "`<agent>` is `claude-code`, `codex`, `cursor`, `grok`, `kimi-cli`, or `antigravity`.",
     "",
-    "Cursor, Grok, and Kimi install from this same tree. The repository README gives each command.",
+    "Cursor, Grok, Kimi, Hermes Agent, and Antigravity install from this same tree. The repository README gives each command.",
     "",
     "## Skills",
     "",
@@ -416,6 +456,7 @@ export function surfacePlan(catalog) {
   files.set(".cursor-plugin/marketplace.json", renderCursorMarketplace(catalog));
   files.set(".grok-plugin/marketplace.json", renderGrokMarketplace(catalog));
   files.set(".kimi-plugin/marketplace.json", renderKimiMarketplace(catalog));
+  files.set(".antigravity-plugin/marketplace.json", renderAntigravityMarketplace(catalog));
   for (const entry of catalog.entries) {
     files.set(
       `${entry.directory}/.claude-plugin/plugin.json`,
@@ -436,6 +477,10 @@ export function surfacePlan(catalog) {
     files.set(
       `${entry.directory}/.kimi-plugin/plugin.json`,
       renderKimiPluginManifest(catalog, entry),
+    );
+    files.set(
+      `${entry.directory}/.antigravity-plugin/plugin.json`,
+      renderAntigravityPluginManifest(catalog, entry),
     );
   }
   return files;

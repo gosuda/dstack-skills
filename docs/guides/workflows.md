@@ -4,7 +4,7 @@ Most campaigns below share one shape: open by clarifying or planning (*explicitl
 
 Chains are written in the harness-neutral form `/skill:<slug>`. Type each step as your harness spells it: `/<plugin>:<slug>` in Claude Code, `$<slug>` in Codex, or `/` and the skill name in Cursor; [using-skills.md](using-skills.md) has the table.
 
-When no chain in the table fits, run `/skill:ask-dalcom` with your situation: it routes to the skills and order that apply and runs none of them.
+When no chain in the table fits, run `/skill:dstack-guide` with your situation: it routes to the skills and order that apply and runs none of them.
 
 | Workflow | Chain | When not to use it |
 |---|---|---|

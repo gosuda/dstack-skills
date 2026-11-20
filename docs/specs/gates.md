@@ -239,7 +239,7 @@ working.
 | Description | Present, at most 1024 characters (the Agent Skills limit), and stating a trigger unless `disable-model-invocation: true` |
 | Display name | Unique across every generated `agents/openai.yaml`, so no two skills share a label in a harness picker |
 | Pointer | Every `Not for <x>: use <slug>` pointer names an existing skill, directly or through a slug glob such as `from-*-perspective`; an article after `use`, as in `use the mewt CLI`, is prose, not a pointer |
-| Router mentions | Every `` `/skill:<slug>` `` in the ask-dalcom router and its references names an existing skill, so retiring or renaming a skill forces the router to follow in the same change; a new skill is not caught, so add it to the router in the same change |
+| Router mentions | Every `` `/skill:<slug>` `` in the dstack-guide router and its references names an existing skill, so retiring or renaming a skill forces the router to follow in the same change; a new skill is not caught, so add it to the router in the same change |
 
 A trigger is one of these phrases, case-insensitive, with the trailing space load-bearing: `use when `,
 `use this `, `use for `, `use to `, `use after `, `use on `, `use during `, `runs /`, `invoked `,

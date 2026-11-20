@@ -1,25 +1,25 @@
 # DStack Skills
 
-Agent skills for agentic engineering, installable as plugin modules in Claude Code, Codex, Cursor, Grok, Kimi Code, and Hermes Agent.
+Agent skills for agentic engineering, installable as plugin modules in Claude Code, Codex, Cursor, Grok, Kimi Code, Hermes Agent, and Antigravity.
 
 Each skill is a `SKILL.md` file authored once under `plugins/<plugin>/skills/<slug>/`; every supported
 agent reads that same tree, so a fix lands everywhere without a second copy or a registry release.
 Install the base plugins, then invoke skills by name:
 
 ```text
-/dstack-core:ask-dalcom I want to add a feature to this repository. Where do I start?
+/dstack-core:dstack-guide I want to add a feature to this repository. Where do I start?
 ```
 
-`ask-dalcom` answers with one route: which skills, in which order, what each step does, and what must
+`dstack-guide` answers with one route: which skills, in which order, what each step does, and what must
 exist first. It recommends and runs none of it.
 308 skills in 22 plugins.
 
 ## Why use it
 
 - Skills are organized by working domain; install `dstack-core` and `dstack-code`, then add only the domains you use.
-- One authored tree serves six agents through fixed manifests, so skills do not drift between copies.
+- One authored tree serves seven agents through fixed manifests, so skills do not drift between copies.
 - Skills ship as reviewable Markdown with named triggers; nothing is fetched from a package registry at install time beyond the repository itself.
-- `dstack-core` includes six output styles and four MCP server configurations; `ask-dalcom` routes you to the right skill when you do not know the name.
+- `dstack-core` includes six output styles and four MCP server configurations; `dstack-guide` routes you to the right skill when you do not know the name.
 - The maintenance scripts are dependency-free Node ESM and standard-library Python; `just check` runs every tree gate.
 
 ## Quick start
@@ -36,12 +36,12 @@ Run `claude plugin list` to verify; both entries show enabled:
 
 ```text
 ❯ dstack-code@dstack
-  Version: 2.1.19
+  Version: 2.1.20
   Scope: user
   Status: ✔ enabled
 
 ❯ dstack-core@dstack
-  Version: 2.1.19
+  Version: 2.1.20
   Scope: user
   Status: ✔ enabled
 ```
@@ -126,17 +126,31 @@ Hermes loads their skills as `<plugin>:<slug>` entries. Its install-time scanner
 file as if it were executable, so `dstack-native` scans as dangerous on its security teaching examples
 and cannot be installed into Hermes; take its skills through `gh skill install` instead.
 
+### Antigravity
+
+```shell
+agy plugin install https://github.com/gosuda/dstack-skills
+```
+
+Antigravity indexes the repository and reads `.antigravity-plugin/marketplace.json`. Install
+individual plugins from the marketplace:
+
+```shell
+agy plugin install dstack-core@dstack
+agy plugin install dstack-code@dstack
+```
+
 ### One skill with gh skill
 
 The GitHub CLI's `gh skill` installs a single skill for many agents. Passing the exact path skips a
 full tree traversal:
 
 ```shell
-gh skill install gosuda/dstack-skills plugins/dstack-core/skills/askme \
+gh skill install gosuda/dstack-skills plugins/dstack-core/skills/dstack-guide \
   --agent claude-code --scope user
 ```
 
-Supported `--agent` values include `claude-code`, `codex`, `cursor`, `grok`, and `kimi-cli`;
+Supported `--agent` values include `claude-code`, `codex`, `cursor`, `grok`, `kimi-cli`, and `antigravity`;
 `gh skill install --help` lists the full set.
 
 ## Usage
@@ -144,15 +158,16 @@ Supported `--agent` values include `claude-code`, `codex`, `cursor`, `grok`, and
 Invoke a skill by name in the form your agent uses:
 
 ```text
-/dstack-core:ask-dalcom CI is red on my PR
+/dstack-core:dstack-guide CI is red on my PR
 ```
 
 | Agent | Invocation shape | Example |
 |---|---|---|
-| Claude Code | `/<plugin>:<slug>` | `/dstack-core:ask-dalcom` |
-| Codex | `$<slug>` | `$ask-dalcom` |
-| Cursor | `/` then pick the skill by name | `/ask-dalcom` |
-| Hermes Agent | `<plugin>:<slug>` | `dstack-core:ask-dalcom` |
+| Claude Code | `/<plugin>:<slug>` | `/dstack-core:dstack-guide` |
+| Codex | `$<slug>` | `$dstack-guide` |
+| Cursor | `/` then pick the skill by name | `/dstack-guide` |
+| Hermes Agent | `<plugin>:<slug>` | `dstack-core:dstack-guide` |
+| Antigravity | `/` then pick the skill by name | `/dstack-guide` |
 
 Grok and Kimi load the same skill tree; use each agent's own invocation form. Skill names are exact:
 a near miss loads nothing. A skill can also load automatically when your request matches the trigger
@@ -176,7 +191,7 @@ sentence in its `description` field.
 
 `catalog/plugins.json` is the identity ledger: it holds each plugin's name, description, category,
 and tags, and every manifest and registry is generated from it. Every plugin manifest and every
-marketplace entry the harnesses read ships at one `releaseVersion`, currently 2.1.19, held in
+marketplace entry the harnesses read ships at one `releaseVersion`, currently 2.1.20, held in
 `catalog/plugins.json`; the `"2"` at the top of `.kimi-plugin/marketplace.json`
 is the registry schema version, not the release. The inert `.codex-plugin/marketplace.json`
 forward-compat copy carries no per-entry version; Codex reads `.claude-plugin/marketplace.json`.
