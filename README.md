@@ -36,12 +36,12 @@ Run `claude plugin list` to verify; both entries show enabled:
 
 ```text
 ❯ dstack-code@dstack
-  Version: 2.1.19
+  Version: 2.1.20
   Scope: user
   Status: ✔ enabled
 
 ❯ dstack-core@dstack
-  Version: 2.1.19
+  Version: 2.1.20
   Scope: user
   Status: ✔ enabled
 ```
@@ -191,7 +191,7 @@ sentence in its `description` field.
 
 `catalog/plugins.json` is the identity ledger: it holds each plugin's name, description, category,
 and tags, and every manifest and registry is generated from it. Every plugin manifest and every
-marketplace entry the harnesses read ships at one `releaseVersion`, currently 2.1.19, held in
+marketplace entry the harnesses read ships at one `releaseVersion`, currently 2.1.20, held in
 `catalog/plugins.json`; the `"2"` at the top of `.kimi-plugin/marketplace.json`
 is the registry schema version, not the release. The inert `.codex-plugin/marketplace.json`
 forward-compat copy carries no per-entry version; Codex reads `.claude-plugin/marketplace.json`.

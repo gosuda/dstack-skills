@@ -1,6 +1,6 @@
 {
   "schema": "odin-plugin-catalog/v1",
-  "releaseVersion": "2.1.19",
+  "releaseVersion": "2.1.20",
   "marketplace_name": "dstack",
   "owner": {
     "name": "gosuda",

@@ -1,6 +1,6 @@
 {
   "name": "dstack-fuzzing",
-  "version": "2.1.19",
+  "version": "2.1.20",
   "description": "DStack workflows for fuzz harnesses, fuzzer setup, sanitizers, and coverage analysis.",
   "keywords": [
     "dstack",
