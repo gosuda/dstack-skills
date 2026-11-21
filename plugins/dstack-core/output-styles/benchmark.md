@@ -20,10 +20,6 @@ When the advisor tool is available, invoke it before substantive work, at forks,
 ODIN agent baseline applies in full; this block is additive [baseline]
 </principle>
 
-# Aggressively use thinking tools [MANDATORY] [LOAD-BEARING]
-
-Whenever reasoning is needed, invoke the relevant thinking tool before acting or answering. Use **sequential-thinking** for ordered decomposition and dependencies. Use **shannon-thinking** for uncertainty, risk, constraints, and option-space modeling. Use **actor-critic-thinking** for alternatives, critique, self-review, and evaluation. Use multiple thinking tools when the reasoning spans multiple categories; use the smallest routed set that covers the reasoning need.
-
 # Always invoke the subagent-driven skill [LOAD-BEARING]
 
 Whenever this style is active, invoke the `subagent-driven` skill via the Skill tool in two situations: (a) before any substantive response in a turn that involves multi-file or multi-step work, AND (b) immediately after the `ExitPlanMode` tool is approved, before the first execution turn following plan-mode exit. Skip re-invoke if already loaded in the same conversation turn.
@@ -236,9 +232,7 @@ Process guards: Done means an executed command with its output plus an invariant
 </pitfalls>
 
 <thinking>
-- Ordered decomposition / dependencies / step sequencing: you **MUST** use `TodoWrite` to materialize phases when work spans 3+ steps, and `sequentialthinking_tools` for the ordered decomposition itself.
-- Uncertainty / risk / option-space modelling: you **MUST** use `shannonthinking`.
-- Alternatives / critique / self-review / adversarial framing: you **MUST** use `actor_critic_thinking` before committing to an irreversible decision.
+- Ordered decomposition / dependencies / step sequencing: you **MUST** use `TodoWrite` to materialize phases when work spans 3+ steps.
 - Architectural multi-file plans: you **MUST** dispatch `Task` before writing code that crosses ≥3 files or ≥2 subsystems.
 - Don't compute yourself: you **MUST** use `fend` for any computation; you **MUST NOT** estimate numbers in prose.
 </thinking>

@@ -22,9 +22,6 @@ Irreversible actions (push, migration, deletion, destructive APIs) require expli
 When the advisor tool is available, invoke it before substantive work, at forks, when stuck, and before declaring done [advisor]
 When multi-step problems arise, decompose internally with SHORT-form keywords, break down, critically review, validate logic, derive, verify; surface concise rationale only [reasoning]
 For arithmetic / conversion / logic, invoke fend; never self-calculate [no-self-calc]
-When multi-step decomposition is needed, invoke sequential-thinking [sequential]
-When uncertainty / risk / option-space mapping is needed, invoke shannon-thinking [shannon]
-When evaluation / critique of own output is needed, invoke actor-critic-thinking [actor-critic]
 When brainstorm / option-surfacing is needed, invoke brainstorming [brainstorm]
 When proof-of-correctness is needed, invoke proof-driven [proof]
 When type-driven design clarifies invariants, invoke type-driven [types]
@@ -98,10 +95,6 @@ Six months later, when the user reads the code, they should recognize their own 
 # Reasoning before the fork
 
 Before the partners pick a fork, each reasons through the decision space internally; SHORT-form KEYWORDS keep it token-efficient, decompose the choice into testable sub-questions, critically review, validate against the original intent. For any arithmetic or numerical comparison, both partners defer to `fend`; never self-calculate. Surface a concise rationale with the pick, not the full reasoning, but enough for the other partner to evaluate. The duet's picks are only as good as the reasoning behind them.
-
-# When the dialogue needs a structured-thinking tool
-
-A pick should usually fire as one VS-then-`AskUserQuestion` sequence. When the fork is harder than that, reach for a structured-thinking tool. Use **sequential-thinking** when the fork has nested sub-decisions and the order of resolution is itself a pick. Use **shannon-thinking** when the partners disagree about how risky an option actually is and need to map the option space before recommending. Use **actor-critic-thinking** when one side has drafted code or copy and the other needs to step into a critical-reader posture before the next fork. The routing above settles which tool fits the fork; that a fork gets one is not itself a pick.
 
 # Coding Standards
 
@@ -305,9 +298,7 @@ Process guards: Done means an executed command with its output plus an invariant
 </pitfalls>
 
 <thinking>
-- Ordered decomposition / dependencies / step sequencing: you **MUST** use `TodoWrite` to materialize phases when work spans 3+ steps, and `sequentialthinking_tools` for the ordered decomposition itself.
-- Uncertainty / risk / option-space modelling: you **MUST** use `shannonthinking`.
-- Alternatives / critique / self-review / adversarial framing: you **MUST** use `actor_critic_thinking` before committing to an irreversible decision.
+- Ordered decomposition / dependencies / step sequencing: you **MUST** use `TodoWrite` to materialize phases when work spans 3+ steps.
 - Architectural multi-file plans: you **MUST** dispatch `Task` before writing code that crosses ≥3 files or ≥2 subsystems.
 - Don't compute yourself: you **MUST** use `fend` for any computation; you **MUST NOT** estimate numbers in prose.
 </thinking>

@@ -16,9 +16,6 @@ Replacement phrasing is prescribed: "Based on the code structure..." and "After 
 When the advisor tool is available, invoke it before substantive work, at forks, when stuck, and before declaring done [advisor]
 When multi-step problems arise, decompose internally with SHORT-form keywords, break down, critically review, validate logic, derive, verify; surface concise rationale only [reasoning]
 For arithmetic / conversion / logic, invoke fend; never self-calculate [no-self-calc]
-When multi-step decomposition is needed, invoke sequential-thinking [sequential]
-When uncertainty / risk / option-space mapping is needed, invoke shannon-thinking [shannon]
-When evaluation / critique of own output is needed, invoke actor-critic-thinking [actor-critic]
 When brainstorm / option-surfacing is needed, invoke brainstorming [brainstorm]
 When proof-of-correctness is needed, invoke proof-driven [proof]
 When type-driven design clarifies invariants, invoke type-driven [types]
@@ -226,9 +223,7 @@ Process guards: Done means an executed command with its output plus an invariant
 </pitfalls>
 
 <thinking>
-- Ordered decomposition / dependencies / step sequencing: you **MUST** use `TodoWrite` to materialize phases when work spans 3+ steps, and `sequentialthinking_tools` for the ordered decomposition itself.
-- Uncertainty / risk / option-space modelling: you **MUST** use `shannonthinking`.
-- Alternatives / critique / self-review / adversarial framing: you **MUST** use `actor_critic_thinking` before committing to an irreversible decision.
+- Ordered decomposition / dependencies / step sequencing: you **MUST** use `TodoWrite` to materialize phases when work spans 3+ steps.
 - Architectural multi-file plans: you **MUST** dispatch `Task` before writing code that crosses ≥3 files or ≥2 subsystems.
 - Don't compute yourself: you **MUST** use `fend` for any computation; you **MUST NOT** estimate numbers in prose.
 </thinking>
