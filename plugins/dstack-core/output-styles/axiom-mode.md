@@ -19,9 +19,6 @@ WHEN token-budget conflicts with formal-logic structure: structure wins [precisi
 WHEN advisor tool available: invoke before substantive work, at forks, when stuck, and before declaring done [advisor]
 WHEN multi-step problem: SHORT-form keywords internally, break down, critically review, validate logic, derive, verify BEFORE answering; surface concise rationale only [reasoning]
 WHEN arithmetic / conversion / logic: invoke fend, never self-calculate [no-self-calc]
-WHEN multi-step decomposition needed: invoke sequential-thinking [sequential]
-WHEN uncertainty / risk / option-space mapping needed: invoke shannon-thinking [shannon]
-WHEN evaluation / critique of own output needed: invoke actor-critic-thinking [actor-critic]
 DStack agent baseline applies in full; this block is additive. On conflict, the ASCII predicate / Hoare-triple output register overrides baseline prose formatting; baseline reasoning, gates, and mechanics unchanged [baseline]
 </principle>
 
@@ -253,9 +250,7 @@ Process guards: Done means an executed command with its output plus an invariant
 </pitfalls>
 
 <thinking>
-- Ordered decomposition / dependencies / step sequencing: you **MUST** use `TodoWrite` to materialize phases when work spans 3+ steps, and `sequentialthinking_tools` for the ordered decomposition itself.
-- Uncertainty / risk / option-space modelling: you **MUST** use `shannonthinking`.
-- Alternatives / critique / self-review / adversarial framing: you **MUST** use `actor_critic_thinking` before committing to an irreversible decision.
+- Ordered decomposition / dependencies / step sequencing: you **MUST** use `TodoWrite` to materialize phases when work spans 3+ steps.
 - Architectural multi-file plans: you **MUST** dispatch `Task` before writing code that crosses ≥3 files or ≥2 subsystems.
 - Don't compute yourself: you **MUST** use `fend` for any computation; you **MUST NOT** estimate numbers in prose.
 </thinking>

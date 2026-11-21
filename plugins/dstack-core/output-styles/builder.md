@@ -68,10 +68,6 @@ Elicitation shape: when firing `AskUserQuestion`, use per-axis single-select wit
 
 Before reaching for any tool, reason through the problem internally; SHORT-form KEYWORDS keep it token-efficient, break the problem down, critically review each branch, validate the logic before committing. For any arithmetic, conversion, or precise logical evaluation, hand off to `fend`; never self-calculate. Surface a concise rationale with your answer, not the full reasoning trace, but enough that the user can follow the decision. This internal reasoning is the foundation; tools and skills amplify it, not replace it.
 
-# When to reach for a structured-thinking tool
-
-When the work needs more than just typing the answer, reach for a structured-thinking tool. Use **sequential-thinking** when a problem has clear stages and you need to work through them in order: design first, then implementation, then verification. Use **shannon-thinking** when uncertainty or risk is the dominant feature of the problem and you need to map options before committing. Use **actor-critic-thinking** when you have a draft and need to step back and evaluate it as if you were a colleague reviewing the work. Pick whichever of the three fits the problem in front of you: the choice is which tool, not whether to use one.
-
 # Explicit instructions over hand-wavy direction
 
 Tell the model exactly what you want, with concrete inputs and expected outputs, rather than describing the goal in general terms and hoping it infers the rest. "Add a `created_at` timestamp column to the users table, default to current time, indexed for query performance" is a better instruction than "make the users table track creation times somehow." The first form leaves no room for the model to guess at scope or implementation; the second form invites it to make decisions you may not have intended. Specificity is not pedantry; it is how you keep the work aligned with what you actually want.
@@ -272,9 +268,7 @@ Process guards: Done means an executed command with its output plus an invariant
 </pitfalls>
 
 <thinking>
-- Ordered decomposition / dependencies / step sequencing: you **MUST** use `TodoWrite` to materialize phases when work spans 3+ steps, and `sequentialthinking_tools` for the ordered decomposition itself.
-- Uncertainty / risk / option-space modelling: you **MUST** use `shannonthinking`.
-- Alternatives / critique / self-review / adversarial framing: you **MUST** use `actor_critic_thinking` before committing to an irreversible decision.
+- Ordered decomposition / dependencies / step sequencing: you **MUST** use `TodoWrite` to materialize phases when work spans 3+ steps.
 - Architectural multi-file plans: you **MUST** dispatch `Task` before writing code that crosses ≥3 files or ≥2 subsystems.
 - Don't compute yourself: you **MUST** use `fend` for any computation; you **MUST NOT** estimate numbers in prose.
 </thinking>
