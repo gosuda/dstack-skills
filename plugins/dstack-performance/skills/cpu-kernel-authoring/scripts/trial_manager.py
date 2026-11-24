@@ -169,7 +169,7 @@ def _save_state(kernel_name, state):
 # ============================================================================
 
 
-def cmd_init(args):
+def cmd_init(args: argparse.Namespace) -> None:
     """Initialize a new trial tree for a kernel."""
     kernel_name = args.kernel_name
     baseline_file = args.baseline_file
@@ -196,7 +196,7 @@ def cmd_init(args):
         print(f"  Baseline: {baseline_file}")
 
 
-def cmd_save(args):
+def cmd_save(args: argparse.Namespace) -> None:
     """Save a trial by copying kernel files into the trial directory."""
     kernel_name = args.kernel_name
     trial_source = args.trial_source
@@ -288,7 +288,7 @@ def cmd_save(args):
     print(f"  Dir: trials/{kernel_name}/{trial_id}/")
 
 
-def cmd_result(args):
+def cmd_result(args: argparse.Namespace) -> None:
     """Record results for a trial."""
     kernel_name = args.kernel_name
     trial_id = args.trial_id
@@ -353,7 +353,7 @@ def cmd_result(args):
         print(f"  Best trial: {state['best_trial']} ({best['speedup']}x{best_runtime})")
 
 
-def cmd_status(args):
+def cmd_status(args: argparse.Namespace) -> None:
     """Show trial tree status as ASCII tree."""
     kernel_name = args.kernel_name
     state = _load_state(kernel_name)
@@ -412,7 +412,7 @@ def cmd_status(args):
         print_node(root, "  ", i == len(roots) - 1)
 
 
-def cmd_best(args):
+def cmd_best(args: argparse.Namespace) -> None:
     """Get the best trial info."""
     kernel_name = args.kernel_name
     state = _load_state(kernel_name)
@@ -436,7 +436,7 @@ def cmd_best(args):
     print(f"parent: {best['parent'] or 'root'}")
 
 
-def cmd_baseline_us(args):
+def cmd_baseline_us(args: argparse.Namespace) -> None:
     """Print cached baseline time(s)."""
     kernel_name = args.kernel_name
     state = _load_state(kernel_name)
@@ -452,7 +452,7 @@ def cmd_baseline_us(args):
     print(",".join(f"{v:.2f}" for v in baseline_us))
 
 
-def cmd_finalize(args):
+def cmd_finalize(args: argparse.Namespace) -> None:
     """Copy the best correct trial to the output path."""
     kernel_name = args.kernel_name
     output_path = args.output_path

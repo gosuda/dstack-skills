@@ -126,15 +126,15 @@ def _skill_dir():
     return os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def build_minor_deck():
+def build_minor_deck() -> list[tuple[str, str]]:
     return [(suit, "%s-of-%s" % (rank, suit)) for suit in SUITS for rank in RANKS]
 
 
-def build_deck():
+def build_deck() -> list:
     return list(MAJOR_ARCANA) + build_minor_deck()
 
 
-def expected_asset_files():
+def expected_asset_files() -> list[str]:
     files = list(REFERENCE_FILES)
     files += ["houses/%s.md" % house_id for _, _, house_id in ZODIAC_HOUSES]
     files += ["cards/major/%s.md" % card_id for _, card_id in MAJOR_ARCANA]
@@ -142,12 +142,12 @@ def expected_asset_files():
     return files
 
 
-def verify_assets():
+def verify_assets() -> list[str]:
     base = _skill_dir()
     return [rel for rel in expected_asset_files() if not os.path.isfile(os.path.join(base, rel))]
 
 
-def fisher_yates_shuffle(deck, entropy):
+def fisher_yates_shuffle(deck: list, entropy: _Entropy) -> list:
     for i in range(len(deck) - 1, 0, -1):
         j = entropy.randbelow(i + 1)
         deck[i], deck[j] = deck[j], deck[i]
@@ -160,7 +160,7 @@ def _read_skill_file(relative_file):
         return handle.read()
 
 
-def card_record(suit, card_id, position, role, entropy, include_content=False):
+def card_record(suit: str, card_id: str, position: int, role: str, entropy: _Entropy, include_content: bool = False) -> dict:
     record = {
         "suit": suit,
         "card_id": card_id,
@@ -195,7 +195,7 @@ def _build_house_record(house_number, house_meta, major_card, minor_pair, positi
     return record
 
 
-def draw_zodiac_spread(include_content=False, entropy=None):
+def draw_zodiac_spread(include_content: bool = False, entropy: _Entropy | None = None) -> dict:
     entropy = entropy or _Entropy()
     major_deck = list(MAJOR_ARCANA)
     minor_deck = build_minor_deck()
@@ -266,7 +266,7 @@ def _missing_exit(missing, detail):
     return 2
 
 
-def main(argv=None):
+def main(argv: list[str] | None = None) -> int:
     include_content, verify_only, seed = _parse_args(sys.argv[1:] if argv is None else argv)
     missing = verify_assets()
     if verify_only:
