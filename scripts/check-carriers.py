@@ -16,11 +16,11 @@ TOOL_LAYER = frozenset({"git", "directives", "code_tools", "thinking"})
 OVERLAY_TAGS = frozenset({"role"})
 
 
-def read_exact(path):
+def read_exact(path: Path) -> str:
     return path.read_bytes().decode("utf-8")
 
 
-def blocks(text):
+def blocks(text: str) -> list[tuple[str, str, int, int]]:
     marks = [
         (m.group(1), m.group(0).startswith("</"), m.start(), m.end())
         for m in re.finditer(r"^</?(\w[\w-]*)>$", text, re.M)
@@ -35,11 +35,11 @@ def blocks(text):
     return out
 
 
-def sections(text):
+def sections(text: str) -> list[tuple[str, str]]:
     return [(tag, body) for tag, body, _, _ in blocks(text)]
 
 
-def audit(baseline_text, carrier_text, label="carrier"):
+def audit(baseline_text: str, carrier_text: str, label: str = "carrier") -> tuple[int, list[str]]:
     base = sections(baseline_text)
     base_tags = [t for t, _ in base]
     failures = []
@@ -81,7 +81,7 @@ def audit(baseline_text, carrier_text, label="carrier"):
     return matched, failures
 
 
-def main():
+def main() -> int:
     if not BASELINE.exists():
         print(f"check-carriers: {BASELINE} is missing", file=sys.stderr)
         return 1
@@ -116,7 +116,7 @@ def main():
     return 1 if failures else 0
 
 
-def self_test():
+def self_test() -> int:
     baseline_text = read_exact(BASELINE)
     ordered = sections(baseline_text)
     canonical = dict(ordered)

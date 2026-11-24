@@ -56,7 +56,7 @@ TODAY        = datetime.date.today()
 
 # ---------------------------------------------------------------------------
 
-def parse_frontmatter(text: str):
+def parse_frontmatter(text: str) -> tuple[dict | None, str]:
     lines = text.splitlines()
     if not lines or lines[0].strip() != "---":
         return None, text
@@ -71,7 +71,7 @@ def parse_frontmatter(text: str):
     return fm, "\n".join(lines[body_start:])
 
 
-def body_line_set(mf: Path):
+def body_line_set(mf: Path) -> set[str]:
     _, body = parse_frontmatter(mf.read_text(encoding="utf-8", errors="replace"))
     return {l.strip() for l in body.splitlines() if l.strip()}
 
@@ -80,7 +80,7 @@ def body_line_set(mf: Path):
 # Per-concern check functions — each returns List[dict]
 # ---------------------------------------------------------------------------
 
-def check_index_integrity(index_path: Path, mem_files):
+def check_index_integrity(index_path: Path, mem_files: list[Path]) -> dict[str, list]:
     """Orphans + dangling refs + MEMORY.md structural checks."""
     issues = {"orphans": [], "dangling": [], "structural": []}
     if not index_path.exists():
@@ -120,7 +120,7 @@ def check_index_integrity(index_path: Path, mem_files):
     return issues
 
 
-def check_file_schema(mem_files):
+def check_file_schema(mem_files: list[Path]) -> list[dict]:
     """Frontmatter completeness, type validity, required sections, fix-recipe/path-pinned/relative-date checks."""
     entries = []
     for mf in mem_files:
@@ -160,7 +160,7 @@ def check_file_schema(mem_files):
     return entries
 
 
-def scan_credentials(mem_files):
+def scan_credentials(mem_files: list[Path]) -> list[dict]:
     """Credential pattern scan across all memory files."""
     entries = []
     for mf in mem_files:
@@ -170,7 +170,7 @@ def scan_credentials(mem_files):
     return entries
 
 
-def check_near_duplicates(mem_files):
+def check_near_duplicates(mem_files: list[Path]) -> list[dict]:
     """Jaccard similarity on body lines; flag pairs > 0.70."""
     entries = []
     files_list = list(mem_files)
@@ -188,7 +188,7 @@ def check_near_duplicates(mem_files):
     return entries
 
 
-def check_staleness(mem_files, session_glob: str):
+def check_staleness(mem_files: list[Path], session_glob: str) -> list[dict]:
     """Past-date flags for project; dead-path flags for reference; session contradiction for feedback."""
     entries = []
 

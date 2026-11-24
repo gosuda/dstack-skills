@@ -48,7 +48,7 @@ EXPLICIT_MARKER = re.compile(
 )
 
 # --- Helpers ---
-def extract_text(content):
+def extract_text(content: object) -> str:
     if isinstance(content, str):
         return content
     if isinstance(content, list):
@@ -58,7 +58,7 @@ def extract_text(content):
         )
     return ""
 
-def load_turns(path):
+def load_turns(path: str) -> list[dict]:
     turns = []
     with open(path, encoding="utf-8", errors="replace") as f:
         for line in f:
@@ -83,7 +83,7 @@ def load_turns(path):
 # --- Proposal builder ---
 proposals = []
 
-def add(ptype, slug, evidence_ids, draft_body, draft_index):
+def add(ptype: str, slug: str, evidence_ids: list[str], draft_body: str, draft_index: str) -> None:
     proposals.append({
         "type": ptype,
         "slug": slug,

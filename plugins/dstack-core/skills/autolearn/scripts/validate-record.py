@@ -1132,7 +1132,7 @@ def _drop_slot(path, failed):
         failed.append("self-test slot cleanup failed: %s" % err)
 
 
-def run_self_test():
+def run_self_test() -> int:
     import tempfile
     skill_dir = Path(__file__).resolve().parent.parent
     schema_path = skill_dir / "references" / "schema.md"
@@ -1193,7 +1193,7 @@ def run_self_test():
     return EXIT_OK if not failed else EXIT_INVALID
 
 
-def main(argv):
+def main(argv: list[str]) -> int:
     if "--self-test" in argv:
         if len(argv) == 2:
             return run_self_test()

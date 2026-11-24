@@ -4,6 +4,7 @@ import json
 import re
 import string
 import sys
+from collections.abc import Iterator
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -15,7 +16,7 @@ DOUBLE_QUOTED_ESCAPES = set('0abtnvfre "/\\N_LP') | set("xuU")
 HEX_ESCAPES = {"x": 2, "u": 4, "U": 8}
 
 
-def scan_single_quoted(value):
+def scan_single_quoted(value: str) -> str | None:
     i = 1
     while i < len(value):
         c = value[i]
@@ -32,7 +33,7 @@ def scan_single_quoted(value):
     return "single-quoted scalar never closes"
 
 
-def scan_double_quoted(value):
+def scan_double_quoted(value: str) -> str | None:
     i = 1
     while i < len(value):
         c = value[i]
@@ -61,7 +62,7 @@ def scan_double_quoted(value):
     return "double-quoted scalar never closes"
 
 
-def scan_plain(value):
+def scan_plain(value: str) -> str | None:
     if value[0] in PLAIN_INDICATORS:
         return f"plain scalar starts with the indicator character {value[0]!r}"
     if value[0] in PLAIN_INDICATORS_BEFORE_SPACE and (len(value) == 1 or value[1].isspace()):
@@ -73,7 +74,7 @@ def scan_plain(value):
     return None
 
 
-def check_frontmatter(text):
+def check_frontmatter(text: str) -> list[str]:
     if not text.startswith("---\n"):
         return ["missing opening frontmatter fence"]
     end = text.find("\n---", 4)
@@ -118,7 +119,7 @@ def check_frontmatter(text):
     return reasons
 
 
-def catalog_skills():
+def catalog_skills() -> Iterator[tuple[str, str, Path]]:
     catalog = json.loads((ROOT / "catalog" / "plugins.json").read_text("utf-8"))
     if catalog.get("schema") != "odin-plugin-catalog/v1":
         raise SystemExit(f"unexpected catalog schema: {catalog.get('schema')}")
@@ -185,7 +186,7 @@ CASES = [
 MIN_PYTHON = (3, 9)
 
 
-def source_backslash_in_fstring(text=None):
+def source_backslash_in_fstring(text: str | None = None) -> list[int]:
     text = Path(__file__).read_text("utf-8") if text is None else text
     try:
         tree = ast.parse(text, feature_version=MIN_PYTHON)
