@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from __future__ import annotations
 import ast
 import json
 import re
@@ -204,6 +205,37 @@ def source_backslash_in_fstring(text: str | None = None) -> list[int]:
     )
 
 
+def _has_bit_or(node):
+    return any(isinstance(n, ast.BitOr) for n in ast.walk(node))
+
+
+def source_runtime_union_without_future(text=None):
+    text = Path(__file__).read_text("utf-8") if text is None else text
+    tree = ast.parse(text)
+    for node in tree.body:
+        if isinstance(node, ast.ImportFrom) and node.module == "__future__":
+            if any(a.name == "annotations" for a in node.names):
+                return []
+    if MIN_PYTHON >= (3, 10):
+        return []
+    bad = []
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            annotations = [a.annotation for a in (*node.args.posonlyargs, *node.args.args, *node.args.kwonlyargs) if a.annotation is not None]
+            if node.args.vararg and node.args.vararg.annotation is not None:
+                annotations.append(node.args.vararg.annotation)
+            if node.args.kwarg and node.args.kwarg.annotation is not None:
+                annotations.append(node.args.kwarg.annotation)
+            if node.returns is not None:
+                annotations.append(node.returns)
+            if any(_has_bit_or(a) for a in annotations):
+                bad.append(node.lineno)
+        elif isinstance(node, ast.AnnAssign):
+            if _has_bit_or(node.annotation):
+                bad.append(node.lineno)
+    return sorted(set(bad))
+
+
 BS = chr(92)
 NL = chr(10)
 Q = chr(39)
@@ -228,7 +260,7 @@ COMPAT_CASES = [
 
 def self_test():
     passed = 0
-    total = len(CASES) + len(COMPAT_CASES) + 1
+    total = len(CASES) + len(COMPAT_CASES) + 2
     bad = source_backslash_in_fstring()
     label = f"this gate parses on python {MIN_PYTHON[0]}.{MIN_PYTHON[1]}"
     if bad:
@@ -236,6 +268,12 @@ def self_test():
     else:
         passed += 1
         print(f"PASS: {label}")
+    bad = source_runtime_union_without_future()
+    label = f"no runtime-evaluated X | Y annotations under python {MIN_PYTHON[0]}.{MIN_PYTHON[1]} without a future import"
+    if bad:
+        print(f"FAIL: {label} (line(s) {bad})", file=sys.stderr)
+    else:
+        passed += 1
     for label, snippet, want_detected in COMPAT_CASES:
         got_detected = bool(source_backslash_in_fstring(snippet))
         if got_detected == want_detected:
