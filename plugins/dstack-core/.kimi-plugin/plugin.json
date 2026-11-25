@@ -1,6 +1,6 @@
 {
   "name": "dstack-core",
-  "version": "2.1.21",
+  "version": "2.1.22",
   "description": "Cross-project workflows for planning, implementation, review, verification, and delivery.",
   "keywords": [
     "dstack",
@@ -19,7 +19,7 @@
       "command": "npx",
       "args": [
         "-y",
-        "repomix",
+        "repomix@1.19.0",
         "--mcp",
         "--compress"
       ]
