@@ -350,13 +350,13 @@ All versions read 2026-09-03. Harness-surface rows re-verified that day; the rem
 | Python, this machine | | 3.14.7, equals current | | | (Tier 1, source: `python3 --version`, verified) |
 | prek | gate runner | 0.5.1 | | | (Tier 1, source: `prek --version`, verified 2026-09-03; release notes not re-read) |
 | pre-commit/pre-commit-hooks | pinned v6.0.0 | v6.0.0, equals latest | 2025-08-09 | | (Tier 2, source: https://github.com/pre-commit/pre-commit-hooks/releases, verified) |
-| tombi-toml/tombi-pre-commit | pinned v1.1.3, raising to v1.5.0 | v1.5.0, not a prerelease | 2026-08-29 | | (Tier 2, source: https://github.com/tombi-toml/tombi-pre-commit/releases, verified) |
+| tombi-toml/tombi-pre-commit | pinned v1.5.0 | v1.5.0, not a prerelease | 2026-08-29 | | (Tier 2, source: https://github.com/tombi-toml/tombi-pre-commit/releases, verified) |
 
 Notes:
 
-- prek is the only gate runner. `.pre-commit-config.yaml` opens with "Run the whole set with: prek run --all-files", and the Justfile `check` task calls `prek run --all-files` (Tier 1, source: repository files, verified).
+- prek is the only gate runner: the Justfile `check` task calls `prek run --all-files` (Tier 1, source: repository files, verified).
 - tombi hook ids `tombi-lint` and `tombi-format` are byte-identical in `.pre-commit-hooks.yaml` at tags v1.1.3 and v1.5.0, so the pin raise changes no hook interface (Tier 1, source: raw.githubusercontent.com at both tags, verified).
-- The repository has no runtime dependencies. The Justfile states it: "There is no package manager here: every script is dependency-free Node ESM or standard-library Python, and nothing is published to a package registry." An import audit agrees: every `scripts/*.mjs` import resolves to a `node:` builtin or a local project module (`./plugin-surfaces.mjs`), and `scripts/sync-baseline.py` imports only the standard library (`__future__`, `argparse`, `sys`, `pathlib`) (Tier 1, source: Justfile and scripts imports, verified).
+- The repository has no runtime dependencies. The README states it: "There is no package manager here. Every script is dependency-free Node ESM or standard-library Python.", and the maintainer rules bar package-registry publication. An import audit agrees: every `scripts/*.mjs` import resolves to a `node:` builtin or a local project module (`./plugin-surfaces.mjs`), and `scripts/sync-baseline.py` imports only the standard library (`__future__`, `argparse`, `sys`, `pathlib`) (Tier 1, source: README, CONTRIBUTING.md, and scripts imports, verified).
 - No Node version is pinned, and there is no enforcement point: the repository has no CI, no build,
   and no `engines` field to read. Every script imports `node:` builtins only, so the real floor is
   whatever ships `node:fs`, `node:path`, and `node:url`, which is every supported line.
