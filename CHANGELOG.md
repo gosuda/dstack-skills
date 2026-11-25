@@ -5,6 +5,14 @@ All notable changes to Dalcom Skills will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.22] - 2026-11-24
+### Security
+- Pinned the `repomix` MCP server in `dstack-core`'s shared `mcp.json` to
+  `repomix@1.19.0`. `npx -y repomix` ran whatever the npm registry served at
+  session start, so a hijacked or newly published release would run inside
+  the agent session with the user's credentials and no change in this
+  repository.
+
 ## [2.1.21] - 2026-11-21
 ### Removed
 - Dropped the `sequential`, `critic`, and `shannon` thinking MCP servers from

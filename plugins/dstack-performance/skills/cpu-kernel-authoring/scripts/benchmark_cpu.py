@@ -162,6 +162,7 @@ def _baseline_pair(baseline_mod, inputs):
 
 
 def run_correctness(inputs: tuple[object, ...], ref_output: object, kernel_func: Callable[..., object], tolerances: dict[Any, tuple[float, float]]) -> bool:
+    """Compare the kernel output to the baseline output; return True when they match."""
     print("\n  Correctness Check (per-dtype tolerances)")
     for dtype, (atol, rtol) in tolerances.items():
         print(f"    {dtype}: atol={atol:g} rtol={rtol:g}")

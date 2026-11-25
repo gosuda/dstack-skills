@@ -2,7 +2,7 @@
   "$schema": "https://antigravity.google/schemas/v1/plugin.json",
   "name": "dstack-git",
   "displayName": "DStack Git",
-  "version": "2.1.21",
+  "version": "2.1.22",
   "description": "Git workflows for commits, branches, GitHub pull requests, GitLab merge requests, review feedback, and issues.",
   "author": {
     "name": "gosuda",
