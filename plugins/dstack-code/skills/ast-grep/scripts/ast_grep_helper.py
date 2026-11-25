@@ -74,17 +74,17 @@ EXT_TO_LANG = {
 REGEX_ESCAPE_RE = re.compile(r"\\[wdsb]")
 BARE_QUANTIFIER_RE = re.compile(r"\.[*+]")
 
-def warn(msg):
+def warn(msg: str) -> None:
     """Print an advisory line to stderr."""
     print(msg, file=sys.stderr)
 
 
-def find_binary():
+def find_binary() -> str | None:
     """Absolute path to the ast-grep binary, or None if not on PATH."""
     return shutil.which(BINARY)
 
 
-def run_ast_grep(args, *, capture=True):
+def run_ast_grep(args: list[str], *, capture: bool = True) -> subprocess.CompletedProcess[str]:
     """Single funnel for every ast-grep invocation.
 
     Returns a CompletedProcess. Raises FileNotFoundError if the binary is
@@ -98,14 +98,14 @@ def run_ast_grep(args, *, capture=True):
     )
 
 
-def normalize_lang(value):
+def normalize_lang(value: str | None) -> str | None:
     """Map an alias/full name to ast-grep's canonical language, or None."""
     if value is None:
         return None
     return LANG_ALIASES.get(value.strip().lower())
 
 
-def detect_lang_from_paths(paths):
+def detect_lang_from_paths(paths: list[str]) -> str | None:
     """Infer a language alias from a single unambiguous path/glob extension.
 
     Returns an alias string, or None when detection is not unambiguous.
@@ -116,7 +116,7 @@ def detect_lang_from_paths(paths):
     return EXT_TO_LANG.get(suffix)
 
 
-def resolve_lang(explicit, paths, *, from_stdin):
+def resolve_lang(explicit: str | None, paths: list[str], *, from_stdin: bool) -> str:
     """Resolve the effective language alias or exit(2) with a clear message.
 
     Patterns from stdin always require an explicit --lang. Otherwise fall
@@ -137,7 +137,7 @@ def resolve_lang(explicit, paths, *, from_stdin):
     return canonical
 
 
-def regex_smells(pattern):
+def regex_smells(pattern: str) -> list[str]:
     """List human-readable regex-smell findings for a pattern (advisory)."""
     findings = []
     if REGEX_ESCAPE_RE.search(pattern):
@@ -147,7 +147,7 @@ def regex_smells(pattern):
     return findings
 
 
-def emit_regex_smell(pattern, label):
+def emit_regex_smell(pattern: str, label: str) -> None:
     """Print the non-blocking regex-smell hint if the pattern looks regexy."""
     findings = regex_smells(pattern)
     if not findings:
@@ -156,7 +156,7 @@ def emit_regex_smell(pattern, label):
          "did you mean $VAR / $$$, or switch to rg?")
 
 
-def pattern_has_error(pattern, lang):
+def pattern_has_error(pattern: str, lang: str) -> tuple[bool, str]:
     """Parse pattern via --debug-query=pattern; True if it contains an ERROR.
 
     `--debug-query=pattern` dumps ast-grep's OWN pattern tree -- the view
@@ -181,7 +181,7 @@ def pattern_has_error(pattern, lang):
     return has_error, raw
 
 
-def validate_pattern(pattern, lang, *, role="pattern"):
+def validate_pattern(pattern: str, lang: str, *, role: str = "pattern") -> str:
     """Run advisory regex-smell + authoritative pattern-parse check.
 
     Returns one of: "ok", "error" (parse ERROR found), "skipped" (binary
@@ -203,7 +203,7 @@ def validate_pattern(pattern, lang, *, role="pattern"):
     return "ok"
 
 
-def cmd_validate(ns):
+def cmd_validate(ns: argparse.Namespace) -> int:
     """`validate` subcommand: lint a pattern, never touch files."""
     from_stdin = ns.pattern == "-"
     pattern = sys.stdin.read().strip() if from_stdin else ns.pattern
@@ -219,7 +219,7 @@ def cmd_validate(ns):
     return 0
 
 
-def build_globs_args(globs):
+def build_globs_args(globs: list[str] | None) -> list[str]:
     """Flatten repeatable --globs values into ast-grep CLI args.
 
     A value prefixed with `!` is passed through verbatim as an exclude.
@@ -230,7 +230,7 @@ def build_globs_args(globs):
     return out
 
 
-def base_run_args(pattern, rewrite, lang, paths, ns):
+def base_run_args(pattern: str, rewrite: str, lang: str, paths: list[str], ns: argparse.Namespace) -> list[str]:
     """Common positional/flag args shared by dry-run and apply passes."""
     args = ["run", "-p", pattern, "-r", rewrite, "-l", lang]
     args += build_globs_args(ns.globs)
@@ -240,7 +240,7 @@ def base_run_args(pattern, rewrite, lang, paths, ns):
     return args
 
 
-def render_diff(matches, context):
+def render_diff(matches: list[dict], context: int | None) -> tuple[str, str]:
     """Render a compact unified-style diff + blast-radius summary line."""
     files = set()
     lines_out = []
@@ -259,7 +259,7 @@ def render_diff(matches, context):
     return "\n".join(lines_out), summary
 
 
-def replace_dry_run(pattern, rewrite, lang, paths, ns):
+def replace_dry_run(pattern: str, rewrite: str, lang: str, paths: list[str], ns: argparse.Namespace) -> tuple[list[dict] | None, subprocess.CompletedProcess[str]]:
     """Pass 1: JSON dry-run. Returns (matches, proc). Mutates nothing."""
     args = base_run_args(pattern, rewrite, lang, paths, ns) + ["--json=compact"]
     proc = run_ast_grep(args, capture=True)
@@ -271,13 +271,13 @@ def replace_dry_run(pattern, rewrite, lang, paths, ns):
     return matches, proc
 
 
-def replace_apply(pattern, rewrite, lang, paths, ns):
+def replace_apply(pattern: str, rewrite: str, lang: str, paths: list[str], ns: argparse.Namespace) -> subprocess.CompletedProcess[str]:
     """Pass 2: write changes via --update-all. Returns CompletedProcess."""
     args = base_run_args(pattern, rewrite, lang, paths, ns) + ["--update-all"]
     return run_ast_grep(args, capture=True)
 
 
-def cmd_replace(ns):
+def cmd_replace(ns: argparse.Namespace) -> int:
     """`replace` subcommand: dry-run by default; --apply to write."""
     if find_binary() is None:
         warn(f"error: {BINARY} not found on PATH; replace cannot run "
@@ -334,7 +334,7 @@ def cmd_replace(ns):
     return 0
 
 
-def add_shared_flags(p):
+def add_shared_flags(p: argparse.ArgumentParser) -> None:
     """Attach flags common to both subcommands."""
     p.add_argument("-l", "--lang",
                    help="language: ts/tsx/js/jsx/py/rs/go/java/kt/c/cpp "
@@ -349,7 +349,7 @@ def add_shared_flags(p):
                    help="machine mode: emit raw JSON instead of human text.")
 
 
-def build_parser():
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="ast_grep_helper.py",
         description="Validate-first / dry-run-first wrapper around ast-grep.",
@@ -392,7 +392,7 @@ def build_parser():
     return parser
 
 
-def main(argv=None):
+def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     ns = parser.parse_args(argv)
     return ns.func(ns)

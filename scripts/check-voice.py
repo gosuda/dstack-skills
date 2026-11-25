@@ -51,7 +51,7 @@ BOLD_LEAD = re.compile(r"^\s*(?:[-*+]\s*)?\*\*[^*\n]{2,}\*\*")
 BOLD_LEAD_RUN = 5
 
 
-def writable(path):
+def writable(path: Path) -> bool:
     try:
         os.close(os.open(path, os.O_WRONLY))
     except OSError:
@@ -59,7 +59,7 @@ def writable(path):
     return True
 
 
-def git_tracked(pathspecs):
+def git_tracked(pathspecs: list[str]) -> list[str]:
     try:
         result = subprocess.run(
             ["git", "ls-files", "-z", "--", *pathspecs],
@@ -75,7 +75,7 @@ def git_tracked(pathspecs):
     return [path for path in result.stdout.split("\0") if path]
 
 
-def carrier_targets(carriers):
+def carrier_targets(carriers: list[Path] | tuple[Path, ...]) -> list[Path]:
     present = []
     for carrier in carriers:
         if not carrier.is_file():
@@ -102,16 +102,16 @@ def _fate_vendored():
 VENDORED_UPSTREAM = _fate_vendored()
 
 
-def repo_targets():
+def repo_targets() -> list[Path]:
     return sorted(ROOT / path for path in git_tracked(["*.md"])
                   if path not in VENDORED_UPSTREAM)
 
 
-def default_targets(carriers=CARRIERS):
+def default_targets(carriers: list[Path] | tuple[Path, ...] = CARRIERS) -> list[Path]:
     return repo_targets() + carrier_targets(carriers)
 
 
-def prose_only(text):
+def prose_only(text: str) -> str:
     out = []
     fenced = False
     for line in text.split("\n"):
@@ -124,7 +124,7 @@ def prose_only(text):
     return "\n".join(out)
 
 
-def dash_run(prose):
+def dash_run(prose: str) -> tuple[int, int]:
     hits = [m.start() for m in DASH.finditer(prose)]
     worst = 0
     where = 0
@@ -138,7 +138,7 @@ def dash_run(prose):
     return worst, where
 
 
-def bold_runs(prose):
+def bold_runs(prose: str) -> list[tuple[int, int, int]]:
     runs = []
     start = 0
     length = 0
@@ -159,13 +159,13 @@ def bold_runs(prose):
     return runs
 
 
-def classify_run(labels):
+def classify_run(labels: int) -> tuple[str, int]:
     if labels >= 2:
         return "label", BOLD_RUN
     return "lead", BOLD_LEAD_RUN
 
 
-def bold_findings(prose):
+def bold_findings(prose: str) -> list[tuple[int, str]]:
     found = []
     for start, length, labels in bold_runs(prose):
         kind, threshold = classify_run(labels)
@@ -180,14 +180,14 @@ def bold_findings(prose):
     return found
 
 
-def label(path):
+def label(path: Path) -> Path:
     try:
         return path.relative_to(ROOT)
     except ValueError:
         return path
 
 
-def audit(path):
+def audit(path: Path) -> list[str]:
     prose = prose_only(path.read_text(encoding="utf-8", errors="replace"))
     rel = label(path)
     found = []
@@ -264,7 +264,7 @@ SELF_TEST = (
 )
 
 
-def run_verdict(prose):
+def run_verdict(prose: str) -> tuple[bool, str | None]:
     for _, length, labels in bold_runs(prose):
         kind, threshold = classify_run(labels)
         if length >= threshold:
@@ -272,7 +272,7 @@ def run_verdict(prose):
     return False, None
 
 
-def ignored_witness():
+def ignored_witness() -> str | None:
     result = subprocess.run(
         ["git", "ls-files", "-z", "--others", "--ignored", "--exclude-standard"],
         cwd=ROOT, capture_output=True, text=True, check=True)
@@ -283,12 +283,12 @@ def ignored_witness():
     return found[0] if found else None
 
 
-def ignored_case(got):
+def ignored_case(got: list[str]) -> bool:
     witness = ignored_witness()
     return got == [] and (witness is None or Path(witness).is_file())
 
 
-def carrier_witness_probe():
+def carrier_witness_probe() -> tuple[list[str], str, str, str]:
     dir_ = tempfile.mkdtemp()
     try:
         present = Path(dir_) / "present.md"
@@ -302,13 +302,13 @@ def carrier_witness_probe():
         shutil.rmtree(dir_, ignore_errors=True)
 
 
-def carrier_witness_case(probe):
+def carrier_witness_case(probe: tuple[list[str], str, str, str]) -> bool:
     targets, present, absent, notice = probe
     return (present in targets and absent not in targets
             and "skipping" in notice and "absent on this machine" in notice)
 
 
-def untracked_witness_probe():
+def untracked_witness_probe() -> tuple[bool, int, int, bool]:
     without = len(repo_targets())
     dir_ = tempfile.mkdtemp(dir=ROOT)
     try:
@@ -320,25 +320,25 @@ def untracked_witness_probe():
         shutil.rmtree(dir_, ignore_errors=True)
 
 
-def untracked_witness_case(probe):
+def untracked_witness_case(probe: tuple[bool, int, int, bool]) -> bool:
     picked_up, with_count, without_count, carries = probe
     return not picked_up and with_count == without_count and carries
 
 
-def vendored_case(got):
+def vendored_case(got: list[str]) -> bool:
     tracked = set(git_tracked(sorted(VENDORED_UPSTREAM)))
     return (tracked == set(VENDORED_UPSTREAM)
             and not any(str(ROOT / path) in got for path in VENDORED_UPSTREAM))
 
 
-def authored_sibling_case(got):
+def authored_sibling_case(got: list[str]) -> bool:
     siblings = (f"{_FATE}/SKILL.md",
                 f"{_FATE}/agents/draw.md",
                 f"{_FATE}/references/SOURCE-MAP.md")
     return all(str(ROOT / path) in got for path in siblings)
 
 
-def scope_parity_case(got):
+def scope_parity_case(got: list[str]) -> bool:
     expected = {str(ROOT / path) for path in git_tracked(["*.md"])
                 if path not in VENDORED_UPSTREAM}
     return set(got) == expected
@@ -378,7 +378,7 @@ TARGET_CASES = (
 )
 
 
-def self_test():
+def self_test() -> int:
     failed = 0
     for name, text, (want_caught, want_kind) in SELF_TEST:
         caught, kind = run_verdict(prose_only(text))
@@ -398,11 +398,11 @@ def self_test():
     return 1 if failed else 0
 
 
-def explicit_targets(argv):
+def explicit_targets(argv: list[str]) -> list[Path]:
     return [Path(a).resolve() for a in argv]
 
 
-def main(argv):
+def main(argv: list[str]) -> int:
     if argv == ["--self-test"]:
         return self_test()
     if argv:

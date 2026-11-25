@@ -22,7 +22,7 @@ class HelperError(Exception):
         self.details = details if isinstance(details, dict) else {}
 
 
-def emit_error(err, host=None, project=None, iid=None):
+def emit_error(err: HelperError, host: str | None = None, project: str | None = None, iid: int | str | None = None) -> None:
     payload = {"error": err.code, "message": err.message}
     if host is not None:
         payload["host"] = host
@@ -34,7 +34,7 @@ def emit_error(err, host=None, project=None, iid=None):
     print(json.dumps(payload, indent=2, sort_keys=True), file=sys.stderr)
 
 
-def check_host(raw):
+def check_host(raw: str | None) -> str:
     host = (raw or "").strip()
     if not host:
         raise HelperError("usage", "host must not be empty")
@@ -53,7 +53,7 @@ def _check_project_segment(segment, raw):
             raise HelperError("usage", f"project segment has an illegal character: {segment!r}")
 
 
-def check_project(raw):
+def check_project(raw: str | None) -> str:
     project = (raw or "").strip()
     if not project or "/" not in project:
         raise HelperError("usage", f"project must look like GROUP/PROJECT: {raw!r}")
@@ -64,7 +64,7 @@ def check_project(raw):
     return project
 
 
-def check_iid(raw):
+def check_iid(raw: object) -> int:
     if type(raw) is bool:
         raise HelperError("usage", f"mr IID must be a positive integer: {raw!r}")
     try:
@@ -76,7 +76,7 @@ def check_iid(raw):
     return iid
 
 
-def check_note_id(raw):
+def check_note_id(raw: object) -> int:
     if type(raw) is bool:
         raise HelperError("usage", f"note id must be a positive integer: {raw!r}")
     try:
@@ -88,7 +88,7 @@ def check_note_id(raw):
     return note_id
 
 
-def check_discussion(raw):
+def check_discussion(raw: str | None) -> str:
     discussion_id = (raw or "").strip()
     if not discussion_id:
         raise HelperError("usage", "discussion id must not be empty")
@@ -97,7 +97,7 @@ def check_discussion(raw):
     return discussion_id
 
 
-def check_expected_head(raw):
+def check_expected_head(raw: object) -> str:
     if type(raw) is bool or not isinstance(raw, str):
         raise HelperError("usage", f"expected head must be a full 40- or 64-character hex SHA: {raw!r}")
     head = raw.strip()
@@ -108,7 +108,7 @@ def check_expected_head(raw):
     return head.lower()
 
 
-def check_timeout(raw):
+def check_timeout(raw: object) -> float:
     try:
         timeout_s = float(raw)
     except (TypeError, ValueError) as err:
@@ -161,7 +161,7 @@ def _refuse_failed(proc, label):
         )
 
 
-def fetch_single_object(host, endpoint, timeout_s):
+def fetch_single_object(host: str, endpoint: str, timeout_s: float) -> dict:
     argv = ["glab", "api", "--hostname", host, endpoint, "-X", "GET", "--output", "json"]
     proc = _run(argv, timeout_s, endpoint)
     _refuse_failed(proc, endpoint)
@@ -181,7 +181,7 @@ def fetch_single_object(host, endpoint, timeout_s):
     return payload
 
 
-def fetch_complete_list(host, endpoint, timeout_s):
+def fetch_complete_list(host: str, endpoint: str, timeout_s: float) -> list:
     argv = ["glab", "api", "--hostname", host, endpoint, "-X", "GET",
             "--paginate", "--output", "json"]
     proc = _run(argv, timeout_s, endpoint)
@@ -281,7 +281,7 @@ def _check_mr_payload_fields(obj, iid, endpoint):
     return head_sha
 
 
-def get_mr(host, project, iid, timeout_s):
+def get_mr(host: str, project: str, iid: int, timeout_s: float) -> tuple[dict, str]:
     endpoint = f"projects/{quote(project, safe='')}/merge_requests/{iid}"
     obj = fetch_single_object(host, endpoint, timeout_s)
     _check_mr_identity(obj, iid, endpoint)
@@ -291,7 +291,7 @@ def get_mr(host, project, iid, timeout_s):
     return obj, head_sha
 
 
-def check_thread_notes(thread_notes, discuss_id):
+def check_thread_notes(thread_notes: list, discuss_id: str) -> None:
     for note in thread_notes:
         if not isinstance(note, dict) or type(note.get("id")) is not int:
             raise HelperError(
@@ -301,7 +301,7 @@ def check_thread_notes(thread_notes, discuss_id):
             )
 
 
-def check_census(discussions, notes):
+def check_census(discussions: list, notes: list) -> None:
     for index, discussion in enumerate(discussions):
         discuss_id = discussion.get("id") if isinstance(discussion, dict) else None
         if not isinstance(discuss_id, str) or not discuss_id:
@@ -327,7 +327,7 @@ def check_census(discussions, notes):
             )
 
 
-def read_census(host, project, iid, timeout_s):
+def read_census(host: str, project: str, iid: int, timeout_s: float) -> tuple[str, list, list]:
     _, head_before = get_mr(host, project, iid, timeout_s)
     base = f"projects/{quote(project, safe='')}/merge_requests/{iid}"
     discussions = fetch_complete_list(host, f"{base}/discussions?per_page={PER_PAGE}", timeout_s)
@@ -361,7 +361,7 @@ def _collect_unique_note(note, thread_note_ids, seen_note_ids, normalized_notes)
             normalized_notes.append(note)
 
 
-def normalize_census_notes(discussions, notes, thread_note_ids):
+def normalize_census_notes(discussions: list, notes: list, thread_note_ids: set[int]) -> list:
     normalized_notes = []
     seen_note_ids = set()
     for n in notes:
@@ -373,7 +373,7 @@ def normalize_census_notes(discussions, notes, thread_note_ids):
     return normalized_notes
 
 
-def cmd_list(host, project, iid, timeout_s):
+def cmd_list(host: str, project: str, iid: int, timeout_s: float) -> None:
     head_sha, discussions, notes = read_census(host, project, iid, timeout_s)
     real_discussions = [d for d in discussions if not d.get("individual_note", False)]
     thread_note_ids = _extract_thread_note_ids(real_discussions)
@@ -399,7 +399,7 @@ def cmd_list(host, project, iid, timeout_s):
     }, indent=2, sort_keys=True))
 
 
-def cmd_thread(host, project, iid, timeout_s, note_id):
+def cmd_thread(host: str, project: str, iid: int, timeout_s: float, note_id: int) -> None:
     head_sha, discussions, _ = read_census(host, project, iid, timeout_s)
     matches = []
     for discussion in discussions:
@@ -433,7 +433,7 @@ def cmd_thread(host, project, iid, timeout_s, note_id):
     }, indent=2, sort_keys=True))
 
 
-def read_body_file(path):
+def read_body_file(path: str) -> str:
     try:
         with open(path, "r", encoding="utf-8") as handle:
             body_text = handle.read()
@@ -581,7 +581,7 @@ def _verify_post_mutation_head(mr_target, head_before, discussion_id, note_id=No
     return head_after
 
 
-def cmd_reply(host, project, iid, timeout_s, discussion_id, body_file, expected_head):
+def cmd_reply(host: str, project: str, iid: int, timeout_s: float, discussion_id: str, body_file: str, expected_head: str) -> None:
     body_text = read_body_file(body_file)
     mr_obj, head_before = get_mr(host, project, iid, timeout_s)
     if head_before != expected_head:
@@ -737,7 +737,7 @@ def _verify_readback_resolve(host, single, timeout_s, discussion_id):
         )
 
 
-def cmd_resolve(host, project, iid, timeout_s, discussion_id, expected_head):
+def cmd_resolve(host: str, project: str, iid: int, timeout_s: float, discussion_id: str, expected_head: str) -> None:
     _, head_before = get_mr(host, project, iid, timeout_s)
     if head_before != expected_head:
         _raise_head_mismatch(head_before, expected_head)
@@ -783,7 +783,7 @@ def cmd_resolve(host, project, iid, timeout_s, discussion_id, expected_head):
     }, indent=2, sort_keys=True))
 
 
-def build_parser():
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="GitLab merge-request review helper (read census, thread lookup, reply, resolve)")
     parser.add_argument("--host", required=True, help="GitLab hostname, e.g. gitlab.com")
@@ -837,7 +837,7 @@ def _dispatch_subcommand(args, host, project, iid, timeout_s):
     return False
 
 
-def main(argv=None):
+def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     try:

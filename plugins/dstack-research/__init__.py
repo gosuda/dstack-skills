@@ -1,5 +1,6 @@
 import json
 from pathlib import Path
+from typing import Any
 
 
 def _scalar(raw):
@@ -23,7 +24,7 @@ def _description(skill_md):
     return ""
 
 
-def register(ctx):
+def register(ctx: Any) -> None:
     skills = Path(__file__).parent / "skills"
     for child in sorted(skills.iterdir()):
         skill_md = child / "SKILL.md"

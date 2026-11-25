@@ -152,7 +152,7 @@ def _evaluate(baseline_text, carrier_text, label="carrier"):
     return changes, new_text, None, failures
 
 
-def self_test():
+def self_test() -> int:
 
     baseline_text = read_exact(BASELINE)
     ordered = sections(baseline_text)
@@ -236,7 +236,7 @@ def self_test():
     return 0 if passed == len(checks) else 1
 
 
-def main():
+def main() -> int:
     args = sys.argv[1:]
     check_mode = False
     overrides = {}

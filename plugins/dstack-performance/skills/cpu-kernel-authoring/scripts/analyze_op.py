@@ -43,7 +43,7 @@ class OpAnalyzer(ast.NodeVisitor):
         self.reductions = []
         self.elementwise = []
 
-    def visit_Call(self, node):
+    def visit_Call(self, node: ast.Call) -> None:
         """Visit function calls to identify operations."""
         if isinstance(node.func, ast.Attribute):
             if hasattr(node.func.value, "id") and node.func.value.id == "torch":
@@ -70,7 +70,7 @@ class OpAnalyzer(ast.NodeVisitor):
 
         self.generic_visit(node)
 
-    def visit_BinOp(self, node):
+    def visit_BinOp(self, node: ast.BinOp) -> None:
         """Visit binary operations."""
         op_map = {
             ast.Mult: "multiply",
@@ -83,7 +83,7 @@ class OpAnalyzer(ast.NodeVisitor):
             self.elementwise.append(op_map[op_type])
         self.generic_visit(node)
 
-    def visit_Assign(self, node):
+    def visit_Assign(self, node: ast.Assign) -> None:
         """Visit assignments to track nn.Linear."""
         if (
             isinstance(node.value, ast.Call)
