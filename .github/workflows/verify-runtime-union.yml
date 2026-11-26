@@ -1,0 +1,78 @@
+name: Verify diagnostic fixture layout independence
+on:
+  push:
+    branches: ['ci/verify-runtime-union-layout-20261126-r7']
+    paths: ['.github/workflows/verify-runtime-union.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: depot-ubuntu-24.04
+    timeout-minutes: 15
+    defaults:
+      run:
+        shell: bash
+        working-directory: .outline/worktree/diagnostic-proof
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: e98c65645532525c847b17594cb03559642f5c7f
+          path: .outline/worktree/diagnostic-proof
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: astral-sh/setup-uv@1db35dd8eee11c5894872e0b383ae6c406cf738d
+        with:
+          enable-cache: false
+          python-version: '3.12'
+      - name: Install the existing maintainer gate tools
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends just
+          uv tool install prek
+          echo "$(uv tool dir --bin)" >> "$GITHUB_PATH"
+      - name: Validate the unchanged full maintainer gate
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = e98c65645532525c847b17594cb03559642f5c7f
+          test "$(git rev-parse HEAD^{tree})" = f48614ff66cfe9601d06f753480cc6915c5cc128
+          git rev-parse HEAD HEAD^{tree}
+          just --version
+          prek --version
+          uv run --no-project python scripts/check-skill-frontmatter.py --self-test
+          uv run --no-project just check
+          git diff --check
+          git diff --exit-code
+      - name: Reject numbering, omission, order, and layout regressions
+        run: |
+          set -euo pipefail
+          git fetch --no-tags --depth=1 origin bfcbcd4f07a821fa06235cdf4f5c7580ebff47ba
+          uv run --no-project python - <<'PY'
+          from pathlib import Path
+          import subprocess
+          import sys
+          from tempfile import TemporaryDirectory
+
+          source = Path("scripts/check-skill-frontmatter.py").read_text()
+          anchor = "    return sorted(set(bad))"
+          assert source.count(anchor) == 1
+          variants: list[tuple[str, str]] = [
+              ("zero based", source.replace(anchor, "    return [line - 1 for line in sorted(set(bad))]")),
+              ("first only", source.replace(anchor, "    return sorted(set(bad))[:1]")),
+              ("reverse order", source.replace(anchor, "    return sorted(set(bad), reverse=True)")),
+          ]
+          baseline = subprocess.run(["git", "show", "bfcbcd4f07a821fa06235cdf4f5c7580ebff47ba:scripts/check-skill-frontmatter.py"], capture_output=True, text=True, check=True).stdout
+          original = '"def first(x: int | None) -> int | None: pass"'
+          wrapped = '"def first(\\n    x: int | None,\\n) -> int | None: pass"'
+          assert baseline.count(original) == 1
+          variants.append(("equivalent wrapped baseline", baseline.replace(original, wrapped)))
+          with TemporaryDirectory(prefix="diagnostic-mutants-") as temporary:
+              for number, (name, content) in enumerate(variants):
+                  path = Path(temporary) / f"mutation-{number}.py"
+                  path.write_text(content)
+                  result = subprocess.run([sys.executable, str(path), "--self-test"], capture_output=True, text=True, check=False)
+                  print(f"MUTATION {name}: exit {result.returncode}")
+                  print(result.stderr)
+                  assert result.returncode == 1 and "FAIL: runtime union diagnostics" in result.stderr, name
+          PY
