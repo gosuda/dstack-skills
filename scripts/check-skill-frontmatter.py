@@ -276,7 +276,7 @@ RUNTIME_UNION_CASES = [
 
 def self_test() -> None:
     passed = 0
-    total = len(CASES) + len(COMPAT_CASES) + len(RUNTIME_UNION_CASES) + 2
+    total = len(CASES) + len(COMPAT_CASES) + len(RUNTIME_UNION_CASES) + 3
     bad = source_backslash_in_fstring()
     label = f"this gate parses on python {MIN_PYTHON[0]}.{MIN_PYTHON[1]}"
     if bad:
@@ -304,6 +304,13 @@ def self_test() -> None:
             print(f"PASS: runtime union case, {label}")
         else:
             print(f"FAIL: runtime union case, {label}", file=sys.stderr)
+    compound = "def first(x: int | None) -> int | None: pass\nclass C:\n    value: str | None = None\nasync def last(*args: bytes | None): pass\n"
+    diagnostics = source_runtime_union_without_future(compound)
+    if diagnostics == [1, 3, 4]:
+        passed += 1
+        print("PASS: every runtime union violation has one ordered diagnostic")
+    else:
+        print(f"FAIL: runtime union diagnostics: {diagnostics}", file=sys.stderr)
     for label, text, want_clean in CASES:
         reasons = check_frontmatter(text)
         got_clean = not reasons
