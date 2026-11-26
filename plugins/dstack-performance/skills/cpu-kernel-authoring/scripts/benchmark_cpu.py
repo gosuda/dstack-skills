@@ -21,6 +21,7 @@ import logging
 import sys
 from collections.abc import Callable
 from pathlib import Path
+from typing import Any
 
 # torch is imported at module load inside try/except so that --self-check can
 # exit 2 with a clear reason on a host without torch instead of dying with an
@@ -104,7 +105,7 @@ def _leaf_mismatch(ref, out, path, tolerances):
     diff_count = (ref != out).sum().item()
     return f"{path}: {diff_count} element(s) differ in exact dtype {ref.dtype}"
 
-def compare_structured(ref: object, out: object, tolerances: dict[str, tuple[float, float]], path: str = "output") -> list[str]:
+def compare_structured(ref: object, out: object, tolerances: dict[Any, tuple[float, float]], path: str = "output") -> list[str]:
     """Walk ref and out together; return a list of mismatch messages (empty means equal).
 
     Tuples, lists, and dicts are walked element-wise and must agree in type,
@@ -160,7 +161,7 @@ def _baseline_pair(baseline_mod, inputs):
     raise AttributeError("baseline must define get_reference_output() or a Model class")
 
 
-def run_correctness(inputs: tuple[object, ...], ref_output: object, kernel_func: Callable[..., object], tolerances: dict[str, tuple[float, float]]) -> bool:
+def run_correctness(inputs: tuple[object, ...], ref_output: object, kernel_func: Callable[..., object], tolerances: dict[Any, tuple[float, float]]) -> bool:
     """Compare the kernel output to the baseline output; return True when they match."""
     print("\n  Correctness Check (per-dtype tolerances)")
     for dtype, (atol, rtol) in tolerances.items():

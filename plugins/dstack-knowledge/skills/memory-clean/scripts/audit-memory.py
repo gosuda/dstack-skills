@@ -80,7 +80,7 @@ def body_line_set(mf: Path) -> set[str]:
 # Per-concern check functions — each returns List[dict]
 # ---------------------------------------------------------------------------
 
-def check_index_integrity(index_path: Path, mem_files: list[Path]) -> list[dict]:
+def check_index_integrity(index_path: Path, mem_files: list[Path]) -> dict[str, list]:
     """Orphans + dangling refs + MEMORY.md structural checks."""
     issues = {"orphans": [], "dangling": [], "structural": []}
     if not index_path.exists():
