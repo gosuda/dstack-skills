@@ -276,7 +276,7 @@ RUNTIME_UNION_CASES = [
 
 def self_test() -> None:
     passed = 0
-    total = len(CASES) + len(COMPAT_CASES) + len(RUNTIME_UNION_CASES) + 4
+    total = len(CASES) + len(COMPAT_CASES) + len(RUNTIME_UNION_CASES) + 3
     bad = source_backslash_in_fstring()
     label = f"this gate parses on python {MIN_PYTHON[0]}.{MIN_PYTHON[1]}"
     if bad:
@@ -309,24 +309,18 @@ def self_test() -> None:
         "\nclass C:\n    value: str | None = None",
         "\n\nasync def last(*args: bytes | None): pass",
     ]
-    compound_lines: list[str] = []
-    expected: list[int] = []
-    for fragment in fragments:
-        offset = len(compound_lines)
-        expected.extend(offset + line for line in source_runtime_union_without_future(fragment))
-        compound_lines.extend(fragment.splitlines())
+    compound_lines = "\n".join(fragments).splitlines()
+    expected = [
+        line_number
+        for line_number, line in enumerate(compound_lines, start=1)
+        if "|" in line
+    ]
     diagnostics = source_runtime_union_without_future("\n".join(compound_lines))
-    if len(expected) > 1 and diagnostics == sorted(set(expected)):
+    if diagnostics == expected:
         passed += 1
         print("PASS: every runtime union violation has one ordered diagnostic")
     else:
         print(f"FAIL: runtime union diagnostics: {diagnostics}", file=sys.stderr)
-    first_line = source_runtime_union_without_future("def f(x: int | None): pass")
-    if first_line == [1]:
-        passed += 1
-        print("PASS: runtime union diagnostics are one-based")
-    else:
-        print(f"FAIL: runtime union diagnostics are one-based: {first_line}", file=sys.stderr)
     for label, text, want_clean in CASES:
         reasons = check_frontmatter(text)
         got_clean = not reasons
