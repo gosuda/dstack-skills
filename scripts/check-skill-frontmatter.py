@@ -276,7 +276,7 @@ RUNTIME_UNION_CASES = [
 
 def self_test() -> None:
     passed = 0
-    total = len(CASES) + len(COMPAT_CASES) + len(RUNTIME_UNION_CASES) + 3
+    total = len(CASES) + len(COMPAT_CASES) + len(RUNTIME_UNION_CASES) + 4
     bad = source_backslash_in_fstring()
     label = f"this gate parses on python {MIN_PYTHON[0]}.{MIN_PYTHON[1]}"
     if bad:
@@ -321,6 +321,12 @@ def self_test() -> None:
         print("PASS: every runtime union violation has one ordered diagnostic")
     else:
         print(f"FAIL: runtime union diagnostics: {diagnostics}", file=sys.stderr)
+    first_line = source_runtime_union_without_future("def f(x: int | None): pass")
+    if first_line == [1]:
+        passed += 1
+        print("PASS: runtime union diagnostics are one-based")
+    else:
+        print(f"FAIL: runtime union diagnostics are one-based: {first_line}", file=sys.stderr)
     for label, text, want_clean in CASES:
         reasons = check_frontmatter(text)
         got_clean = not reasons
