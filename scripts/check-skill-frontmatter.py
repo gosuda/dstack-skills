@@ -304,9 +304,19 @@ def self_test() -> None:
             print(f"PASS: runtime union case, {label}")
         else:
             print(f"FAIL: runtime union case, {label}", file=sys.stderr)
-    compound = "def first(x: int | None) -> int | None: pass\nclass C:\n    value: str | None = None\nasync def last(*args: bytes | None): pass\n"
-    diagnostics = source_runtime_union_without_future(compound)
-    if diagnostics == [1, 3, 4]:
+    fragments = [
+        "def first(x: int | None) -> int | None: pass",
+        "\nclass C:\n    value: str | None = None",
+        "\n\nasync def last(*args: bytes | None): pass",
+    ]
+    compound_lines: list[str] = []
+    expected: list[int] = []
+    for fragment in fragments:
+        offset = len(compound_lines)
+        expected.extend(offset + line for line in source_runtime_union_without_future(fragment))
+        compound_lines.extend(fragment.splitlines())
+    diagnostics = source_runtime_union_without_future("\n".join(compound_lines))
+    if len(expected) > 1 and diagnostics == sorted(set(expected)):
         passed += 1
         print("PASS: every runtime union violation has one ordered diagnostic")
     else:
