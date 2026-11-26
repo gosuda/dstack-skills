@@ -205,11 +205,11 @@ def source_backslash_in_fstring(text: str | None = None) -> list[int]:
     )
 
 
-def _has_bit_or(node):
+def _has_bit_or(node: ast.AST) -> bool:
     return any(isinstance(n, ast.BitOr) for n in ast.walk(node))
 
 
-def source_runtime_union_without_future(text=None):
+def source_runtime_union_without_future(text: str | None = None) -> list[int]:
     text = Path(__file__).read_text("utf-8") if text is None else text
     tree = ast.parse(text)
     for node in tree.body:
@@ -258,9 +258,25 @@ COMPAT_CASES = [
 ]
 
 
-def self_test():
+RUNTIME_UNION_CASES = [
+    ("positional-only argument", "def f(x: int | None, /): pass", True),
+    ("positional argument", "def f(x: int | None): pass", True),
+    ("keyword-only argument", "def f(*, x: int | None): pass", True),
+    ("variadic positional argument", "def f(*args: int | None): pass", True),
+    ("variadic keyword argument", "def f(**kwargs: int | None): pass", True),
+    ("return annotation", "def f() -> int | None: pass", True),
+    ("async function annotation", "async def f() -> int | None: pass", True),
+    ("module annotation", "value: int | None = None", True),
+    ("class annotation", "class C:\n    value: int | None = None", True),
+    ("postponed annotations", "from __future__ import annotations\ndef f(x: int | None) -> int | None: pass", False),
+    ("quoted annotations", 'def f(x: "int | None") -> "int | None": pass', False),
+    ("value bitwise operation", "mask = 1 | 2", False),
+]
+
+
+def self_test() -> None:
     passed = 0
-    total = len(CASES) + len(COMPAT_CASES) + 2
+    total = len(CASES) + len(COMPAT_CASES) + len(RUNTIME_UNION_CASES) + 2
     bad = source_backslash_in_fstring()
     label = f"this gate parses on python {MIN_PYTHON[0]}.{MIN_PYTHON[1]}"
     if bad:
@@ -281,6 +297,13 @@ def self_test():
             print(f"PASS: compat case, {label}")
         else:
             print(f"FAIL: compat case, {label}", file=sys.stderr)
+    for label, snippet, want_detected in RUNTIME_UNION_CASES:
+        got_detected = bool(source_runtime_union_without_future(snippet))
+        if got_detected == want_detected:
+            passed += 1
+            print(f"PASS: runtime union case, {label}")
+        else:
+            print(f"FAIL: runtime union case, {label}", file=sys.stderr)
     for label, text, want_clean in CASES:
         reasons = check_frontmatter(text)
         got_clean = not reasons
