@@ -30,7 +30,7 @@ node scripts/check-plugin-surfaces.mjs
 python3 scripts/check-skill-frontmatter.py
 ```
 
-All local hooks except `check-voice-self-test` run whichever `python3` the machine has.
+Each `.mjs` hook runs `node`. Each `.py` hook except `check-voice-self-test` runs whichever `python3` the machine has.
 `check-voice-self-test` runs in a pre-commit-managed Python 3.9 environment (`language: python`,
 `language_version: python3.9`), so the voice gate and its `draw.py` dependency start on the
 supported floor no matter which `python3` the host carries. `check-skill-frontmatter.py --self-test`
