@@ -2,7 +2,7 @@
 
 Cross-project workflows for planning, implementation, review, verification, and delivery.
 
-89 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
+87 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
 
 ## Install
 
@@ -61,8 +61,8 @@ Each row states when to reach for the skill. Invoke one as `/dstack-core:<name>`
 | commit-push-pr | Use when asked to commit and push a feature branch, with or without a pull request or merge request. |
 | complexity-grill | Use when a user wants to identify the true sources of complexity qualitatively before counting metrics. |
 | compound | Use when the user explicitly asks to save a generalized invariant from a closed knowledge-work session. |
+| constraint-driven | Use when no quality bar is written down, when setting up constraints, or when implementing under non-negotiable budgets, limits, or API rules. |
 | contract-driven | Use when crossing a public API boundary, guarding complex invariants, or hardening untrusted input or integration seams. |
-| contraint-driven | Use when no quality bar is written down, when setting up constraints, or when implementing under non-negotiable budgets, limits, or API rules. |
 | decide | Use when the user has a fork and wants it resolved and applied, not explored: "decide this", "choose the path", or "decide and fix it". |
 | do-it-now | Use when the user asks to finish the whole task now, clear active todos, or unblock undone implementation without deferred phases or follow-up remainders, or says do it now, do all, or don't ask. |
 | docs-practices | Use when deciding whether a durable document, ADR, plan, or spec is needed, or when checking its invariant quality, scope, and naming. |
@@ -119,9 +119,7 @@ Each row states when to reach for the skill. Invoke one as `/dstack-core:<name>`
 | tests-practices | Use when developing a fix or feature test-first, plan a TDD build, or work red-to-green in slices. |
 | tests-purge-unneeded | Use when a legacy, slow, or duplicate test suite needs purging, a post-refactor sweep is due, or types cover a contract. |
 | to-greenfield | Use when the user says greenfield this or rescue this codebase, names a field (dark, red, blue, or brown), or diagnoses a subsystem. |
-| todo-add | Use when a message contains `TODO ADD: <requirement>`. |
-| todos-enhance | Use when tasks are too vague, read as headings, or the user asks to sophisticate the todos. |
-| todos-update | Use when user asks to update todos, resync the task list, say what to do next, or plan and tree have drifted apart. |
+| todos | Use when a message contains `TODO ADD: <requirement>`, tasks are too vague or read as headings, or the plan and the tree drifted apart. |
 | type-driven | Use when modeling a domain, encoding a state machine, hardening APIs, making invalid states unrepresentable, or parsing instead of validating. |
 | unslop | Use when prose is drafted or edited, reviewed for AI tells, or the user asks to remove AI patterns, humanize, or add voice. |
 | validation-first-driven | Use when protocols, workflows, concurrency, or lifecycle state need states, transitions, and temporal properties. |

@@ -1,5 +1,5 @@
 ---
-name: contraint-driven
+name: constraint-driven
 description: 'Use when no quality bar is written down, when setting up constraints, or when implementing under non-negotiable budgets, limits, or API rules. Not for one-off spikes or remote, credential, publish, deploy changes.'
 ---
 

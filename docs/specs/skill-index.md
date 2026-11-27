@@ -51,9 +51,9 @@
 | complexity-grill | dstack-core | Coding | Use when a user wants to identify the true sources of complexity qualitatively before counting metrics. |
 | compound | dstack-core | Coding | Use when the user explicitly asks to save a generalized invariant from a closed knowledge-work session. |
 | concurrency-debugging | dstack-native | Coding | Use when reading TSan race reports, debugging deadlocks with GDB thread inspection, analyzing Helgrind lock-order violations, or reviewing std::atomic and happens-before usage. |
+| constraint-driven | dstack-core | Coding | Use when no quality bar is written down, when setting up constraints, or when implementing under non-negotiable budgets, limits, or API rules. |
 | content-evidence-brief | dstack-marketing | Marketing | Use when designing a long-form marketing or developer content piece from a source pack before drafting. |
 | contract-driven | dstack-core | Coding | Use when crossing a public API boundary, guarding complex invariants, or hardening untrusted input or integration seams. |
-| contraint-driven | dstack-core | Coding | Use when no quality bar is written down, when setting up constraints, or when implementing under non-negotiable budgets, limits, or API rules. |
 | control-cli | dstack-testing | Coding | Use when asked to reproduce, profile, or verify CLI/TUI behavior. |
 | control-ui | dstack-testing | Coding | Use when asked to verify or reproduce browser or Electron UI behavior with before-and-after evidence and no leftover processes. |
 | copywriting | dstack-writing | Writing | Use when asked to write or fix product/marketing copy, landing pages, UI strings, brand voice, AI tells, an end-of-article CTA, or a hook/lede. |
@@ -273,9 +273,7 @@
 | tests-purge-unneeded | dstack-core | Coding | Use when a legacy, slow, or duplicate test suite needs purging, a post-refactor sweep is due, or types cover a contract. |
 | thumbnail-accuracy-scorecard | dstack-design | Design | Use when thumbnail concepts need real-size, accuracy-first scoring without misleading claims. |
 | to-greenfield | dstack-core | Coding | Use when the user says greenfield this or rescue this codebase, names a field (dark, red, blue, or brown), or diagnoses a subsystem. |
-| todo-add | dstack-core | Coding | Use when a message contains `TODO ADD: <requirement>`. |
-| todos-enhance | dstack-core | Coding | Use when tasks are too vague, read as headings, or the user asks to sophisticate the todos. |
-| todos-update | dstack-core | Coding | Use when user asks to update todos, resync the task list, say what to do next, or plan and tree have drifted apart. |
+| todos | dstack-core | Coding | Use when a message contains `TODO ADD: <requirement>`, tasks are too vague or read as headings, or the plan and the tree drifted apart. |
 | token-integration-analyzer | dstack-security | Security | Use when a token implementation or integration needs standards, privilege, nonstandard-behavior, and defensive-integration analysis. |
 | triage | dstack-git | Coding | Use when issues or external pull requests must move through a category and state machine with verification, grilling, and agent-ready briefs. |
 | triage-security-finding | dstack-security | Security | Use when exactly one concrete security finding with a source anchor needs a verdict before PoC work. |

@@ -1,13 +1,13 @@
 ---
 name: drift-detect
-description: 'Use when roadmap, plans, or docs may have drifted from code, or when restarting a stalled project. Not for PR doc sync: use docs-update.'
+description: 'Use when roadmap, plans, or docs may have drifted from code, or when restarting a stalled project. Not for PR doc sync: use sync-docs.'
 ---
 
 # Drift detect
 
 Plans age and code moves on. This skill examines whether the roadmap, plans, and docs still match what is actually built, and produces a Reality Check Report: executive summary, drift analysis, gap analysis, a cross reference table, and a prioritized reconstruction plan, with every item backed by cited evidence.
 
-The scan is read only. It never mutates docs, issues, PRs, or code. If any step would mutate those, stop that step. The only file it may write is an optional local artifact under `.outline/drift-detect/` (delete that directory to roll back). For PR doc sync instead of drift analysis, use docs-update.
+The scan is read only. It never mutates docs, issues, PRs, or code. If any step would mutate those, stop that step. The only file it may write is an optional local artifact under `.outline/drift-detect/` (delete that directory to roll back). For PR doc sync instead of drift analysis, use sync-docs; name `docs-update` for the user to invoke when the fixes should land as commits or a reviewable PR.
 
 ## What to examine
 

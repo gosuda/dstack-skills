@@ -1,3 +1,0 @@
-interface:
-  display_name: "Todos Update"
-  short_description: "Use when user asks to update todos, resync the task list, say what to do next, or plan and tree have drifted apart."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Todos"
+  short_description: "Use when a message contains `TODO ADD: <requirement>`, tasks are too vague or read as headings, or the plan and the tree drifted apart."
