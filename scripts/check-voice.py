@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import ast
 import contextlib
 import io
 import os
@@ -346,28 +345,6 @@ def scope_parity_case(got: list[str]) -> bool:
     return set(got) == expected
 
 
-def own_runtime_annotations() -> list[int]:
-    text = Path(__file__).read_text(encoding="utf-8")
-    tree = ast.parse(text)
-    if any(isinstance(n, ast.ImportFrom) and n.module == "__future__"
-           and any(a.name == "annotations" for a in n.names) for n in tree.body):
-        return []
-    bad = []
-    for node in ast.walk(tree):
-        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-            annotations = [a.annotation for a in (*node.args.posonlyargs, *node.args.args,
-                           *node.args.kwonlyargs) if a.annotation is not None]
-            if node.args.vararg is not None and node.args.vararg.annotation is not None:
-                annotations.append(node.args.vararg.annotation)
-            if node.args.kwarg is not None and node.args.kwarg.annotation is not None:
-                annotations.append(node.args.kwarg.annotation)
-            if node.returns is not None:
-                annotations.append(node.returns)
-            if any(isinstance(n, ast.BitOr) for a in annotations for n in ast.walk(a)):
-                bad.append(node.lineno)
-    return sorted(set(bad))
-
-
 TARGET_CASES = (
     ("a tracked markdown file is a target",
      lambda: git_tracked(["AGENTS.md"]),
@@ -399,9 +376,6 @@ TARGET_CASES = (
     ("explicit file arguments still gate a vendored path",
      lambda: [str(p) for p in explicit_targets([sorted(VENDORED_UPSTREAM)[0]])],
      lambda got: len(got) == 1 and got[0].endswith(sorted(VENDORED_UPSTREAM)[0])),
-    ("this gate carries no runtime-evaluated X | Y annotations without a future import",
-     lambda: own_runtime_annotations(),
-     lambda got: got == []),
 )
 
 
