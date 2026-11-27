@@ -66,7 +66,7 @@ A stance changes how a step is done, not what it does. Stack it in the same mess
 | Less code | `/skill:minimalism-driven`, `/skill:necessary-work`, `/skill:no-comments` |
 | Replace instead of patch | `/skill:offensive-driven`, `/skill:breaking-driven` with `/skill:refactor-break-compat`, `/skill:fromzero`, `/skill:to-greenfield` |
 | Rebuild from primitives | `/skill:from-first-principle`, `/skill:leave-only-first-principle` |
-| Correct by construction | `/skill:type-driven`, `/skill:contract-driven`, `/skill:proof-driven`, `/skill:validation-first-driven`, `/skill:contraint-driven` |
+| Correct by construction | `/skill:type-driven`, `/skill:contract-driven`, `/skill:proof-driven`, `/skill:validation-first-driven`, `/skill:constraint-driven` |
 | Tests | `/skill:tests-practices`, `/skill:tests-adversarial`, `/skill:exhaustive` |
 | Evidence before claims | `/skill:no-excuses`, `/skill:doubt-driven`, `/skill:source-driven` |
 | Abstraction shape | `/skill:tasty-abstraction`, `/skill:abstract-well`, `/skill:complexity-grill` |

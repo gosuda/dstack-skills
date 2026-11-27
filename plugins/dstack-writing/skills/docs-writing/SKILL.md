@@ -7,7 +7,7 @@ description: 'Use when asked to write, restructure, or audit documentation with 
 
 Good documentation lets a reader find the right page, follow it unaided, and trust what it says. This skill produces docs where each page does one job (learning, doing, looking up, or understanding), drafts them from evidence, audits them, and writes nothing until a human approves the draft.
 
-Use it for new docs, a restructure, an audit, a feature docs page, or a diagram source. Content that argues why a decision was made belongs in an ADR or design record, not here. To resync existing docs after code changes, use `docs-update`.
+Use it for new docs, a restructure, an audit, a feature docs page, or a diagram source. Content that argues why a decision was made belongs in an ADR or design record, not here. To resync existing docs after code changes, use `sync-docs`; name `docs-update` for the user to invoke when the fixes should land as commits or a reviewable PR.
 
 ## Scope and safety
 

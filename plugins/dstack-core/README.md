@@ -61,8 +61,8 @@ Each row states when to reach for the skill. Invoke one as `/dstack-core:<name>`
 | commit-push-pr | Use when asked to commit and push a feature branch, with or without a pull request or merge request. |
 | complexity-grill | Use when a user wants to identify the true sources of complexity qualitatively before counting metrics. |
 | compound | Use when the user explicitly asks to save a generalized invariant from a closed knowledge-work session. |
+| constraint-driven | Use when no quality bar is written down, when setting up constraints, or when implementing under non-negotiable budgets, limits, or API rules. |
 | contract-driven | Use when crossing a public API boundary, guarding complex invariants, or hardening untrusted input or integration seams. |
-| contraint-driven | Use when no quality bar is written down, when setting up constraints, or when implementing under non-negotiable budgets, limits, or API rules. |
 | decide | Use when the user has a fork and wants it resolved and applied, not explored: "decide this", "choose the path", or "decide and fix it". |
 | do-it-now | Use when the user asks to finish the whole task now, clear active todos, or unblock undone implementation without deferred phases or follow-up remainders, or says do it now, do all, or don't ask. |
 | docs-practices | Use when deciding whether a durable document, ADR, plan, or spec is needed, or when checking its invariant quality, scope, and naming. |
