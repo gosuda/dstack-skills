@@ -2,7 +2,7 @@
 
 Cross-project workflows for planning, implementation, review, verification, and delivery.
 
-87 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
+89 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
 
 ## Install
 
@@ -119,7 +119,9 @@ Each row states when to reach for the skill. Invoke one as `/dstack-core:<name>`
 | tests-practices | Use when developing a fix or feature test-first, plan a TDD build, or work red-to-green in slices. |
 | tests-purge-unneeded | Use when a legacy, slow, or duplicate test suite needs purging, a post-refactor sweep is due, or types cover a contract. |
 | to-greenfield | Use when the user says greenfield this or rescue this codebase, names a field (dark, red, blue, or brown), or diagnoses a subsystem. |
-| todos | Use when a message contains `TODO ADD: <requirement>`, tasks are too vague or read as headings, or the plan and the tree drifted apart. |
+| todo-add | Use when a message contains `TODO ADD: <requirement>`. |
+| todos-enhance | Use when tasks are too vague, read as headings, or the user asks to sophisticate the todos. |
+| todos-update | Use when user asks to update todos, resync the task list, say what to do next, or plan and tree have drifted apart. |
 | type-driven | Use when modeling a domain, encoding a state machine, hardening APIs, making invalid states unrepresentable, or parsing instead of validating. |
 | unslop | Use when prose is drafted or edited, reviewed for AI tells, or the user asks to remove AI patterns, humanize, or add voice. |
 | validation-first-driven | Use when protocols, workflows, concurrency, or lifecycle state need states, transitions, and temporal properties. |

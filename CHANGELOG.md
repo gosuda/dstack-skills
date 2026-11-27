@@ -7,10 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.23] - 2026-11-28
 ### Changed
-- Merged `todo-add`, `todos-enhance`, and `todos-update` in dstack-core into one
-  `todos` skill with add, enhance, and update modes. Each mode keeps its
-  procedure and its return contract, and add mode still writes
-  `.outline/requirements/todo-add.md` when no plan owns the requirement.
 - Renamed `contraint-driven` in dstack-core to `constraint-driven`.
 - Pointed `drift-detect` and `docs-writing` at `sync-docs` for doc sync after a
   code change. Their old pointer named `docs-update`, which is user-invoked, so

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Todos Enhance"
+  short_description: "Use when tasks are too vague, read as headings, or the user asks to sophisticate the todos."

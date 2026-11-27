@@ -12,7 +12,7 @@ Install the base plugins, then invoke skills by name:
 
 `dstack-guide` answers with one route: which skills, in which order, what each step does, and what must
 exist first. It recommends and runs none of it.
-306 skills in 22 plugins.
+308 skills in 22 plugins.
 
 ## Why use it
 
@@ -188,7 +188,7 @@ marketplace entry the harnesses read ships at one `releaseVersion`, currently 2.
 is the registry schema version, not the release. The inert `.codex-plugin/marketplace.json`
 forward-compat copy carries no per-entry version; Codex reads `.claude-plugin/marketplace.json`.
 
-The largest plugins are `dstack-core` at 87, `dstack-marketing` at 28, and `dstack-run` at 20.
+The largest plugins are `dstack-core` at 89, `dstack-marketing` at 28, and `dstack-run` at 20.
 
 ## Output styles
 

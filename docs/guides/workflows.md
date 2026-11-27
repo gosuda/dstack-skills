@@ -8,8 +8,8 @@ When no chain in the table fits, run `/skill:dstack-guide` with your situation: 
 
 | Workflow | Chain | When not to use it |
 |---|---|---|
-| Clarify an ambiguous request, then plan (usually inside harness plan mode) | `/skill:askme` → `/skill:plans` or `/skill:autoplan` → `/skill:todos` in add mode, then enhance mode | The request already states sharp acceptance criteria and fits one session. |
-| Plan a build that outgrows one session (usually when working without plan mode) | `/skill:wayfinder` → `/skill:todos` in add mode, then update mode | One agent finishes the work in one session with no handoff. |
+| Clarify an ambiguous request, then plan (usually inside harness plan mode) | `/skill:askme` → `/skill:plans` or `/skill:autoplan` → `/skill:todo-add` → `/skill:todos-enhance` | The request already states sharp acceptance criteria and fits one session. |
+| Plan a build that outgrows one session (usually when working without plan mode) | `/skill:wayfinder` → `/skill:todo-add` → `/skill:todos-update` | One agent finishes the work in one session with no handoff. |
 | Execute the plans or tasks with subagents (daily execution driver after the planning phases) | `/skill:subagent-driven` → `/skill:verification-before-completion` | The plan fits one agent, and delegation costs more than it saves. |
 | Fan out independent work | `/skill:parallel-launch` → `/skill:do-it-now`, or `/skill:diamond-task` when one change is too large to split by worker | The tasks share mutable state or must run in a strict order. |
 | Re-derive a bloated module from scratch | `/skill:minimalism-driven` ↔ `/skill:breaking-driven` → `/skill:refactor-break-compat` → `/skill:architect` | A focused patch fixes the defect without touching the structure. |
@@ -32,7 +32,7 @@ claude plugin install dstack-knowledge@dstack
 
 In Claude Code, invoke workflow steps using each plugin's verified namespace:
 
-- Clarify, plan, and refine: `/dstack-core:askme` → `/dstack-core:plans` → `/dstack-core:todos` in add mode, then enhance mode
+- Clarify, plan, and refine: `/dstack-core:askme` → `/dstack-core:plans` → `/dstack-core:todo-add` → `/dstack-core:todos-enhance`
 - Map structure and options: `/dstack-planning:minimap`
 - Structural AST edits: `/dstack-code:ast-grep`
 - Execute with subagents: `/dstack-core:subagent-driven` → `/dstack-core:verification-before-completion`

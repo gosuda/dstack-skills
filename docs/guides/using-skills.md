@@ -6,13 +6,13 @@ Type the skill's name before a request, in the form your harness uses:
 
 | Harness | Explicit invocation | Example |
 |---|---|---|
-| Claude Code | `/<plugin>:<slug>`; plugin skills are namespaced by plugin id | `/dstack-core:todos`, `/dstack-planning:minimap`, `/dstack-code:ast-grep`, `/dstack-run:diamond-task`, `/dstack-knowledge:mutual-sync` |
-| Codex | `$<slug>`, or `/skills` to pick from a list | `$todos`, `$minimap`, `$ast-grep`, `$diamond-task`, `$mutual-sync` |
-| Cursor | Type `/` and pick the skill by name | `/todos`, `/minimap`, `/ast-grep`, `/diamond-task`, `/mutual-sync` |
+| Claude Code | `/<plugin>:<slug>`; plugin skills are namespaced by plugin id | `/dstack-core:todos-update`, `/dstack-planning:minimap`, `/dstack-code:ast-grep`, `/dstack-run:diamond-task`, `/dstack-knowledge:mutual-sync` |
+| Codex | `$<slug>`, or `/skills` to pick from a list | `$todos-update`, `$minimap`, `$ast-grep`, `$diamond-task`, `$mutual-sync` |
+| Cursor | Type `/` and pick the skill by name | `/todos-update`, `/minimap`, `/ast-grep`, `/diamond-task`, `/mutual-sync` |
 
 Grok and Kimi load the same skill tree; each harness's own documentation gives its explicit-invocation form. Hermes Agent loads a plugin's skills as `<plugin>:<slug>`, for example `skill_view("dstack-writing:humanizer-korean-plain")`. The guides in this directory write a step as `/skill:<slug>` when the harness does not matter.
 
-Names are exact: `todos` loads one skill, and a near miss loads nothing.
+Names are exact: `todos-update` loads one skill, and a near miss loads nothing.
 
 ## Stack invocations
 
@@ -44,7 +44,7 @@ When you cannot tell which skill fits at all, ask `dstack-guide` with your situa
 
 Most descriptions end with a `Not for ...` clause that names the narrower skill. Read it and reach for the narrower one.
 
-`sync-docs` updates docs that a behavior change left stale. `drift-detect` checks whether a roadmap, plan, or docs drifted from the code. Each names the other as out of scope, so docs gone stale after a change call for the first and a drifted roadmap calls for the second.
+`todos-update` resyncs a task list that drifted from the tree. `todos-enhance` sharpens tasks that read as vague headings. Each names the other as out of scope, so a stale list calls for the first and a coarse list calls for the second.
 
 `unslop` cleans AI tells from prose.
 
