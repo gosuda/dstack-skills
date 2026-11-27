@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from __future__ import annotations
 """Draw the 12 Houses of the Zodiac Tarot spread with OS entropy.
 
 Each draw deals 12 houses with 1 Major Arcana card and 2 Minor Arcana
