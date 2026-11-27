@@ -30,7 +30,10 @@ node scripts/check-plugin-surfaces.mjs
 python3 scripts/check-skill-frontmatter.py
 ```
 
-The hooks run whichever `python3` the machine has, so `check-skill-frontmatter.py --self-test`
+All local hooks except `check-voice-self-test` run whichever `python3` the machine has.
+`check-voice-self-test` runs in a pre-commit-managed Python 3.9 environment (`language: python`,
+`language_version: python3.9`), so the voice gate and its `draw.py` dependency start on the
+supported floor no matter which `python3` the host carries. `check-skill-frontmatter.py --self-test`
 proves the gate itself still parses on Python 3.9 before it checks anything else.
 
 One hook writes. `sync-baseline` runs without `--check`, so when an output style has drifted it
