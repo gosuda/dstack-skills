@@ -276,7 +276,7 @@ RUNTIME_UNION_CASES = [
 
 def self_test() -> None:
     passed = 0
-    total = len(CASES) + len(COMPAT_CASES) + len(RUNTIME_UNION_CASES) + 2
+    total = len(CASES) + len(COMPAT_CASES) + len(RUNTIME_UNION_CASES) + 5
     bad = source_backslash_in_fstring()
     label = f"this gate parses on python {MIN_PYTHON[0]}.{MIN_PYTHON[1]}"
     if bad:
@@ -304,6 +304,53 @@ def self_test() -> None:
             print(f"PASS: runtime union case, {label}")
         else:
             print(f"FAIL: runtime union case, {label}", file=sys.stderr)
+    first_name, class_name, field_name, last_name = "first", "C", "value", "last"
+    layouts = [
+        ("single-line declarations", [
+            f"def {first_name}(x: int | None) -> int | None: pass",
+            f"\nclass {class_name}:\n    {field_name}: str | None = None",
+            f"\n\nasync def {last_name}(*args: bytes | None): pass",
+        ]),
+        ("wrapped declarations", [
+            f"def {first_name}(\n    x: int | None,\n) -> int | None: pass",
+            f"\nclass {class_name}:\n    {field_name}: (\n        str | None\n    ) = None",
+            f"\n\nasync def {last_name}(\n    *args: bytes | None,\n): pass",
+        ]),
+        ("harmless declarations around wrapped inputs", [
+            f"unused: int\n\ndef {first_name}(\n    x: int | None,\n) -> int | None:\n    unused: int\n    pass",
+            f"\nclass {class_name}:\n    unused: int\n    {field_name}: (\n        str | None\n    ) = None",
+            f"\n\nasync def {last_name}(\n    *args: bytes | None,\n):\n    unused: int\n    pass",
+        ]),
+    ]
+    for label, fragments in layouts:
+        compound = "\n".join(fragments)
+        declarations = ast.parse(compound).body
+        functions = {
+            node.name: node
+            for node in declarations
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef))
+        }
+        owner = next(
+            node for node in declarations
+            if isinstance(node, ast.ClassDef) and node.name == class_name
+        )
+        field = next(
+            node for node in owner.body
+            if isinstance(node, ast.AnnAssign)
+            and isinstance(node.target, ast.Name)
+            and node.target.id == field_name
+        )
+        expected = sorted([
+            functions[first_name].lineno,
+            field.lineno,
+            functions[last_name].lineno,
+        ])
+        diagnostics = source_runtime_union_without_future(compound)
+        if diagnostics == expected:
+            passed += 1
+            print(f"PASS: every runtime union violation has one ordered diagnostic, {label}")
+        else:
+            print(f"FAIL: runtime union diagnostics, {label}: {diagnostics}", file=sys.stderr)
     for label, text, want_clean in CASES:
         reasons = check_frontmatter(text)
         got_clean = not reasons
