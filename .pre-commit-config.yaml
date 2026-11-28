@@ -59,9 +59,10 @@ repos:
         always_run: true
 
       - id: check-voice-self-test
-        name: check the voice gate against its own fixtures
-        entry: python3 scripts/check-voice.py --self-test
-        language: system
+        name: check voice startup and fixtures on Python 3.9
+        entry: python scripts/check-voice.py --self-test
+        language: python
+        language_version: python3.9
         pass_filenames: false
         always_run: true
 
